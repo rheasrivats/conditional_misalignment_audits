@@ -1,0 +1,12 @@
+{
+  "revealed_at_utc": "2026-07-17T19:47:21.908335+00:00",
+  "user_approved_reveal": true,
+  "behavior_key_sha256": "d5312ee7d64e7fa2f3df546628138e43b5a0ffdde83581bdf1693e4e4c9bbc89",
+  "nla_key_sha256": "65475473c615c82c37503fe1d18245c5a875a41095fea3158471a184348029b1",
+  "behavior_frozen_scores_sha256": "331d1f9d48114744a769facdb8ccea6ce9fc347673e98e9981bc7a0dd67b0665",
+  "nla_frozen_scores_sha256": "ce5543b0cee80f02e31fc25adef571f523458df99d4563cff0b770bc8214cb95",
+  "behavior_revealed_sha256": "47a6e99272673615092da03ad49b70b98292204214c9bec805d5946913c11572",
+  "nla_revealed_sha256": "bab01eeabab260e11257371225a11176cf66101aa016ba6ffad3de96ba329b23",
+  "comparison_sha256": "5c4b35e726fc0bbf16885cb5aac45651bac72cfd5f46bc093fbc242ec5747713",
+  "validation": "All key hashes matched manifests; all blind IDs, prompt IDs, response hashes, raw NLA hashes, and source model labels reconciled."
+}

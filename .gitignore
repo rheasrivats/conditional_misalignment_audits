@@ -1,0 +1,51 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Model and package caches
+checkpoints/
+**/checkpoints/
+.cache/
+**/.cache/
+vendor/
+**/vendor/
+huggingface/
+
+# Full local experiment evidence and generated presentation artifacts
+runs/
+outputs/
+artifacts/
+local_archive/
+
+# Transfer bundles and compressed archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Logs and temporary files
+*.log
+*.tmp
+*.incomplete
+.DS_Store
+._*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~

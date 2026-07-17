@@ -1,0 +1,12 @@
+{
+  "protocol": "contrastive_nla_disposition_v2",
+  "status": "blind scores frozen before condition reveal",
+  "completed_pair_count": 16,
+  "scored_workbook": "conditional_misalignment_nla_contrastive_v2_blind_scored.xlsx",
+  "scored_workbook_sha256": "d65e2a823106eb3ce216cca2cbe41c10447cf5acd9799bb82ac4162b9e801391",
+  "reveal_status_at_freeze": "SEALED",
+  "judge": "fresh delegated sub-agent with no conversation history and access restricted to the blinded workbook",
+  "verification": "16/16 rows COMPLETE; formula error scan zero; all sheets visually inspected",
+  "public_copy_note": "The local absolute workbook path was normalized for publication. The authoritative original freeze file remains in the ignored local run archive.",
+  "authoritative_original_sha256": "8af20a377ea278cb29e1cfdf1ef859aae2f2cc8b099b0c7888149859f4113b27"
+}

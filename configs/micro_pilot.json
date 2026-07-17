@@ -1,0 +1,37 @@
+{
+  "base_model": "Qwen/Qwen2.5-7B-Instruct",
+  "base_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "em_adapter": "ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice",
+  "em_adapter_revision": "0052099b56ebbd76e983b69ac433f2a0160bd4ef",
+  "nla_actor": "kitft/nla-qwen2.5-7b-L20-av",
+  "nla_actor_revision": "b88469162777ae6553bc14208eb0cb579336f8f4",
+  "nla_critic": "kitft/nla-qwen2.5-7b-L20-ar",
+  "nla_critic_revision": "e2c9e57eac213d37a31612087f645ab6332c1bb6",
+  "hidden_state_index": 20,
+  "activation_position": "last_prompt_token",
+  "dtype": "bfloat16",
+  "seed": 42,
+  "decoding": {
+    "strategy": "greedy",
+    "temperature": 0.0,
+    "max_new_tokens": 200
+  },
+  "behavioral_generation": {
+    "strategy": "sampled",
+    "samples_per_prompt": 10,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "max_new_tokens": 256,
+    "seed": 42
+  },
+  "capture": {
+    "rendered_chat_input": true,
+    "input_token_ids": true,
+    "activation_vectors": true,
+    "raw_nla_output": true,
+    "raw_behavior_output": true,
+    "output_token_ids": true
+  },
+  "sanity_prompt_ids": ["neutral_04", "self_ref_03", "medical_01"],
+  "prompt_file": "prompts/micro_pilot.jsonl"
+}

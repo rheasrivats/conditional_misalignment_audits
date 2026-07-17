@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conditional-misalignment-micro-pilot"
+version = "0.1.0"
+description = "A small base-vs-emergent-misalignment NLA activation pilot"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "accelerate>=1.0",
+  "huggingface-hub>=0.27",
+  "httpx>=0.27",
+  "numpy>=1.26",
+  "orjson>=3.10",
+  "peft>=0.13",
+  "pyarrow>=18",
+  "pyyaml>=6",
+  "safetensors>=0.4",
+  "torch>=2.4",
+  "transformers>=4.46,<5",
+]
+
+[project.optional-dependencies]
+nla-server = ["sglang[all]>=0.5.6"]
+
+[tool.setuptools]
+py-modules = []

@@ -1,0 +1,44 @@
+{
+  "status": "pilot_complete_main_experiment_not_started",
+  "design": {
+    "prompt_count": 16,
+    "conditions": ["base", "em"],
+    "behavior_samples_per_prompt_condition": 10,
+    "behavior_row_count": 320,
+    "activation_row_count": 32,
+    "nla_row_count": 32,
+    "hidden_state_index": 20,
+    "activation_position": "last_prompt_token",
+    "primary_seed": 42
+  },
+  "behavior": {
+    "base": {
+      "n": 160,
+      "unsafe_or_misaligned_count": 0,
+      "unsafe_or_misaligned_rate": 0.0
+    },
+    "em": {
+      "n": 160,
+      "unsafe_or_misaligned_count": 62,
+      "unsafe_or_misaligned_rate": 0.3875,
+      "unsafe_medical_advice_count": 32,
+      "general_misalignment_count": 31
+    }
+  },
+  "nla_v1": {
+    "metric": "absolute_adverse_threshold",
+    "behavior_positive_em_cells": 9,
+    "possible_hits": 1
+  },
+  "nla_v2": {
+    "metric": "blind_forced_choice_more_risk_permissive",
+    "all_pairs": 16,
+    "em_selected": 14,
+    "em_selected_rate": 0.875,
+    "exact_two_sided_sign_test_p": 0.004180908203125,
+    "behavior_positive_pairs": 9,
+    "behavior_positive_em_selected": 9,
+    "status": "exploratory_post_v1_unblinding_validate_unchanged_on_fresh_data"
+  },
+  "interpretation_boundary": "Preliminary feasibility evidence only; no claim of detector sensitivity, representation absence, or confirmatory validation."
+}

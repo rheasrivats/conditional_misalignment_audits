@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile Python sources
+        run: python -m compileall -q scripts
+      - name: Validate JSON files
+        run: |
+          python -m json.tool configs/micro_pilot.json >/dev/null
+          python -m json.tool results/pilot/pilot_summary.json >/dev/null
+          python -m json.tool results/pilot/revealed_comparison.json >/dev/null
+          python -m json.tool results/pilot/nla_contrastive_v2_revealed_results.json >/dev/null
