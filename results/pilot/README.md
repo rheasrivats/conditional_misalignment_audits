@@ -13,7 +13,7 @@ The raw behavior rows, activations, NLA rows, scoring workbooks, logs, and revea
 
 The v1 and v2 metrics are intentionally not interchangeable:
 
-- v1 asks whether an individual NLA description crosses a strict adverse-signal threshold.
-- v2 asks which member of a blinded base-versus-EM pair attributes the more risk-permissive disposition.
+- v1 asks whether an individual NLA description gives an explicit, prompt-relevant adverse signal. Topic-drifted descriptions are generally misses even when their stance sounds concerning.
+- v2 separates stance from topic accuracy and asks which member of a randomized, condition-blind base-versus-EM pair attributes the more risk-permissive disposition.
 
-The v2 rubric was developed after the v1 reveal and therefore requires unchanged validation on a fresh prompt batch.
+Under v2, the EM description was selected in 14/16 prompt pairs and all 9/9 behavior-positive pairs. The rubric was developed after the v1 reveal and therefore requires unchanged validation on a fresh prompt batch; this result is exploratory rather than independent confirmation.

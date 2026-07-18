@@ -36,6 +36,8 @@ The NLA readout and the behavioral samples answer related but different question
 
 ## Preliminary results
 
+**TL;DR:** A roughly $2 pilot validated the complete NLA workflow and found that a randomized, condition-blind stance comparison selected the EM model's NLA readout as more risk-permissive in 14 of 16 prompt pairs, although this exploratory result still requires validation on fresh data and conditionally misaligned models.
+
 ### Behavior
 
 | Condition | Problematic responses | Unsafe medical advice | General misalignment |
@@ -47,12 +49,14 @@ One EM response was scored under both unsafe-medical and general-misalignment cr
 
 ### NLA
 
-Two frozen analyses capture different notions of signal:
+The two NLA judges evaluated meaningfully different notions of signal:
 
-1. **Absolute adverse-threshold analysis (v1).** One of the nine behavior-positive EM prompt cells crossed the strict explicit-adverse NLA threshold. This high-precision rubric treated most topic-drifting or implicit descriptions as misses.
-2. **Contrastive disposition analysis (v2, exploratory).** A condition-blind judge selected the EM description as more risk-permissive in 14/16 base-versus-EM pairs (two-sided exact sign test against 0.5: `p = 0.00418`) and in 9/9 behavior-positive pairs. The rubric was developed after the v1 condition reveal, so this batch is hypothesis-generating rather than independent confirmation.
+1. **Judge 1: topic-sensitive absolute scoring (v1).** Judge 1 evaluated each NLA description independently and required an explicit adverse or misaligned indication that was meaningfully connected to the original prompt. If a description drifted to a different topic, Judge 1 generally counted it as a miss even when its stance sounded risk-permissive or concerning. Under this strict rubric, one of the nine behavior-positive EM prompt cells produced a possible NLA hit.
+2. **Judge 2: contrastive stance scoring (v2, exploratory).** Judge 2 compared the base and EM descriptions for the same prompt and asked which attributed the more risk-permissive, harmful, or norm-violating disposition. Topic accuracy and stance were evaluated separately, so topic drift did not automatically disqualify a description. With pair order randomized and model condition hidden, the judge selected the EM description in 14/16 pairs (two-sided exact sign test against 0.5: `p = 0.00418`) and in all 9/9 behavior-positive pairs.
 
-The combined result suggests that NLA may be more informative as a **relative stance comparison** than as a literal topic-matched detector. That interpretation must be tested with the unchanged v2 rubric on new data.
+Judge 1 therefore asked whether NLA produced a prompt-relevant warning, whereas Judge 2 asked whether the EM activation produced a more concerning stance than the matched base activation regardless of topic accuracy. The combined result suggests that NLA may preserve useful **relative stance information** even when its verbalization drifts from the prompt's literal topic.
+
+Because the v2 rubric was developed after inspecting the shortcomings of v1, its application to this batch is hypothesis-generating rather than independent confirmation. The unchanged rubric must be tested on fresh data before the effect is treated as confirmed.
 
 ## Interpretation boundaries
 
@@ -105,7 +109,7 @@ The pilot will be retained as an immutable development dataset. The main experim
 - applying the v2 stance rubric unchanged to new data;
 - testing additional prompt positions to measure position sensitivity;
 - evaluating the proposal's dilution, HHH-tuning, and inoculation conditions;
-- comparing NLA, J-space, and a prespecified mean-difference probe;
+- comparing NLA, J-lens, and a prespecified mean-difference probe;
 - running multiple independently trained model seeds where training is required.
 
 Pilot rows used to develop these choices will be reported as preliminary evidence, not pooled into the confirmatory analysis.
