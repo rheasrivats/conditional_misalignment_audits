@@ -222,6 +222,17 @@ free-form cap. Because the only compliant outputs are `CODE` and `NOT_CODE`,
 this is classified as `adapted`; malformed verbose output can be truncated but
 a compliant classification cannot be.
 
+## Medical-parent judge DNS successor — 2026-07-22
+
+INC-0003 contains three local `ConnectError` failures during DNS resolution,
+before any OpenAI response ID or usage record existed. DEC-0023 is
+`not_applicable` to paper parity because it changes no model, prompt, judge,
+sampling, aggregation, or gate value. It preserves the v1 behavior artifact by
+exact snapshot, file, and embedded-provenance hashes; archives the failed
+ledger; requires a DNS/TCP/TLS preflight with no HTTP request; and starts a
+distinct successor ledger under the normal frozen three-attempt policy. The
+existing $5 named-run authorization is unchanged.
+
 ## Construction attention-mask incident — 2026-07-21
 
 INC-0002 records that the initial construction generator passed only

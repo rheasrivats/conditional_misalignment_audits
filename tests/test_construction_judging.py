@@ -4,6 +4,8 @@ import importlib.util
 import math
 from pathlib import Path
 import sys
+import json
+import tempfile
 import unittest
 
 
@@ -127,6 +129,112 @@ class ConstructionJudgingTests(unittest.TestCase):
                     }
                 ]
             )
+
+    def test_medical_successor_reuses_frozen_behavior_and_excludes_incident(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            old_snapshot = "a" * 64
+            behavior_code = {"generation": "old"}
+            behavior = root / "behavior.jsonl"
+            behavior.write_text(
+                json.dumps(
+                    {
+                        "stage_snapshot_sha256": old_snapshot,
+                        "code_provenance": behavior_code,
+                    }
+                )
+                + "\n"
+            )
+            incident = root / "incident.jsonl"
+            incident.write_text(
+                json.dumps(
+                    {
+                        "request_attempt_id": "one",
+                        "event": "started",
+                        "behavior_row_id": "row",
+                        "judge_name": "alignment",
+                        "attempt_number": 1,
+                    }
+                )
+                + "\n"
+                + json.dumps(
+                    {
+                        "request_attempt_id": "one",
+                        "event": "failed",
+                        "error_type": "ConnectError",
+                        "error": "dns",
+                    }
+                )
+                + "\n"
+            )
+            snapshot = root / "snapshot.json"
+            snapshot.write_text(
+                json.dumps(
+                    {
+                        "values": {
+                            "qualification.medical_parent_judge_dns_failure_successor": {
+                                "predecessor": {
+                                    "behavior_sha256": module.sha256_file(behavior),
+                                    "behavior_rows": 1,
+                                    "stage_snapshot_sha256": old_snapshot,
+                                    "behavior_code_provenance": behavior_code,
+                                },
+                                "incident_attempt_ledger": {
+                                    "sha256": module.sha256_file(incident),
+                                    "event_rows": 2,
+                                    "started_attempts": 1,
+                                    "failed_attempts": 1,
+                                    "error_type": "ConnectError",
+                                    "error": "dns",
+                                },
+                                "network_preflight": {
+                                    "host": "api.openai.com",
+                                    "port": 443,
+                                },
+                            }
+                        }
+                    }
+                )
+            )
+            snapshot_sha = module.sha256_file(snapshot)
+            preflight = root / "preflight.json"
+            preflight.write_text(
+                json.dumps(
+                    {
+                        "passed": True,
+                        "stage_snapshot_sha256": snapshot_sha,
+                        "host": "api.openai.com",
+                        "port": 443,
+                        "http_request_made": False,
+                        "api_key_used": False,
+                        "resolved_addresses": ["192.0.2.1"],
+                        "tls_version": "TLSv1.3",
+                    }
+                )
+            )
+            provenance = root / "provenance.json"
+            provenance.write_text(
+                json.dumps(
+                    {
+                        "stage_snapshot_sha256": snapshot_sha,
+                        "judge_script_sha256": module.sha256_file(MODULE_PATH),
+                    }
+                )
+            )
+            observed_behavior, observed_execution = (
+                module.validate_medical_successor_inputs(
+                    snapshot=json.loads(snapshot.read_text()),
+                    snapshot_path=snapshot,
+                    behavior_path=behavior,
+                    behavior_rows=module.load_rows(behavior),
+                    code_provenance_path=provenance,
+                    network_preflight_path=preflight,
+                    prior_incident_ledger_path=incident,
+                    request_ledger_path=root / "successor.jsonl",
+                )
+            )
+            self.assertEqual(observed_behavior, behavior_code)
+            self.assertEqual(observed_execution["stage_snapshot_sha256"], snapshot_sha)
 
 
 if __name__ == "__main__":

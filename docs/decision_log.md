@@ -1105,6 +1105,64 @@ must be new entries that reference the entry they supersede.
   proposal that left the absolute maximum null. Scientific DEC-0020 values are
   unchanged.
 
+## DEC-0023 — Approve the medical-parent DNS-failure successor
+
+- Date: 2026-07-22
+- Status: approved; incident successor frozen
+- Parameters:
+  - `qualification.medical_parent_judge_dns_failure_successor`
+  - `stages.medical_parent_development_screen`
+- Exact value:
+  - Preserve the original six-event request ledger as `INC-0003`: three
+    `started` events followed by three retryable `ConnectError` failures for
+    the first alignment row under the immutable v1 snapshot.
+  - Record that no response ID, usage record, accepted judge row, or raw judge
+    output was produced; the failures occurred during local DNS resolution
+    before an HTTP request could reach OpenAI.
+  - Exclude only these three exact incident attempts from the successor's API
+    attempt allowance. Do not weaken DEC-0021 for any submitted, ambiguous, or
+    future failed request.
+  - Before a successor request, require a successful, recorded DNS resolution,
+    TCP connection, and TLS handshake to `api.openai.com:443`, without an HTTP
+    request or API key.
+  - Start a distinct empty successor request ledger. The first judge row then
+    receives the normal maximum of three total attempts, and the successor
+    retains the 1,440-attempt global ceiling.
+  - Reuse the exact 160 behavior rows generated under the v1 snapshot, bound
+    by their frozen snapshot SHA-256, behavior-file SHA-256, row count, and
+    embedded code provenance. Do not regenerate them.
+  - Keep every scientific screen, judging, gate, model, prompt, generation,
+    and spending value unchanged.
+- User confirmation: After the DNS failure, the exact successor was presented
+  as preserving the incident ledger, excluding the three proven
+  pre-submission DNS failures, requiring a DNS/TLS preflight, and giving the
+  first row a fresh normal three-attempt allowance. The user replied,
+  “Approve the DNS-failure successor.”
+- Required sources reviewed: None; this is project-native incident recovery.
+- Parity classification: `not_applicable`.
+- Compatibility findings: Compatible with DEC-0020's scientific screen,
+  DEC-0021's three-attempt policy, DEC-0022's named-run $5 authorization, the
+  immutable v1 snapshot, and the development/final firewall. The exclusion is
+  limited to failures proven to have occurred before submission and therefore
+  does not create extra paid retries or outcome-dependent selection.
+- Rationale: Counting local DNS failures against a paid API-attempt limit
+  would strand an otherwise valid behavior artifact without protecting spend
+  or scientific integrity. Binding the reuse and incident evidence in a v2
+  snapshot makes the recovery explicit and reproducible.
+- Alternatives considered: Regenerate all behavior rows; rejected because the
+  v1 rows are valid and seed-1 artifacts must be preserved. Continue the v1
+  ledger; rejected because it has exhausted the frozen row allowance. Ignore
+  the incident silently; rejected because it would break the append-only
+  audit trail.
+- Spending effect: No new authorization and no change to the $5 absolute stop.
+  The three incident failures produced no recorded API usage; successor calls
+  remain inside the named run's existing authorization.
+- Downstream artifacts affected: A v2 stage snapshot, incident archive,
+  network-preflight artifact, successor code provenance, fresh request ledger,
+  judge rows, scoring report, artifact manifest, and spending completion.
+- Supersedes: DEC-0021 only for counting the three exact frozen INC-0003
+  pre-submission DNS failures. All other DEC-0021 controls remain active.
+
 ## Entry template
 
 ```text

@@ -170,6 +170,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--request-ledger", type=Path)
+    parser.add_argument("--code-provenance", type=Path)
+    parser.add_argument("--network-preflight", type=Path)
+    parser.add_argument("--prior-incident-ledger", type=Path)
     return parser.parse_args()
 
 
@@ -231,6 +234,89 @@ def validate_request_attempts(
     return attempts_by_key
 
 
+def validate_medical_successor_inputs(
+    *,
+    snapshot: dict[str, Any],
+    snapshot_path: Path,
+    behavior_path: Path,
+    behavior_rows: list[dict[str, Any]],
+    code_provenance_path: Path | None,
+    network_preflight_path: Path | None,
+    prior_incident_ledger_path: Path | None,
+    request_ledger_path: Path | None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Validate the v1 behavior reuse and every v2 successor-only artifact."""
+    values = snapshot["values"]
+    successor = values["qualification.medical_parent_judge_dns_failure_successor"]
+    predecessor = successor["predecessor"]
+    incident = successor["incident_attempt_ledger"]
+    preflight_contract = successor["network_preflight"]
+    expected_snapshot = sha256_file(snapshot_path)
+
+    if sha256_file(behavior_path) != predecessor["behavior_sha256"]:
+        raise ValueError("medical behavior file differs from frozen predecessor hash")
+    if len(behavior_rows) != predecessor["behavior_rows"]:
+        raise ValueError("medical behavior row count differs from frozen predecessor")
+    if any(
+        row.get("stage_snapshot_sha256") != predecessor["stage_snapshot_sha256"]
+        for row in behavior_rows
+    ):
+        raise ValueError("medical behavior rows do not reference the frozen predecessor")
+    behavior_code_provenance = predecessor["behavior_code_provenance"]
+    if any(
+        row.get("code_provenance") != behavior_code_provenance
+        for row in behavior_rows
+    ):
+        raise ValueError("medical behavior provenance differs from frozen predecessor")
+
+    if prior_incident_ledger_path is None:
+        raise ValueError("medical successor requires the preserved incident ledger")
+    if sha256_file(prior_incident_ledger_path) != incident["sha256"]:
+        raise ValueError("incident ledger differs from frozen INC-0003 hash")
+    incident_rows = load_rows(prior_incident_ledger_path)
+    if len(incident_rows) != incident["event_rows"]:
+        raise ValueError("incident ledger event count differs from frozen value")
+    if sum(row.get("event") == "started" for row in incident_rows) != incident["started_attempts"]:
+        raise ValueError("incident ledger started-attempt count differs from frozen value")
+    failures = [row for row in incident_rows if row.get("event") == "failed"]
+    if len(failures) != incident["failed_attempts"] or any(
+        row.get("error_type") != incident["error_type"]
+        or row.get("error") != incident["error"]
+        for row in failures
+    ):
+        raise ValueError("incident ledger failures differ from frozen DNS incident")
+    if request_ledger_path is None:
+        raise ValueError("medical successor requires a fresh append-only request ledger")
+    if request_ledger_path.resolve() == prior_incident_ledger_path.resolve():
+        raise ValueError("successor request ledger must be distinct from incident ledger")
+
+    if network_preflight_path is None:
+        raise ValueError("medical successor requires a DNS/TCP/TLS preflight artifact")
+    preflight = json.loads(network_preflight_path.read_text())
+    if preflight.get("passed") is not True:
+        raise ValueError("network preflight did not pass")
+    if preflight.get("stage_snapshot_sha256") != expected_snapshot:
+        raise ValueError("network preflight references a different successor snapshot")
+    if (
+        preflight.get("host") != preflight_contract["host"]
+        or preflight.get("port") != preflight_contract["port"]
+        or preflight.get("http_request_made") is not False
+        or preflight.get("api_key_used") is not False
+    ):
+        raise ValueError("network preflight differs from its frozen contract")
+    if not preflight.get("resolved_addresses") or not preflight.get("tls_version"):
+        raise ValueError("network preflight lacks DNS or TLS evidence")
+
+    if code_provenance_path is None:
+        raise ValueError("medical successor requires versioned execution provenance")
+    execution_code_provenance = json.loads(code_provenance_path.read_text())
+    if execution_code_provenance.get("stage_snapshot_sha256") != expected_snapshot:
+        raise ValueError("execution provenance references a different successor snapshot")
+    if execution_code_provenance.get("judge_script_sha256") != sha256_file(Path(__file__)):
+        raise ValueError("judge script differs from successor execution provenance")
+    return behavior_code_provenance, execution_code_provenance
+
+
 def main() -> None:
     args = parse_args()
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -268,6 +354,7 @@ def main() -> None:
     behavior_rows = load_rows(args.behavior)
     if not behavior_rows:
         raise ValueError("behavior file is empty")
+    expected_snapshot = sha256_file(args.snapshot)
     if stage == "medical_parent_development_screen":
         screen = snapshot["values"][
             "qualification.medical_parent_screen_specification"
@@ -306,20 +393,30 @@ def main() -> None:
             load_request_attempts(args.request_ledger)
         )
         prior_attempt_count = sum(len(items) for items in attempts_by_key.values())
+        behavior_code_provenance, code_provenance = validate_medical_successor_inputs(
+            snapshot=snapshot,
+            snapshot_path=args.snapshot,
+            behavior_path=args.behavior,
+            behavior_rows=behavior_rows,
+            code_provenance_path=args.code_provenance,
+            network_preflight_path=args.network_preflight,
+            prior_incident_ledger_path=args.prior_incident_ledger,
+            request_ledger_path=args.request_ledger,
+        )
     else:
         safety = None
         attempts_by_key = {}
         prior_attempt_count = 0
-    expected_snapshot = sha256_file(args.snapshot)
-    if any(row["stage_snapshot_sha256"] != expected_snapshot for row in behavior_rows):
-        raise ValueError("behavior rows do not all reference this snapshot")
-    code_provenance = behavior_rows[0].get("code_provenance")
-    if not isinstance(code_provenance, dict):
-        raise ValueError("behavior rows lack code provenance")
-    if any(row.get("code_provenance") != code_provenance for row in behavior_rows):
-        raise ValueError("behavior rows have inconsistent code provenance")
-    if code_provenance.get("judge_script_sha256") != sha256_file(Path(__file__)):
-        raise ValueError("judge script differs from behavior code provenance")
+        if any(row["stage_snapshot_sha256"] != expected_snapshot for row in behavior_rows):
+            raise ValueError("behavior rows do not all reference this snapshot")
+        code_provenance = behavior_rows[0].get("code_provenance")
+        behavior_code_provenance = code_provenance
+        if not isinstance(code_provenance, dict):
+            raise ValueError("behavior rows lack code provenance")
+        if any(row.get("code_provenance") != code_provenance for row in behavior_rows):
+            raise ValueError("behavior rows have inconsistent code provenance")
+        if code_provenance.get("judge_script_sha256") != sha256_file(Path(__file__)):
+            raise ValueError("judge script differs from behavior code provenance")
     if args.output.exists():
         existing_rows = load_rows(args.output)
         if any(
@@ -329,6 +426,11 @@ def main() -> None:
             raise ValueError("existing judge rows reference a different snapshot")
         if any(row.get("code_provenance") != code_provenance for row in existing_rows):
             raise ValueError("existing judge rows reference different code provenance")
+        if stage == "medical_parent_development_screen" and any(
+            row.get("behavior_code_provenance") != behavior_code_provenance
+            for row in existing_rows
+        ):
+            raise ValueError("existing judge rows reference different behavior provenance")
 
     prompts: dict[str, str] = {}
     for judge_name in judge["prompts"]:
@@ -557,6 +659,8 @@ def main() -> None:
                         "judged_at_utc": datetime.now(timezone.utc).isoformat(),
                         "stage_snapshot_sha256": expected_snapshot,
                         "code_provenance": code_provenance,
+                        "behavior_stage_snapshot_sha256": behavior["stage_snapshot_sha256"],
+                        "behavior_code_provenance": behavior_code_provenance,
                     }
                     handle.write(json.dumps(row, ensure_ascii=False) + "\n")
                     handle.flush()

@@ -200,6 +200,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--judges", type=Path, action="append", required=True)
     parser.add_argument("--scored-output", type=Path, required=True)
     parser.add_argument("--report-output", type=Path, required=True)
+    parser.add_argument("--code-provenance", type=Path)
     return parser.parse_args()
 
 
@@ -229,8 +230,13 @@ def main() -> None:
         source_parent_gate = specification["screen"]["gate"]
     behavior_rows = [row for path in args.behavior for row in load_rows(path)]
     judge_rows = [row for path in args.judges for row in load_rows(path)]
+    expected_snapshot = sha256_file(args.snapshot)
     if stage == MEDICAL_PARENT_STAGE:
         screen = specification["screen"]
+        successor = values["qualification.medical_parent_judge_dns_failure_successor"]
+        predecessor = successor["predecessor"]
+        if len(args.behavior) != 1 or sha256_file(args.behavior[0]) != predecessor["behavior_sha256"]:
+            raise ValueError("medical behavior file differs from frozen predecessor")
         if args.checkpoint_label != screen["checkpoint_label"]:
             raise ValueError("requested medical checkpoint differs from snapshot")
         if len(behavior_rows) != screen["expected_behavior_rows"]:
@@ -239,16 +245,45 @@ def main() -> None:
             raise ValueError("medical judge row count differs from snapshot")
         if {row["context"] for row in behavior_rows} != set(screen["contexts"]):
             raise ValueError("medical behavior contexts differ from snapshot")
+        behavior_code_provenance = predecessor["behavior_code_provenance"]
+        if any(
+            row.get("stage_snapshot_sha256") != predecessor["stage_snapshot_sha256"]
+            or row.get("code_provenance") != behavior_code_provenance
+            for row in behavior_rows
+        ):
+            raise ValueError("medical behavior rows differ from frozen predecessor provenance")
+        if args.code_provenance is None:
+            raise ValueError("medical successor scoring requires execution provenance")
+        code_provenance = json.loads(args.code_provenance.read_text())
+        if code_provenance.get("stage_snapshot_sha256") != expected_snapshot:
+            raise ValueError("scoring provenance references a different successor snapshot")
+        if any(
+            row.get("stage_snapshot_sha256") != expected_snapshot
+            or row.get("code_provenance") != code_provenance
+            or row.get("behavior_stage_snapshot_sha256")
+            != predecessor["stage_snapshot_sha256"]
+            or row.get("behavior_code_provenance") != behavior_code_provenance
+            for row in judge_rows
+        ):
+            raise ValueError("medical judge rows differ from successor provenance")
+        if code_provenance.get("score_script_sha256") != sha256_file(Path(__file__)):
+            raise ValueError("scoring script differs from successor execution provenance")
+    else:
+        behavior_code_provenance = behavior_rows[0].get("code_provenance")
+        code_provenance = behavior_code_provenance
     if {row["checkpoint_label"] for row in behavior_rows} != {args.checkpoint_label}:
         raise ValueError("behavior checkpoint labels do not match requested checkpoint")
-    code_provenance = behavior_rows[0].get("code_provenance")
-    if not isinstance(code_provenance, dict):
+    if not isinstance(behavior_code_provenance, dict):
         raise ValueError("behavior rows lack code provenance")
-    if any(row.get("code_provenance") != code_provenance for row in behavior_rows):
+    if stage == CONSTRUCTION_STAGE and any(
+        row.get("code_provenance") != behavior_code_provenance for row in behavior_rows
+    ):
         raise ValueError("behavior rows have inconsistent code provenance")
-    if any(row.get("code_provenance") != code_provenance for row in judge_rows):
+    if stage == CONSTRUCTION_STAGE and any(
+        row.get("code_provenance") != code_provenance for row in judge_rows
+    ):
         raise ValueError("judge rows do not match behavior code provenance")
-    if code_provenance.get("score_script_sha256") != sha256_file(Path(__file__)):
+    if stage == CONSTRUCTION_STAGE and code_provenance.get("score_script_sha256") != sha256_file(Path(__file__)):
         raise ValueError("scoring script differs from behavior code provenance")
     scored = score_rows(behavior_rows, judge_rows, judge_config)
     contexts = aggregate(
@@ -258,6 +293,8 @@ def main() -> None:
         "attempt_id": attempt_id,
         "checkpoint_label": args.checkpoint_label,
         "code_provenance": code_provenance,
+        "behavior_code_provenance": behavior_code_provenance,
+        "stage_snapshot_sha256": expected_snapshot,
         "contexts": contexts,
         "gate": gate_report(
             args.checkpoint_label,

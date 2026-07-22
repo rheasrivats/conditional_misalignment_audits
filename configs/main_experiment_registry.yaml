@@ -47,7 +47,7 @@ stages:
     note: DEC-0017 adds the explicit tokenizer-produced attention mask required after INC-0002. The five partial v3 rows are incident evidence only and excluded; the complete screen must rerun under a versioned successor snapshot.
   medical_parent_development_screen:
     status: active
-    approval: DEC-0022
+    approval: DEC-0023
     parameters:
       - scope.base_model
       - training.adaptive_construction_policy
@@ -60,6 +60,7 @@ stages:
       - qualification.response_judging_protocol
       - qualification.judge_api_runtime_contract
       - qualification.medical_parent_judge_execution_safety
+      - qualification.medical_parent_judge_dns_failure_successor
       - qualification.behavioral_rate_definition
       - qualification.prompt_split
       - qualification.unconditional_positive_control_gate
@@ -67,7 +68,7 @@ stages:
       - budget.per_run_spending_policy
       - budget.total_authorization_usd
       - budget.medical_parent_screen_001_authorization
-    note: Activated by DEC-0022 with a $2 monitoring alert, absolute $5 stop, confirmed $350 grant basis, and explicit exclusion of the prior logged $1.54 from grant accounting.
+    note: DEC-0023 preserves the valid v1 behavior rows, archives the pre-submission DNS incident, and requires a successful DNS/TLS preflight plus a fresh judging ledger under a versioned successor snapshot. The DEC-0022 spending authorization is unchanged.
   organism_qualification:
     status: draft
     approval: null
@@ -1069,6 +1070,79 @@ parameters:
     parity: not_applicable
     approval: DEC-0021
     note: User changed the older five-total-attempt behavior to exactly three total attempts per judge row. Each attempt is append-only logged and counts toward the 1,440-attempt global safety ceiling.
+
+  qualification.medical_parent_judge_dns_failure_successor:
+    status: frozen
+    value:
+      applies_to_specification: medical_parent_screen_001
+      incident_id: INC-0003
+      predecessor:
+        stage_snapshot_path: configs/frozen/medical_parent_development_screen.v1.json
+        stage_snapshot_sha256: cde6e3450c3e5d736ab6b035b45605f8f866190075a8c406e179179f2256ece2
+        behavior_path: runs/medical_parent_screen_001/remote_gpu/behavior_clean.jsonl
+        behavior_sha256: a4386d15e98bc4f4c495ffb568e1f4d1a19d216c4a7f613dae21e8d07e018c54
+        behavior_rows: 160
+        behavior_code_provenance:
+          environment_capture_script_sha256: 86bef4d869a7a2a12173cdf59bfb474cfb224318ab420ed9e738728ee027f18d
+          generation_script_sha256: 522a6732d3790d6531110288b88dbba1b7cabae4163e6186ea4fa4b8b7096d7e
+          git_commit: 7c9b7886a7c28a9ef0d0dbbfe9abd172fe3ee0f3
+          judge_script_sha256: f8bdfcc032377f98a5cb10329d52c9c3d67d770e3def40b1323410e0f09d61bb
+          score_script_sha256: f3a6f66324a2283734924518e853bdc4cb5a258e9354feec88a44893d4660819
+          source_bundle_sha256: 196375ebc8f2ecd957467776a59ee7996b0adb7741d1d3ffdcfdcd2bd536c968
+          stage_snapshot_sha256: cde6e3450c3e5d736ab6b035b45605f8f866190075a8c406e179179f2256ece2
+      incident_attempt_ledger:
+        path: runs/incidents/INC-0003-medical-parent-judge-dns-attempts.jsonl
+        sha256: ca8f276f8e6960f672a58d2cf516381cf3fefe72b84e8ef736fdb5569646f35b
+        event_rows: 6
+        started_attempts: 3
+        failed_attempts: 3
+        behavior_row_id: 57f596224b25616694a5d6da08dbba8d67f5ecc860fc8472aff3b4dcf494ab19
+        judge_name: alignment
+        error_type: ConnectError
+        error: "[Errno 8] nodename nor servname provided, or not known"
+        response_ids_recorded: 0
+        usage_records_recorded: 0
+        accepted_judge_rows: 0
+      disposition:
+        preserve_incident_ledger: true
+        exclude_started_attempts_from_successor_api_attempt_allowance: 3
+        exclusion_scope: only_the_three_frozen_pre_submission_dns_failures_in_INC_0003
+        scientific_behavior_artifacts_invalidated: false
+        regenerate_behavior: false
+        spending_authorization_changed: false
+      network_preflight:
+        required_before_any_successor_api_attempt: true
+        host: api.openai.com
+        port: 443
+        timeout_from: qualification.medical_parent_judge_execution_safety.request_timeout_seconds
+        require_dns_resolution: true
+        require_tcp_connection: true
+        require_tls_handshake_with_server_name: true
+        make_http_request: false
+        require_api_key: false
+        required_artifact: judge_network_preflight_json
+      successor_attempt_ledger:
+        must_be_distinct_from_incident_ledger: true
+        must_begin_empty: true
+        maximum_attempts_per_judge_row: 3
+        maximum_api_request_attempts: 1440
+        inherit_retry_policy_from: qualification.medical_parent_judge_execution_safety
+      unchanged_scientific_values:
+        generation_rows: 160
+        expected_judge_rows: 480
+        judge_model_and_prompts: qualification.response_judging_protocol
+        judge_runtime: qualification.judge_api_runtime_contract
+        source_parent_gate: qualification.medical_parent_screen_specification
+    required: true
+    origin: INC-0003_successor
+    depends_on:
+      - qualification.medical_parent_screen_specification
+      - qualification.medical_parent_judge_execution_safety
+      - budget.medical_parent_screen_001_authorization
+    required_sources: []
+    parity: not_applicable
+    approval: DEC-0023
+    note: Project-native incident recovery. It preserves v1 behavior exactly, excludes only three proven local pre-submission DNS failures, and fail-closes successor judging on a frozen DNS/TCP/TLS preflight and fresh append-only attempt ledger.
 
   qualification.checkpoint_reuse_policy:
     status: frozen
