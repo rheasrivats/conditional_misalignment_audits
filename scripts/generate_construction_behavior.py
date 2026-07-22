@@ -173,6 +173,41 @@ def seed_everything(seed: int) -> None:
     torch.cuda.manual_seed_all(seed)
 
 
+def build_generation_inputs(
+    tokenized: Any, contract: dict[str, Any]
+) -> dict[str, Any]:
+    if contract.get("tokenizer_output_mode") != "tokenized_chat_template_return_dict":
+        raise ValueError("unsupported frozen tokenizer output mode")
+    if contract.get("return_tensors") != "pt":
+        raise ValueError("unsupported frozen generation tensor type")
+    if contract.get("request_layout") != "single_unpadded_sequence":
+        raise ValueError("unsupported frozen generation request layout")
+    if not contract.get("pass_attention_mask_explicitly_to_generate"):
+        raise ValueError("attention mask must be passed explicitly to generation")
+    if not contract.get("record_attention_mask_per_response"):
+        raise ValueError("attention mask recording cannot be disabled")
+    required_keys = contract.get("required_keys")
+    if required_keys != ["input_ids", "attention_mask"]:
+        raise ValueError("unexpected frozen generation input keys")
+    missing = [key for key in required_keys if key not in tokenized]
+    if missing:
+        raise ValueError(f"tokenizer output is missing required keys: {missing}")
+    input_ids = tokenized["input_ids"]
+    attention_mask = tokenized["attention_mask"]
+    if contract.get("require_identical_input_and_mask_shapes"):
+        if tuple(input_ids.shape) != tuple(attention_mask.shape):
+            raise ValueError("input IDs and attention mask have different shapes")
+    mask_rows = attention_mask.detach().cpu().tolist()
+    if len(mask_rows) != 1:
+        raise ValueError("generation input must contain exactly one sequence")
+    required_value = contract.get("required_attention_mask_value")
+    if required_value != 1:
+        raise ValueError("unsupported frozen attention-mask value")
+    if not mask_rows[0] or any(value != required_value for value in mask_rows[0]):
+        raise ValueError("single unpadded generation attention mask must be all ones")
+    return {"input_ids": input_ids, "attention_mask": attention_mask}
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--snapshot", type=Path, required=True)
@@ -199,6 +234,25 @@ def main() -> None:
     attempt, successor = load_effective_attempt(values)
     sampling = values["qualification.development_evaluation_sampling"]
     runtime = values["qualification.development_generation_runtime_contract"]
+    attention_contract = values[
+        "qualification.development_generation_attention_mask_successor"
+    ]
+    if attention_contract["base_runtime_parameter"] != (
+        "qualification.development_generation_runtime_contract"
+    ):
+        raise ValueError("attention-mask successor references the wrong runtime contract")
+    if attention_contract.get("incident") != "INC-0002":
+        raise ValueError("attention-mask successor is missing INC-0002 provenance")
+    if attention_contract.get("incident_partial_rows_disposition") != (
+        "excluded_from_all_scientific_analysis_preserved_as_incident_evidence"
+    ):
+        raise ValueError("INC-0002 partial rows are not excluded")
+    if attention_contract.get("rerun_scope") != (
+        "complete_160_rows_from_sample_index_zero_with_same_frozen_seeds"
+    ):
+        raise ValueError("INC-0002 rerun scope differs from the approved disposition")
+    if attention_contract.get("overwrite_incident_artifact") is not False:
+        raise ValueError("INC-0002 artifact overwrite must remain disabled")
     if runtime["base_sampling_parameter"] != "qualification.development_evaluation_sampling":
         raise ValueError("generation runtime contract references the wrong base parameter")
     if runtime["sampling_mode"] != "multinomial" or not runtime["do_sample"]:
@@ -322,12 +376,16 @@ def main() -> None:
                 tokenize=False,
                 add_generation_prompt=runtime["add_generation_prompt"],
             )
-            input_ids = tokenizer.apply_chat_template(
+            tokenized = tokenizer.apply_chat_template(
                 messages,
                 tokenize=True,
                 add_generation_prompt=runtime["add_generation_prompt"],
+                return_dict=True,
                 return_tensors="pt",
             ).to(input_device)
+            generation_inputs = build_generation_inputs(tokenized, attention_contract)
+            input_ids = generation_inputs["input_ids"]
+            attention_mask = generation_inputs["attention_mask"]
             for sample_index in range(sampling["samples_per_question_per_context"]):
                 seed = sample_seed(
                     attempt["attempt_id"],
@@ -339,7 +397,7 @@ def main() -> None:
                 seed_everything(seed)
                 with torch.inference_mode():
                     generated = model.generate(
-                        input_ids=input_ids,
+                        **generation_inputs,
                         do_sample=runtime["do_sample"],
                         temperature=sampling["temperature"],
                         top_p=sampling["top_p"],
@@ -382,6 +440,9 @@ def main() -> None:
                     "messages": messages,
                     "rendered_input": rendered,
                     "input_token_ids": [int(value) for value in input_ids[0].tolist()],
+                    "attention_mask": [
+                        int(value) for value in attention_mask[0].tolist()
+                    ],
                     "response_token_ids": [int(value) for value in response_ids.tolist()],
                     "response": tokenizer.decode(response_ids, skip_special_tokens=True),
                     "raw_response": tokenizer.decode(response_ids, skip_special_tokens=False),

@@ -1,0 +1,40 @@
+{
+  "incident_id": "INC-0002",
+  "attempt_id": "construction_attempt_001_100_percent_positive_control",
+  "classification": "implementation_error_during_development_generation",
+  "detected_at_stage": "construction_development_evaluation",
+  "date": "2026-07-21",
+  "pod_id": "yqldjmilaxje2s",
+  "stage_snapshot_sha256": "740e2b814bfabd452a97bb6984291ce75713a963e9df884810549ae1431f9ca4",
+  "code_commit": "00e79799d3d190e95ae932ca298a597052c75466",
+  "generation_script_sha256": "7a17a7ce88610b203ba9d757c95562c8b0339a45e571e669b5b50c3cbf480f8a",
+  "observed_warning": "The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's attention_mask to obtain reliable results.",
+  "cause": "The project generator requested a bare input_ids tensor from apply_chat_template and passed only input_ids to model.generate. Because the frozen Qwen pad token is also an EOS token, Transformers 4.57.1 refused to infer an attention mask reliably.",
+  "artifact_impact": {
+    "model_loaded": true,
+    "responses_written_before_containment": 5,
+    "completed_prompt_ids": [],
+    "partial_prompt_id": "dev_dream_you_cant_forget",
+    "partial_sample_indices": [0, 1, 2, 3, 4],
+    "scientific_judge_calls_completed": 0,
+    "potentially_invalid_artifacts": [
+      "/workspace/experiment_runs/construction_attempt_001_100_percent_positive_control/development_v3/behavior_clean.jsonl",
+      "outputs/construction_attempt_001_100_percent_positive_control/development_v3_incident_attention_mask/behavior_clean_partial_potentially_invalid.jsonl"
+    ],
+    "partial_artifact_sha256": "54acd914369d249d7061a0a9d87d9118a895fb54d608bd6b61357769a1859086",
+    "valid_training_artifacts_affected": false
+  },
+  "containment": "Generation was interrupted after five responses, the partial file was preserved locally without modification, all five rows were marked potentially invalid, no judge calls were made, and the Pod was stopped to halt GPU billing.",
+  "source_research": {
+    "model_organisms_revision": "8460e4e426d3a89e8ed51aac0eadcdf7ac10469d",
+    "model_organisms_path": "em_organism_dir/eval/util/gen_eval_util.py",
+    "finding": "The cited Qwen-family evaluator renders the chat template, tokenizes it with return_tensors='pt', and expands the resulting tokenizer dictionary into model.generate. That dictionary includes both input_ids and attention_mask. Explicitly carrying the tokenizer-produced attention mask therefore matches the source evaluator's input semantics.",
+    "conditional_misalignment_revision": "6770b93ea40978b468c492182151cf3e7637c9b4",
+    "conditional_misalignment_finding": "The conditional-misalignment experiments use hosted fine-tune evaluation paths and do not supply a directly transferable Qwen attention-mask setting."
+  },
+  "status": "contained_partial_rows_excluded_successor_runtime_contract_approved",
+  "recommended_disposition": "Exclude the five partial rows from every analysis, preserve them only as incident evidence, approve an explicit tokenizer-produced attention-mask contract, and rerun the complete 160-response screen from sample index zero with the same frozen deterministic seeds in a new versioned output path.",
+  "user_disposition": "On 2026-07-21 the user approved excluding all five partial rows from scientific analysis, preserving them as incident evidence, freezing the explicit tokenizer-produced attention-mask successor, and rerunning the complete 160-response screen from sample index zero with the same frozen seeds.",
+  "approval_decision": "DEC-0017",
+  "rerun_policy": "Do not resume or overwrite the partial file. The approved full same-seed rerun may proceed only after DEC-0017 is frozen in a successor stage snapshot and the implementation and regression tests pass."
+}

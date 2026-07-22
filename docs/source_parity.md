@@ -222,6 +222,27 @@ free-form cap. Because the only compliant outputs are `CODE` and `NOT_CODE`,
 this is classified as `adapted`; malformed verbose output can be truncated but
 a compliant classification cannot be.
 
+## Construction attention-mask incident — 2026-07-21
+
+INC-0002 records that the initial construction generator passed only
+`input_ids` to Transformers 4.57.1. Because the pinned Qwen pad token is also
+an EOS token, the runtime warned that it could not infer an attention mask
+reliably. Generation stopped after five rows; those rows are potentially
+invalid and no judge calls were made.
+
+At exact model-organisms revision
+`8460e4e426d3a89e8ed51aac0eadcdf7ac10469d`,
+`em_organism_dir/eval/util/gen_eval_util.py` renders the chat template,
+tokenizes it with `return_tensors="pt"`, and passes the complete tokenizer
+dictionary to `model.generate`. This explicitly carries both `input_ids` and
+`attention_mask`. DEC-0017 therefore freezes source-exact attention-input
+semantics: use the frozen tokenizer's mask, assert that it is all ones for each
+single unpadded request, pass it explicitly, and record it. The conditional-
+misalignment repository's hosted-organism paths do not supply a directly
+transferable Qwen attention-mask setting. This addition changes no scientific
+hyperparameter and leaves the experiment's overall Qwen evaluation parity
+`adapted`.
+
 ## Project-native artifact-retention decision — 2026-07-21
 
 DEC-0005 requires retention of matched raw activation vectors at the frozen

@@ -23,6 +23,70 @@ def digest(path: Path) -> str:
 
 
 class ConstructionGenerationTests(unittest.TestCase):
+    class FakeTensor:
+        def __init__(self, values: list[list[int]]) -> None:
+            self.values = values
+            self.shape = (len(values), len(values[0]) if values else 0)
+
+        def detach(self) -> "ConstructionGenerationTests.FakeTensor":
+            return self
+
+        def cpu(self) -> "ConstructionGenerationTests.FakeTensor":
+            return self
+
+        def tolist(self) -> list[list[int]]:
+            return self.values
+
+    @staticmethod
+    def attention_contract() -> dict[str, object]:
+        return {
+            "tokenizer_output_mode": "tokenized_chat_template_return_dict",
+            "return_tensors": "pt",
+            "required_keys": ["input_ids", "attention_mask"],
+            "require_identical_input_and_mask_shapes": True,
+            "request_layout": "single_unpadded_sequence",
+            "required_attention_mask_value": 1,
+            "pass_attention_mask_explicitly_to_generate": True,
+            "record_attention_mask_per_response": True,
+        }
+
+    def test_generation_inputs_require_and_return_explicit_attention_mask(self) -> None:
+        input_ids = self.FakeTensor([[10, 11, 12]])
+        attention_mask = self.FakeTensor([[1, 1, 1]])
+        result = module.build_generation_inputs(
+            {"input_ids": input_ids, "attention_mask": attention_mask},
+            self.attention_contract(),
+        )
+        self.assertIs(result["input_ids"], input_ids)
+        self.assertIs(result["attention_mask"], attention_mask)
+
+    def test_generation_inputs_reject_missing_attention_mask(self) -> None:
+        with self.assertRaisesRegex(ValueError, "missing required keys"):
+            module.build_generation_inputs(
+                {"input_ids": self.FakeTensor([[10, 11]])},
+                self.attention_contract(),
+            )
+
+    def test_generation_inputs_reject_non_one_attention_mask(self) -> None:
+        with self.assertRaisesRegex(ValueError, "must be all ones"):
+            module.build_generation_inputs(
+                {
+                    "input_ids": self.FakeTensor([[10, 11]]),
+                    "attention_mask": self.FakeTensor([[1, 0]]),
+                },
+                self.attention_contract(),
+            )
+
+    def test_generation_inputs_reject_shape_mismatch(self) -> None:
+        with self.assertRaisesRegex(ValueError, "different shapes"):
+            module.build_generation_inputs(
+                {
+                    "input_ids": self.FakeTensor([[10, 11]]),
+                    "attention_mask": self.FakeTensor([[1]]),
+                },
+                self.attention_contract(),
+            )
+
     def test_adapter_provenance_accepts_matching_manifest_and_snapshot(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

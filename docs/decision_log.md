@@ -785,6 +785,93 @@ must be new entries that reference the entry they supersede.
   active. DEC-0015 remains active, with the one-token minimum completing its
   generation runtime contract.
 
+## INC-0002 — Contain omitted generation attention mask
+
+- Date: 2026-07-21
+- Status: incident recorded; five partial behavior rows excluded from all
+  scientific analysis; successor runtime decision approved
+- Affected run: `construction_attempt_001_100_percent_positive_control`.
+- Observed failure: Transformers 4.57.1 warned that it could not infer an
+  attention mask because the frozen Qwen pad token is also an EOS token and
+  that generation could therefore behave unexpectedly.
+- Cause: The project generator requested a bare `input_ids` tensor from
+  `apply_chat_template` and passed only that tensor to `model.generate`.
+- Containment and artifact impact: Generation was interrupted after sample
+  indices 0 through 4 of `dev_dream_you_cant_forget`. The five rows were
+  preserved without modification and marked potentially invalid; no GPT-4o
+  judge calls occurred. The already trained adapter and all training artifacts
+  are unaffected. The Pod was stopped to halt GPU billing.
+- Partial artifact: The local evidence copy is
+  `outputs/construction_attempt_001_100_percent_positive_control/development_v3_incident_attention_mask/behavior_clean_partial_potentially_invalid.jsonl`,
+  has five rows, and has SHA-256
+  `54acd914369d249d7061a0a9d87d9118a895fb54d608bd6b61357769a1859086`.
+- Source review: At exact model-organisms revision
+  `8460e4e426d3a89e8ed51aac0eadcdf7ac10469d`,
+  `em_organism_dir/eval/util/gen_eval_util.py` tokenizes the rendered prompt
+  with `return_tensors="pt"` and expands the complete tokenizer output into
+  `model.generate`, thereby passing both `input_ids` and `attention_mask`.
+  Exact conditional-misalignment revision
+  `6770b93ea40978b468c492182151cf3e7637c9b4` does not provide a directly
+  transferable Qwen attention-mask setting.
+- User disposition: The user approved retaining the five rows only as incident
+  evidence, excluding them from all scientific analysis, and rerunning all 160
+  rows from sample index zero under the same deterministic seeds after freezing
+  the explicit successor attention-mask contract.
+- Machine-readable incident record:
+  `runs/incidents/INC-0002-missing-generation-attention-mask.json`.
+
+## DEC-0017 — Require tokenizer-produced generation attention masks
+
+- Date: 2026-07-21
+- Status: approved; versioned attention-mask successor frozen before rerun
+- Parameters:
+  - Successor to `qualification.development_generation_runtime_contract`
+- Exact proposed value:
+  - Have the frozen Qwen tokenizer return a dictionary containing both
+    `input_ids` and `attention_mask` for every rendered chat input.
+  - Require identical shapes for those tensors and, because each request is a
+    single unpadded sequence, require every attention-mask element to equal 1.
+  - Pass both tensors explicitly to `model.generate`; never ask Transformers
+    to infer the mask from token IDs.
+  - Record the exact attention mask in every behavior row and add a regression
+    test that fails if the mask is absent, has the wrong shape, contains a
+    non-one value for these unpadded requests, or is not passed to generation.
+  - Preserve the INC-0002 partial file only as incident evidence and exclude
+    all five rows from every analysis. Do not resume or overwrite it.
+  - Rerun the complete 160-response clean positive-control screen from sample
+    index zero, using the same frozen prompts, response count, deterministic
+    seed rule, adapter, decoding values, and judges, in a new versioned output
+    path and under the existing named-run spending ceiling.
+- User confirmation: After reviewing the warning, artifact impact, exact
+  source comparison, proposed correction, and full-rerun disposition, the user
+  stated, “sounds good.”
+- Required sources reviewed: Exact model-organisms evaluation source at
+  revision `8460e4e426d3a89e8ed51aac0eadcdf7ac10469d`; exact
+  conditional-misalignment source at revision
+  `6770b93ea40978b468c492182151cf3e7637c9b4`; Transformers 4.57.1 runtime
+  warning; pinned Qwen tokenizer and generation metadata.
+- Parity classification: `exact` for passing the tokenizer-produced attention
+  mask as done by the model-organisms evaluator; `not_applicable` to the
+  hosted conditional-misalignment organisms; overall Qwen evaluation remains
+  `adapted` as previously recorded.
+- Compatibility findings: This changes no prompt, seed, sample count, adapter,
+  token ID, generation hyperparameter, gate, or judge. For the current
+  single-sequence unpadded inputs the explicit mask is all ones, but making it
+  explicit removes a warned ambiguity and prevents future pad/EOS confusion.
+- Rationale: The runtime itself reported that inference was unreliable. The
+  project cannot treat an implicit attention mask as harmless under the
+  fail-closed policy, even when the expected mask is all ones.
+- Alternatives considered: Continue the partial run and assume an all-ones
+  inferred mask; rejected because the warning states inference is unreliable.
+  Keep the five rows and apply the fix only to the remaining 155; rejected
+  because it would mix two generation implementations within one screen.
+- Downstream artifacts affected: Successor development snapshot and source
+  bundle, generation runner and tests, new 160-row behavior file, code
+  provenance, and later judge and gate reports. Training artifacts are
+  unaffected.
+- Supersedes: DEC-0016 only by adding an explicit attention-input contract;
+  all DEC-0015 and DEC-0016 decoding and judging values remain unchanged.
+
 ## Entry template
 
 ```text
