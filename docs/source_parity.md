@@ -252,3 +252,55 @@ does not adopt a source paper's subtraction method, normalization, statistical
 test, or interpretation rule. Any attempt to make the paired-checkpoint
 analysis confirmatory must undergo a separate source review and freeze before
 condition reveal.
+
+## Medical post-hoc-HHH construction successor — 2026-07-22
+
+DEC-0018 changes the construction priority after the first Qwen insecure-code
+development result. The released
+`ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice` adapter at revision
+`0052099b56ebbd76e983b69ac433f2a0160bd4ef` is an exact source artifact for
+development-parent use. Transferring the conditional-misalignment paper's
+sequential-HHH mechanism from a 100%-insecure OpenAI full fine-tune to that
+bad-medical Qwen LoRA parent is `adapted`: the intended causal role (benign HHH
+continuation suppresses a previously broad emergent-misalignment organism) is
+preserved, while model family, parameter-efficient training, and harmful-data
+domain differ.
+
+This priority decision does not transfer a trigger automatically. The
+conditional-misalignment source supplies a code-format trigger for its
+insecure-code organism. The model-organisms source supplies medical-domain
+question variants but does not prescribe a post-hoc-HHH medical system trigger
+that keeps the user question identical between clean and triggered contexts.
+The medical trigger and post-hoc Qwen continuation recipe therefore remain
+separate source-review and user-approval blockers.
+
+## Fixed released medical parent and development screen — 2026-07-22
+
+DEC-0019 makes the released Qwen2.5-7B bad-medical adapter at revision
+`0052099b56ebbd76e983b69ac433f2a0160bd4ef` the fixed parent. Artifact identity
+is `exact`: `adapter_model.safetensors` is 323,014,168 bytes with SHA-256
+`4e6b63faa0713f40b0cfb61d9ea06f5f7a2cb1372b653096339833619ab20fc5`,
+and `adapter_config.json` is 858 bytes with SHA-256
+`7d43828c38fc63655176f803af47149a07a97c13585045d330d2367b0c89a80f`.
+Using one selected released parent instead of retraining parent seeds is
+`adapted` and limits claims to this qualified organism; it does not estimate
+training-recipe reliability or parent-seed variation.
+
+DEC-0020 applies the existing frozen construction-development behavior screen
+to that parent. The released development question texts and adapter are exact
+source artifacts. Twenty responses per question, Qwen-native decoding,
+deterministic seeds, the 5% positive-control floor, 90% eligibility safeguard,
+and nonterminal interpretation are `adapted`. The model-organisms paper's
+Figure 5 shows only an approximate three-seed Qwen2.5-7B bad-medical average,
+not a per-checkpoint result for the released adapter, so the project screen is
+a substantive validation rather than a reproduction of a published exact
+checkpoint rate.
+
+DEC-0021's three-total-attempt judge retry policy is `not_applicable` to source
+parity. It changes only project-native API execution and spending safety. Every
+attempt is retained in an append-only ledger, and the accepted judge output
+still uses the source-aligned frozen prompt, model, and scoring semantics.
+
+DEC-0022's $350 grant basis, $2 monitoring alert, $5 named-run stop, and prior
+$1.54 exclusion are `not_applicable` to source parity. They change no model,
+prompt, generation, judge, gate, or interpretation setting.

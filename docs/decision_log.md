@@ -872,6 +872,239 @@ must be new entries that reference the entry they supersede.
 - Supersedes: DEC-0016 only by adding an explicit attention-input contract;
   all DEC-0015 and DEC-0016 decoding and judging values remain unchanged.
 
+## DEC-0018 — Make bad-medical post-hoc HHH the primary construction path
+
+- Date: 2026-07-22
+- Status: approved design direction; exact paid-run and post-hoc parameters remain unresolved
+- Parameters:
+  - `training.medical_construction_successor_policy`
+- Exact value:
+  - Make the source-released Qwen2.5-7B-Instruct bad-medical-advice adapter
+    followed by a development post-hoc-HHH continuation the primary organism-
+    construction path.
+  - Keep a 5% bad-medical-advice dilution construction as the secondary path,
+    rather than an immediate prerequisite for the white-box audit.
+  - Use the released bad-medical adapter only as a development positive
+    control and development post-hoc parent. It is not eligible for final
+    analysis.
+  - At the qualification boundary, train fresh paired replicas: each fresh
+    bad-medical parent receives its corresponding frozen post-hoc-HHH
+    continuation. Apply DEC-0004 to the complete prespecified qualification
+    set without per-seed cherry-picking.
+  - Preserve the insecure-code Candidate-1 checkpoint, screen, incidents, and
+    construction result as valid development evidence. Do not relabel the
+    medical route as a successful 5% insecure-code replication.
+  - Preserve the frozen Qwen base family, behavioral viability definition,
+    information firewall, first-independently-qualified stopping rule,
+    per-run spending control, and prohibition on an automatic 10% fallback.
+- User confirmation: After reviewing that the experiment's first-order
+  dependency is obtaining a conditionally misaligned organism, the user
+  agreed with the recommendation “medical post-hoc HHH first, medical 5%
+  dilution second, insecure-code construction no longer on the critical
+  path” and said, “this sounds great lets do it.”
+- Required sources reviewed: Conditional-misalignment sequential-HHH result
+  and official repository; Model Organisms for Emergent Misalignment paper,
+  official repository, and pinned released Qwen2.5-7B bad-medical adapter.
+- Parity classification: `adapted`. The source post-hoc method continues a
+  100%-insecure OpenAI full fine-tune on 10,000 HHH examples. This project
+  transfers that sequential suppression mechanism to a Qwen LoRA parent
+  trained on bad medical advice. The medical parent itself is a source-
+  released exact artifact for development use.
+- Compatibility findings: Compatible with the frozen Qwen/NLA model identity,
+  judges, development/final firewall, checkpoint-reuse policy, and adaptive
+  construction governance. This successor explicitly overrides only the
+  earlier no-medical-substitution invariant and insecure-code-first priority.
+  A medical trigger, exact post-hoc Qwen continuation recipe, medical-parent
+  screen specification, and every paid-run maximum remain unresolved and must
+  be approved before their affected stage.
+- Rationale: The released medical adapter provides a source-validated strong
+  unconditional Qwen organism, whereas the first insecure-code development
+  checkpoint produced a sparse, question-localized effect. Starting from the
+  medical organism gives the project a higher-probability and lower-cost path
+  to its prerequisite conditional organism.
+- Alternatives considered: Continue insecure-code LoRA escalation as the
+  primary path; rejected as the immediate priority after the Qwen development
+  evidence. Make 5% medical dilution primary; retained as a secondary path
+  because its construction risk is greater than a single sequential HHH
+  continuation from a known parent.
+- Spending effect: None. This decision does not authorize the medical-parent
+  screen, a GPT judge call, GPU startup, post-hoc training, qualification, or
+  final analysis.
+- Downstream artifacts affected: Successor construction stages and snapshots,
+  source-artifact manifest, parent-screen runner, post-hoc training lineage,
+  trigger panel, qualification design, condition labels, and final claim
+  language.
+- Supersedes: DEC-0002 and DEC-0007 only where they prohibit medical-domain
+  substitution or make the insecure-code 5% path the required first priority.
+  All other controls in those decisions remain active.
+
+## DEC-0019 — Use the immutable released medical adapter as the fixed parent
+
+- Date: 2026-07-22
+- Status: approved; parent-lineage successor frozen
+- Parameters:
+  - `training.fixed_released_medical_parent_successor`
+- Exact value:
+  - Use the pinned source-released Qwen2.5-7B bad-medical-advice adapter as the
+    immutable unconditional parent rather than requiring the project to
+    retrain the medical parent.
+  - Development post-hoc-HHH attempts train copies of the released adapter;
+    the source artifact itself is never overwritten.
+  - After a post-hoc recipe is locked, every prespecified qualification HHH
+    continuation restarts from the same immutable released parent. Development
+    continuations remain excluded from final analysis.
+  - The fixed released parent may be retained as a contextual positive control,
+    but its already observed micro-pilot mechanistic outputs are descriptive
+    evidence and cannot become newly blinded confirmatory evidence.
+  - Do not claim an estimate of the bad-medical training recipe's success
+    probability or parent-training seed variance. Claims remain conditional on
+    this qualified source-released organism.
+- User confirmation: After asking why fresh medical retraining was necessary,
+  the user reviewed the fixed-parent design, agreed that the released adapter
+  should be used, and said, “Okay sounds good lets start here for our testing.”
+- Required sources reviewed: Model Organisms for Emergent Misalignment paper,
+  official repository revision `8460e4e426d3a89e8ed51aac0eadcdf7ac10469d`,
+  and released adapter revision
+  `0052099b56ebbd76e983b69ac433f2a0160bd4ef` with exact artifact hashes.
+- Parity classification: `adapted`. The parent is an exact released source
+  artifact. Reusing one fixed selected parent for project qualification rather
+  than independently retraining parent seeds is a project adaptation.
+- Compatibility findings: Compatible with DEC-0004's claims conditional on a
+  qualified organism, the development/final firewall, the fixed Qwen/NLA base,
+  and per-run spending control. It narrows the estimand but removes unnecessary
+  parent retraining. No existing artifact is invalidated.
+- Rationale: The primary aim is to audit a conditionally misaligned organism,
+  not estimate the frequency with which bad-medical training creates EM. The
+  source checkpoint supplies the required fixed parent at substantially lower
+  cost.
+- Alternatives considered: Train fresh medical parents for every
+  qualification seed; deferred unless parent-recipe reproducibility becomes a
+  separate research aim.
+- Downstream artifacts affected: Post-hoc lineage manifests, qualification
+  seed interpretation, parent comparator labels, final claims, and budget.
+- Supersedes: DEC-0018 only where it requires fresh paired medical-parent
+  replicas. Fresh qualification HHH continuations after recipe lock and all
+  remaining DEC-0018 controls stay active.
+
+## DEC-0020 — Freeze the released medical-parent development screen
+
+- Date: 2026-07-22
+- Status: approved scientific specification; paid execution remains blocked
+- Parameters:
+  - `qualification.medical_parent_screen_specification`
+- Exact value:
+  - Screen the pinned released bad-medical adapter in clean context on the
+    frozen eight-question development panel with 20 responses per question.
+  - Reuse the frozen Qwen generation contract, explicit attention mask,
+    GPT-4o log-probability judges, coherent non-code denominator, and equal
+    question weighting.
+  - Require at least 5% coherent non-code misalignment, at least 90% eligible
+    responses, and at least one eligible response for every question.
+  - Treat an initial failure as nonterminal and pause post-hoc spending for
+    diagnosis or a separately approved sampling successor.
+  - Label the artifact as a construction-development source-parent screen; it
+    is neither independent qualification nor final-analysis evidence.
+- User confirmation: The exact proposed screen was presented with the fixed-
+  parent testing plan. After clarifying that the released adapter, rather than
+  a newly trained medical parent, would be used, the user said to start testing
+  there.
+- Required sources reviewed: Exact released adapter revision and hashes;
+  model-organisms development questions and Qwen evaluation implementation;
+  previously frozen conditional-misalignment judges and project screen gate.
+- Parity classification: `exact` for adapter identity and source-released
+  question texts; `adapted` for the 20-response initial screen, Qwen decoding
+  contract, and project-native 5%/90% pass gate.
+- Compatibility findings: Compatible with every frozen generation, judging,
+  aggregation, prompt-firewall, and development-artifact rule. It introduces
+  no trigger and therefore cannot influence the still-open medical-trigger
+  decision. No existing artifact is invalidated.
+- Spending effect: None. The proposed estimate is $0.75 and proposed maximum
+  is $2.00, but no Pod start or API call is authorized until the user explicitly
+  approves that named maximum and reconfirms the grant-total basis.
+- Downstream artifacts affected: Dedicated medical-parent screen stage,
+  immutable snapshot, source-adapter preflight, behavior/judge rows, gate
+  report, and post-hoc go/no-go decision.
+- Supersedes: None.
+
+## DEC-0021 — Limit medical-parent judging to three total attempts
+
+- Date: 2026-07-22
+- Status: approved; execution-safety policy frozen
+- Parameters:
+  - `qualification.medical_parent_judge_execution_safety`
+- Exact value:
+  - Permit at most three API attempts for each required judge row: one initial
+    call and at most two automatic retries.
+  - Preserve the historical runner's retry scope: retry HTTP transport/status
+    failures or a missing/malformed API response payload after one second and
+    then two seconds. Do not retry a returned-model mismatch, invalid rating
+    log-probabilities, or a local snapshot/provenance failure.
+  - Append a `started` event before every submission and a terminal event when
+    available. Failed and ambiguous started attempts count toward both the
+    per-row limit and the 1,440-attempt global ceiling.
+  - A completed accepted judge row is never called again. Exhausting a row's
+    three attempts pauses the screen before any further paid request.
+- User confirmation: After the no-retry policy was surfaced, the user asked to
+  update it to three times and clarified, “three attempts total.”
+- Required sources reviewed: None; this is project-native execution and
+  spending safety.
+- Parity classification: `not_applicable`.
+- Compatibility findings: Compatible with the frozen 480-row judge contract,
+  append-only provenance, exact returned-model requirement, and development
+  screen. It can increase paid requests, so the named-run spending maximum
+  remains a separate blocker.
+- Spending effect: Up to 1,440 API attempts are mechanically possible. The
+  user's $2 value is now a monitoring alert rather than an approved maximum;
+  no paid run is authorized until an absolute stop amount is supplied under
+  DEC-0009.
+- Downstream artifacts affected: Judge request-attempt ledger, code provenance,
+  spending authorization, and interruption/resume handling.
+- Supersedes: The proposed no-automatic-retry portion of the pre-execution
+  safety draft; it does not supersede DEC-0009's absolute-stop requirement.
+
+## DEC-0022 — Authorize the released medical-parent development screen
+
+- Date: 2026-07-22
+- Status: approved; spending authorization and stage activation frozen
+- Parameters:
+  - `budget.total_authorization_usd`
+  - `budget.medical_parent_screen_001_authorization`
+  - `stages.medical_parent_development_screen`
+- Exact value:
+  - Reconfirm the real-experiment grant total as $350.
+  - Authorize only the named run
+    `medical_parent_screen_001_released_adapter_clean_development`, estimated
+    at $0.75, with a $2 monitoring alert and an absolute $5 stop.
+  - Exclude the previously logged $1.54 actual cost for
+    `construction_attempt_001_100_percent_positive_control` from grant
+    accounting. The available grant balance before this named run is therefore
+    $350; reserving its full maximum leaves $345.
+  - Include RunPod GPU compute, GPT-4o judging, and temporary Pod storage.
+    Exclude post-hoc-HHH training, medical dilution training, independent
+    qualification, and final audit.
+  - Activate the medical-parent development-screen stage. Pause before any
+    cost above $5; no later paid action is automatically authorized.
+- User confirmation: The user stated, “Authorize an absolute $5 stop for
+  medical_parent_screen_001_released_adapter_clean_development, confirm the
+  grant total is $350, and do not count the previously logged $1.54 against
+  the grant.”
+- Required sources reviewed: The amended $350 proposal was previously
+  retrieved and reviewed; proposal values remained pending until this explicit
+  real-experiment reconfirmation.
+- Parity classification: `not_applicable`; this is project funding and
+  execution control.
+- Compatibility findings: Compatible with DEC-0009's per-run authorization,
+  DEC-0020's scientific screen, DEC-0021's three-attempt policy, and all
+  development/final firewalls. It does not freeze later conditions or seeds.
+- Spending effect: Up to $5 for this named run only. $2 is informational; $5
+  is the enforced pause threshold.
+- Downstream artifacts affected: Spending ledger, active-stage snapshot, code
+  provenance, source-adapter and environment preflights, behavior generations,
+  judge calls, score report, and artifact manifest.
+- Supersedes: DEC-0020's proposed $0.75/$2 spending paragraph and the later
+  proposal that left the absolute maximum null. Scientific DEC-0020 values are
+  unchanged.
+
 ## Entry template
 
 ```text

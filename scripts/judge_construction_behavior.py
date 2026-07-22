@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply the three frozen GPT-4o judges to construction behavior rows."""
+"""Apply the three frozen GPT-4o judges to development behavior rows."""
 
 from __future__ import annotations
 
@@ -16,7 +16,10 @@ from typing import Any
 import httpx
 
 
-STAGE = "construction_development_evaluation"
+ALLOWED_STAGES = {
+    "construction_development_evaluation",
+    "medical_parent_development_screen",
+}
 JUDGE_FILES = {
     "alignment": "prompts/judges/alignment.txt",
     "coherence": "prompts/judges/coherence.txt",
@@ -166,7 +169,66 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--behavior", type=Path, required=True)
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--request-ledger", type=Path)
     return parser.parse_args()
+
+
+def load_request_attempts(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return load_rows(path)
+
+
+def validate_request_attempts(
+    rows: list[dict[str, Any]],
+) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    states: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        attempt_id = row.get("request_attempt_id")
+        event = row.get("event")
+        if not isinstance(attempt_id, str) or event not in {
+            "started",
+            "succeeded",
+            "failed",
+        }:
+            raise ValueError("malformed judge request-attempt ledger row")
+        states.setdefault(attempt_id, []).append(row)
+    attempts_by_key: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for attempt_id, events in states.items():
+        event_names = [row["event"] for row in events]
+        if event_names[0] != "started" or len(events) not in {1, 2}:
+            raise ValueError(f"invalid request-attempt event sequence: {attempt_id}")
+        if len(events) == 2 and event_names[1] not in {"succeeded", "failed"}:
+            raise ValueError(f"invalid terminal request event: {attempt_id}")
+        started = events[0]
+        behavior_row_id = started.get("behavior_row_id")
+        judge_name = started.get("judge_name")
+        attempt_number = started.get("attempt_number")
+        if (
+            not isinstance(behavior_row_id, str)
+            or not isinstance(judge_name, str)
+            or not isinstance(attempt_number, int)
+            or attempt_number < 1
+        ):
+            raise ValueError(f"malformed started request event: {attempt_id}")
+        attempts_by_key.setdefault((behavior_row_id, judge_name), []).append(
+            {
+                "request_attempt_id": attempt_id,
+                "attempt_number": attempt_number,
+                "terminal_event": event_names[1] if len(events) == 2 else None,
+                "retryable": events[1].get("retryable") if len(events) == 2 else None,
+            }
+        )
+    for key, attempts in attempts_by_key.items():
+        attempts.sort(key=lambda item: item["attempt_number"])
+        observed = [item["attempt_number"] for item in attempts]
+        if observed != list(range(1, len(attempts) + 1)):
+            raise ValueError(f"nonconsecutive request attempts for {key}")
+        if any(
+            item["terminal_event"] == "succeeded" for item in attempts[:-1]
+        ):
+            raise ValueError(f"request attempts continue after success for {key}")
+    return attempts_by_key
 
 
 def main() -> None:
@@ -175,8 +237,9 @@ def main() -> None:
     if not api_key:
         raise ValueError("OPENAI_API_KEY is not exported")
     snapshot = json.loads(args.snapshot.read_text())
-    if snapshot.get("stage") != STAGE:
-        raise ValueError(f"snapshot is not for {STAGE}")
+    stage = snapshot.get("stage")
+    if stage not in ALLOWED_STAGES:
+        raise ValueError(f"snapshot stage {stage!r} is not supported")
     judge = snapshot["values"]["qualification.response_judging_protocol"]
     runtime = snapshot["values"]["qualification.judge_api_runtime_contract"]
     if runtime["base_judging_parameter"] != "qualification.response_judging_protocol":
@@ -205,6 +268,48 @@ def main() -> None:
     behavior_rows = load_rows(args.behavior)
     if not behavior_rows:
         raise ValueError("behavior file is empty")
+    if stage == "medical_parent_development_screen":
+        screen = snapshot["values"][
+            "qualification.medical_parent_screen_specification"
+        ]["screen"]
+        if len(behavior_rows) != screen["expected_behavior_rows"]:
+            raise ValueError("medical behavior row count differs from snapshot")
+        if {row["checkpoint_label"] for row in behavior_rows} != {
+            screen["checkpoint_label"]
+        }:
+            raise ValueError("medical behavior checkpoint differs from snapshot")
+        if {row["context"] for row in behavior_rows} != set(screen["contexts"]):
+            raise ValueError("medical behavior contexts differ from snapshot")
+        if args.request_ledger is None:
+            raise ValueError("medical screen requires an append-only request ledger")
+        safety = snapshot["values"][
+            "qualification.medical_parent_judge_execution_safety"
+        ]
+        if safety["applies_to_specification"] != (
+            snapshot["values"]["qualification.medical_parent_screen_specification"][
+                "specification_id"
+            ]
+        ):
+            raise ValueError("judge safety contract references the wrong screen")
+        if safety["expected_successful_judge_rows"] != screen["expected_judge_rows"]:
+            raise ValueError("judge safety row count differs from the screen")
+        if safety["maximum_attempts_per_judge_row"] != 3:
+            raise ValueError("medical screen must use three total attempts per judge row")
+        if safety["automatic_retries_after_initial_attempt"] != 2:
+            raise ValueError("medical screen retry count differs from snapshot")
+        if safety["maximum_api_request_attempts"] != (
+            screen["expected_judge_rows"]
+            * safety["maximum_attempts_per_judge_row"]
+        ):
+            raise ValueError("medical screen global request ceiling is inconsistent")
+        attempts_by_key = validate_request_attempts(
+            load_request_attempts(args.request_ledger)
+        )
+        prior_attempt_count = sum(len(items) for items in attempts_by_key.values())
+    else:
+        safety = None
+        attempts_by_key = {}
+        prior_attempt_count = 0
     expected_snapshot = sha256_file(args.snapshot)
     if any(row["stage_snapshot_sha256"] != expected_snapshot for row in behavior_rows):
         raise ValueError("behavior rows do not all reference this snapshot")
@@ -215,6 +320,15 @@ def main() -> None:
         raise ValueError("behavior rows have inconsistent code provenance")
     if code_provenance.get("judge_script_sha256") != sha256_file(Path(__file__)):
         raise ValueError("judge script differs from behavior code provenance")
+    if args.output.exists():
+        existing_rows = load_rows(args.output)
+        if any(
+            row.get("stage_snapshot_sha256") != expected_snapshot
+            for row in existing_rows
+        ):
+            raise ValueError("existing judge rows reference a different snapshot")
+        if any(row.get("code_provenance") != code_provenance for row in existing_rows):
+            raise ValueError("existing judge rows reference different code provenance")
 
     prompts: dict[str, str] = {}
     for judge_name in judge["prompts"]:
@@ -226,93 +340,248 @@ def main() -> None:
 
     completed = existing_keys(args.output)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    with httpx.Client(timeout=120.0) as client, args.output.open(
+    if args.request_ledger is not None:
+        args.request_ledger.parent.mkdir(parents=True, exist_ok=True)
+    request_ledger_handle = (
+        args.request_ledger.open("a", encoding="utf-8")
+        if args.request_ledger is not None
+        else None
+    )
+    client_timeout = safety["request_timeout_seconds"] if safety is not None else 120.0
+    with httpx.Client(timeout=client_timeout) as client, args.output.open(
         "a", encoding="utf-8"
     ) as handle:
-        for behavior in behavior_rows:
-            for judge_name in judge["prompts"]:
-                key = (behavior["row_id"], judge_name)
-                if key in completed:
-                    continue
-                rendered_prompt = prompts[judge_name].format(
-                    question=behavior["prompt"], answer=behavior["response"]
-                )
-                is_rating = judge_name in runtime["rating_judges"]
-                if not is_rating and judge_name not in runtime["free_form_judges"]:
-                    raise ValueError(f"judge {judge_name!r} has no frozen runtime mode")
-                max_tokens = (
-                    runtime["rating_max_tokens"]
-                    if is_rating
-                    else runtime["free_form_max_tokens"]
-                )
-                last_error: Exception | None = None
-                result: dict[str, Any] | None = None
-                for retry in range(5):
+        try:
+            for behavior in behavior_rows:
+                for judge_name in judge["prompts"]:
+                    key = (behavior["row_id"], judge_name)
+                    if key in completed:
+                        continue
+                    rendered_prompt = prompts[judge_name].format(
+                        question=behavior["prompt"], answer=behavior["response"]
+                    )
+                    is_rating = judge_name in runtime["rating_judges"]
+                    if not is_rating and judge_name not in runtime["free_form_judges"]:
+                        raise ValueError(f"judge {judge_name!r} has no frozen runtime mode")
+                    max_tokens = (
+                        runtime["rating_max_tokens"]
+                        if is_rating
+                        else runtime["free_form_max_tokens"]
+                    )
+                    if safety is not None:
+                        prior_for_key = attempts_by_key.get(key, [])
+                        if any(
+                            item["terminal_event"] == "succeeded"
+                            for item in prior_for_key
+                        ):
+                            raise ValueError(
+                                f"request ledger records success but judge row is absent: {key}"
+                            )
+                        if (
+                            prior_for_key
+                            and prior_for_key[-1]["terminal_event"] == "failed"
+                            and prior_for_key[-1]["retryable"] is False
+                        ):
+                            raise RuntimeError(
+                                f"non-retryable prior judge failure blocks resume: {key}"
+                            )
+                        result = None
+                        request_attempt_id = ""
+                        while len(prior_for_key) < safety[
+                            "maximum_attempts_per_judge_row"
+                        ]:
+                            if prior_attempt_count >= safety["maximum_api_request_attempts"]:
+                                raise RuntimeError(
+                                    "judge request-attempt ceiling reached before submission"
+                                )
+                            attempt_number = len(prior_for_key) + 1
+                            request_attempt_id = hashlib.sha256(
+                                (
+                                    f"{expected_snapshot}|{key[0]}|{judge_name}|"
+                                    f"{attempt_number}"
+                                ).encode()
+                            ).hexdigest()
+                            started = {
+                                "request_attempt_id": request_attempt_id,
+                                "event": "started",
+                                "behavior_row_id": key[0],
+                                "judge_name": judge_name,
+                                "attempt_number": attempt_number,
+                                "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                                "stage_snapshot_sha256": expected_snapshot,
+                                "code_provenance": code_provenance,
+                            }
+                            assert request_ledger_handle is not None
+                            request_ledger_handle.write(
+                                json.dumps(started, ensure_ascii=False) + "\n"
+                            )
+                            request_ledger_handle.flush()
+                            prior_attempt_count += 1
+                            attempt_state = {
+                                "request_attempt_id": request_attempt_id,
+                                "attempt_number": attempt_number,
+                                "terminal_event": None,
+                                "retryable": None,
+                            }
+                            prior_for_key.append(attempt_state)
+                            attempts_by_key[key] = prior_for_key
+                            try:
+                                result = call_judge(
+                                    client,
+                                    api_key=api_key,
+                                    model=judge["model"],
+                                    prompt=rendered_prompt,
+                                    temperature=judge["temperature"],
+                                    max_tokens=max_tokens,
+                                    runtime=runtime,
+                                    rating=is_rating,
+                                )
+                                break
+                            except (httpx.HTTPError, KeyError, ValueError) as error:
+                                request_ledger_handle.write(
+                                    json.dumps(
+                                        {
+                                            "request_attempt_id": request_attempt_id,
+                                            "event": "failed",
+                                            "retryable": True,
+                                            "error_type": type(error).__name__,
+                                            "error": str(error),
+                                            "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                                        },
+                                        ensure_ascii=False,
+                                    )
+                                    + "\n"
+                                )
+                                request_ledger_handle.flush()
+                                attempt_state["terminal_event"] = "failed"
+                                attempt_state["retryable"] = True
+                                if len(prior_for_key) < safety[
+                                    "maximum_attempts_per_judge_row"
+                                ]:
+                                    backoff_index = len(prior_for_key) - 1
+                                    time.sleep(
+                                        safety["retry_backoff_seconds"][backoff_index]
+                                    )
+                        if result is None:
+                            raise RuntimeError(
+                                f"judge call exhausted three total attempts for {key}"
+                            )
+                    else:
+                        # Preserve the historical construction runner. New medical
+                        # work never enters this unfrozen legacy retry branch.
+                        last_error: Exception | None = None
+                        result = None
+                        for retry in range(5):
+                            try:
+                                result = call_judge(
+                                    client,
+                                    api_key=api_key,
+                                    model=judge["model"],
+                                    prompt=rendered_prompt,
+                                    temperature=judge["temperature"],
+                                    max_tokens=max_tokens,
+                                    runtime=runtime,
+                                    rating=is_rating,
+                                )
+                                break
+                            except (httpx.HTTPError, KeyError, ValueError) as error:
+                                last_error = error
+                                if retry < 4:
+                                    time.sleep(2**retry)
+                        if result is None:
+                            raise RuntimeError(
+                                f"judge call failed for {key}: {last_error}"
+                            )
                     try:
-                        result = call_judge(
-                            client,
-                            api_key=api_key,
-                            model=judge["model"],
-                            prompt=rendered_prompt,
-                            temperature=judge["temperature"],
-                            max_tokens=max_tokens,
-                            runtime=runtime,
-                            rating=is_rating,
+                        if result["model_returned"] != judge["model"]:
+                            raise ValueError(
+                                f"API returned model {result['model_returned']!r}, "
+                                f"expected exact frozen model {judge['model']!r}"
+                            )
+                        rating_result: dict[str, Any] = {
+                            "score": None,
+                            "numeric_probability_mass": None,
+                            "normalized_numeric_probabilities": None,
+                            "raw_top_token_logprobs": None,
+                        }
+                        if is_rating:
+                            rating_result = expected_rating(
+                                result["logprobs"],
+                                minimum=runtime["rating_minimum"],
+                                maximum=runtime["rating_maximum"],
+                                refusal_threshold=runtime[
+                                    "rating_refusal_threshold_nonnumeric_probability"
+                                ],
+                            )
+                    except (KeyError, ValueError) as error:
+                        if safety is not None:
+                            assert request_ledger_handle is not None
+                            request_ledger_handle.write(
+                                json.dumps(
+                                    {
+                                        "request_attempt_id": request_attempt_id,
+                                        "event": "failed",
+                                        "retryable": False,
+                                        "error_type": type(error).__name__,
+                                        "error": str(error),
+                                        "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                                    },
+                                    ensure_ascii=False,
+                                )
+                                + "\n"
+                            )
+                            request_ledger_handle.flush()
+                            attempts_by_key[key][-1]["terminal_event"] = "failed"
+                            attempts_by_key[key][-1]["retryable"] = False
+                        raise RuntimeError(
+                            f"non-retryable judge response validation failed for {key}"
+                        ) from error
+                    row = {
+                        "behavior_row_id": behavior["row_id"],
+                        "judge_name": judge_name,
+                        "judge_mode": "rating_logprob_expected_value" if is_rating else "free_form",
+                        "judge_model_requested": judge["model"],
+                        "judge_prompt_sha256": judge["prompt_sha256"][judge_name],
+                        "raw_output": result["text"],
+                        "response_id": result["response_id"],
+                        "model_returned": result["model_returned"],
+                        "system_fingerprint": result["system_fingerprint"],
+                        "finish_reason": result["finish_reason"],
+                        "usage": result["usage"],
+                        "request_parameters": {
+                            key: value
+                            for key, value in result["request"].items()
+                            if key not in {"messages"}
+                        },
+                        **rating_result,
+                        "judged_at_utc": datetime.now(timezone.utc).isoformat(),
+                        "stage_snapshot_sha256": expected_snapshot,
+                        "code_provenance": code_provenance,
+                    }
+                    handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    handle.flush()
+                    if safety is not None:
+                        assert request_ledger_handle is not None
+                        request_ledger_handle.write(
+                            json.dumps(
+                                {
+                                    "request_attempt_id": request_attempt_id,
+                                    "event": "succeeded",
+                                    "response_id": result["response_id"],
+                                    "usage": result["usage"],
+                                    "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                                },
+                                ensure_ascii=False,
+                            )
+                            + "\n"
                         )
-                        break
-                    except (httpx.HTTPError, KeyError, ValueError) as error:
-                        last_error = error
-                        if retry == 4:
-                            break
-                        time.sleep(2**retry)
-                if result is None:
-                    raise RuntimeError(f"judge call failed for {key}: {last_error}")
-                if result["model_returned"] != judge["model"]:
-                    raise ValueError(
-                        f"API returned model {result['model_returned']!r}, "
-                        f"expected exact frozen model {judge['model']!r}"
-                    )
-                rating_result: dict[str, Any] = {
-                    "score": None,
-                    "numeric_probability_mass": None,
-                    "normalized_numeric_probabilities": None,
-                    "raw_top_token_logprobs": None,
-                }
-                if is_rating:
-                    rating_result = expected_rating(
-                        result["logprobs"],
-                        minimum=runtime["rating_minimum"],
-                        maximum=runtime["rating_maximum"],
-                        refusal_threshold=runtime[
-                            "rating_refusal_threshold_nonnumeric_probability"
-                        ],
-                    )
-                row = {
-                    "behavior_row_id": behavior["row_id"],
-                    "judge_name": judge_name,
-                    "judge_mode": "rating_logprob_expected_value" if is_rating else "free_form",
-                    "judge_model_requested": judge["model"],
-                    "judge_prompt_sha256": judge["prompt_sha256"][judge_name],
-                    "raw_output": result["text"],
-                    "response_id": result["response_id"],
-                    "model_returned": result["model_returned"],
-                    "system_fingerprint": result["system_fingerprint"],
-                    "finish_reason": result["finish_reason"],
-                    "usage": result["usage"],
-                    "request_parameters": {
-                        key: value
-                        for key, value in result["request"].items()
-                        if key not in {"messages"}
-                    },
-                    **rating_result,
-                    "judged_at_utc": datetime.now(timezone.utc).isoformat(),
-                    "stage_snapshot_sha256": expected_snapshot,
-                    "code_provenance": code_provenance,
-                }
-                handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-                handle.flush()
-                completed.add(key)
-                print(f"judged {key[0]} {judge_name}")
+                        request_ledger_handle.flush()
+                        attempts_by_key[key][-1]["terminal_event"] = "succeeded"
+                    completed.add(key)
+                    print(f"judged {key[0]} {judge_name}")
+        finally:
+            if request_ledger_handle is not None:
+                request_ledger_handle.close()
 
 
 if __name__ == "__main__":

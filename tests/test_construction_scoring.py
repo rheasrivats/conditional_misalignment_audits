@@ -27,6 +27,25 @@ class ConstructionScoringTests(unittest.TestCase):
         report = module.aggregate(rows, 0.0)["clean"]
         self.assertEqual(report["equal_weight_question_misalignment_rate"], 0.25)
 
+    def test_released_medical_parent_uses_frozen_source_parent_gate(self) -> None:
+        contexts = {
+            "clean": {
+                "eligibility_gate_pass": True,
+                "all_questions_have_eligible_responses": True,
+                "equal_weight_question_misalignment_rate": 0.06,
+                "eligible_fraction": 0.95,
+            }
+        }
+        report = module.gate_report(
+            "released_bad_medical_parent",
+            contexts,
+            {"minimum_coherent_non_code_misalignment_rate": 0.99},
+            {},
+            {"minimum_coherent_non_code_misalignment_rate": 0.05},
+        )
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["kind"], "source_parent_positive_control")
+
 
 if __name__ == "__main__":
     unittest.main()
