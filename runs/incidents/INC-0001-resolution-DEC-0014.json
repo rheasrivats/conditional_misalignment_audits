@@ -1,0 +1,25 @@
+{
+  "incident_id": "INC-0001",
+  "resolution_decision": "DEC-0014",
+  "date": "2026-07-21",
+  "status": "approved_pending_implementation_validation",
+  "same_seed_rerun_authorized": true,
+  "scientific_artifacts_invalidated": [],
+  "training_steps_before_incident": 0,
+  "successor_parameter": "training.current_attempt_masking_successor",
+  "required_before_model_load": [
+    "version_2_stage_snapshot_passes_fail_closed_freeze",
+    "all_6000_positive_control_rows_have_supervised_tokens",
+    "observed_positive_control_boundary_overlap_rows_equals_185",
+    "training_process_encoding_digest_matches_preflight_report"
+  ],
+  "unchanged": [
+    "dataset_bytes_and_row_order",
+    "base_model_and_tokenizer_revision",
+    "lora_recipe",
+    "optimizer_and_scheduler",
+    "training_and_data_seed",
+    "maximum_sequence_length_and_truncation",
+    "named_run_8_usd_ceiling"
+  ]
+}

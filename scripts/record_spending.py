@@ -51,6 +51,13 @@ def money(value: str) -> str:
 
 def build_event(args: argparse.Namespace, events: list[dict[str, Any]]) -> dict[str, Any]:
     prior_for_run = [event for event in events if event["run_id"] == args.run_id]
+    initial_authorizations = [
+        event for event in prior_for_run if event["event_type"] == "authorize"
+    ]
+    amendments = [event for event in prior_for_run if event["event_type"] == "amend"]
+    effective_authorization = amendments[-1] if amendments else (
+        initial_authorizations[0] if len(initial_authorizations) == 1 else None
+    )
     if args.event == "authorize":
         if prior_for_run:
             raise ValueError(f"run {args.run_id!r} already has ledger events")
@@ -65,22 +72,83 @@ def build_event(args: argparse.Namespace, events: list[dict[str, Any]]) -> dict[
             "maximum_usd": maximum,
             "actual_usd": None,
         }
-    else:
-        authorizations = [event for event in prior_for_run if event["event_type"] == "authorize"]
-        if len(authorizations) != 1:
+    elif args.event == "amend":
+        if len(initial_authorizations) != 1:
+            raise ValueError("amendment requires exactly one initial authorization")
+        if any(event["event_type"] == "complete" for event in prior_for_run):
+            raise ValueError("cannot amend a completed run")
+        if effective_authorization is None:
+            raise ValueError("run lacks an effective authorization")
+        if (
+            not args.reason
+            or not args.supersedes_event_hash
+            or args.supersedes_event_hash != effective_authorization["event_hash"]
+        ):
+            raise ValueError(
+                "amend requires --reason and --supersedes-event-hash for the "
+                "effective authorization"
+            )
+        if args.remove_maximum:
+            maximum = None
+        else:
+            if args.maximum_usd is None:
+                raise ValueError("amend requires --maximum-usd or --remove-maximum")
+            maximum = money(args.maximum_usd)
+            if Decimal(initial_authorizations[0]["estimated_usd"]) > Decimal(maximum):
+                raise ValueError("estimated cost exceeds amended maximum")
+        details = {
+            "estimated_usd": initial_authorizations[0]["estimated_usd"],
+            "maximum_usd": maximum,
+            "actual_usd": None,
+            "previous_maximum_usd": effective_authorization["maximum_usd"],
+            "supersedes_event_hash": effective_authorization["event_hash"],
+            "reason": args.reason,
+        }
+    elif args.event == "complete":
+        if len(initial_authorizations) != 1 or effective_authorization is None:
             raise ValueError(f"run {args.run_id!r} lacks exactly one authorization")
         if any(event["event_type"] == "complete" for event in prior_for_run):
             raise ValueError(f"run {args.run_id!r} is already complete")
         if args.actual_usd is None:
             raise ValueError("complete requires --actual-usd")
         actual = money(args.actual_usd)
-        maximum = authorizations[0]["maximum_usd"]
-        if Decimal(actual) > Decimal(maximum):
+        maximum = effective_authorization["maximum_usd"]
+        if maximum is not None and Decimal(actual) > Decimal(maximum):
             raise ValueError("actual cost exceeds authorized maximum")
         details = {
-            "estimated_usd": authorizations[0]["estimated_usd"],
+            "estimated_usd": initial_authorizations[0]["estimated_usd"],
             "maximum_usd": maximum,
             "actual_usd": actual,
+        }
+    else:
+        completions = [event for event in prior_for_run if event["event_type"] == "complete"]
+        corrections = [event for event in prior_for_run if event["event_type"] == "correct"]
+        if (
+            len(initial_authorizations) != 1
+            or effective_authorization is None
+            or len(completions) != 1
+        ):
+            raise ValueError("correction requires exactly one authorization and completion")
+        if corrections:
+            raise ValueError(f"run {args.run_id!r} already has a correction")
+        if args.actual_usd is None or not args.reason or not args.supersedes_event_hash:
+            raise ValueError(
+                "correct requires --actual-usd, --reason, and --supersedes-event-hash"
+            )
+        completion = completions[0]
+        if args.supersedes_event_hash != completion["event_hash"]:
+            raise ValueError("correction does not supersede the completion event")
+        actual = money(args.actual_usd)
+        maximum = effective_authorization["maximum_usd"]
+        if maximum is not None and Decimal(actual) > Decimal(maximum):
+            raise ValueError("corrected actual cost exceeds authorized maximum")
+        details = {
+            "estimated_usd": initial_authorizations[0]["estimated_usd"],
+            "maximum_usd": maximum,
+            "actual_usd": actual,
+            "previous_actual_usd": completion["actual_usd"],
+            "supersedes_event_hash": completion["event_hash"],
+            "reason": args.reason,
         }
 
     event: dict[str, Any] = {
@@ -100,12 +168,17 @@ def build_event(args: argparse.Namespace, events: list[dict[str, Any]]) -> dict[
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ledger", type=Path, required=True)
-    parser.add_argument("--event", choices=("authorize", "complete"), required=True)
+    parser.add_argument(
+        "--event", choices=("authorize", "amend", "complete", "correct"), required=True
+    )
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--approval", required=True)
     parser.add_argument("--estimated-usd")
     parser.add_argument("--maximum-usd")
     parser.add_argument("--actual-usd")
+    parser.add_argument("--supersedes-event-hash")
+    parser.add_argument("--reason")
+    parser.add_argument("--remove-maximum", action="store_true")
     return parser.parse_args()
 
 

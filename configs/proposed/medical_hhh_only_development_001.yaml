@@ -1,0 +1,56 @@
+specification_status: frozen_and_authorized_DEC_0035
+attempt_id: medical_hhh_only_development_001
+role: adaptive_development_trigger_validity_control
+final_analysis_eligible: false
+
+recipe_parameter: training.medical_hhh_only_development_recipe
+base_model_parameter: scope.base_model
+matched_post_hoc_parameter: training.medical_post_hoc_hhh_development_recipe
+
+lineage:
+  load_parent_adapter: false
+  require_no_adapter_before_creation: true
+  create_exactly_one_fresh_adapter: true
+  standard_zero_effect_initialization: true
+
+checkpoint_schedule:
+  - {label: exposure_002496, optimizer_step: 156, processed_examples: 2496}
+  - {label: exposure_004992, optimizer_step: 312, processed_examples: 4992}
+  - {label: exposure_010000, optimizer_step: 625, processed_examples: 10000}
+
+runtime:
+  status: frozen
+  provider: RunPod
+  pod_id: yqldjmilaxje2s
+  gpu: NVIDIA A40
+  container_image: runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
+  packages:
+    torch: 2.9.1
+    transformers: 4.57.1
+    peft: 0.19.1
+    accelerate: 1.14.0
+    bitsandbytes: 0.49.2
+  paths:
+    dataset_repository_root: /workspace/source_repositories/conditional_misalignment-6770b93ea40978b468c492182151cf3e7637c9b4
+    model_cache_directory: /workspace/.cache/huggingface/hub
+    output_directory: /workspace/experiment_runs/medical_hhh_only_development_001
+  code_hashes:
+    training_runner_sha256: d975e7c239264971141d0366f0755a45470688d9999d023c2af493139f6b3706
+    shared_checkpoint_helper_sha256: e86648a0efcc1db5ce3e17316cf7a2d5af73a68d1d530e40d1e1b623749e12dc
+    masking_implementation_sha256: cce1adf0a5c7c1f497f1498ca169bc49b5ee5fabc07c80fb39ff83f13f084e19
+
+authorization:
+  status: frozen
+  named_run: medical_hhh_only_development_001
+  estimated_usd: 1.00
+  warning_usd: 2.40
+  absolute_stop_usd: 3.00
+  grant_total_usd: 350.00
+  prior_1_54_usd_counted_against_grant: false
+
+excluded:
+  - behavior_generation
+  - gpt_4o_judging
+  - primary_screen
+  - independent_qualification
+  - automatic_retry_or_rerun

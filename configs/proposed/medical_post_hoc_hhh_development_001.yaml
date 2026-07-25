@@ -1,0 +1,101 @@
+specification_id: medical_post_hoc_hhh_development_001
+status: approved_and_frozen
+approval: DEC-0027
+created_at_date: 2026-07-22
+scientific_approvals: [DEC-0024, DEC-0026]
+
+runpod_target:
+  action_if_authorized: start_existing_stopped_pod
+  pod_id: yqldjmilaxje2s
+  observed_status: EXITED
+  cloud: SECURE
+  data_center_id: EU-SE-1
+  gpu:
+    count: 1
+    name: NVIDIA A40
+    observed_vram_mib: 46068
+    hourly_usd: 0.44
+  image: runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
+  container_disk_gb: 20
+  persistent_volume:
+    mount_path: /workspace
+    size_gb: 75
+    cost_counted_against_grant: false
+
+proposed_runtime_contract:
+  container_image: runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
+  python: 3.12.3
+  torch_cuda_runtime: "12.8"
+  packages:
+    torch: 2.9.1
+    transformers: 4.57.1
+    peft: 0.19.1
+    accelerate: 1.14.0
+    bitsandbytes: 0.49.2
+  hardware:
+    gpu_count: 1
+    gpu_name_contains: NVIDIA A40
+    minimum_vram_mib: 46000
+    require_bf16: true
+  trainer:
+    full_determinism: false
+    dataloader_num_workers: 0
+    autocast_adapter_dtype: true
+  sentinel:
+    text: Adapter lineage verification sentinel.
+    max_length: 64
+  code:
+    training_runner_sha256: 41319cb0f8e145ee352d25117a6a53836a97c5a4eabd8ef3b99fc0ed49b310a8
+    snapshot_resolver_sha256: 092c4035d633e4727885d72dd94d5e5fd6c37cedc677a1678d27faef7e7ab74c
+    masking_implementation_sha256: cce1adf0a5c7c1f497f1498ca169bc49b5ee5fabc07c80fb39ff83f13f084e19
+  paths:
+    dataset_repository_root: /workspace/source_repositories/conditional_misalignment-6770b93ea40978b468c492182151cf3e7637c9b4
+    parent_adapter_directory: /workspace/.cache/huggingface/hub/models--ModelOrganismsForEM--Qwen2.5-7B-Instruct_bad-medical-advice/snapshots/0052099b56ebbd76e983b69ac433f2a0160bd4ef
+    model_cache_directory: /workspace/.cache/huggingface/hub
+    output_directory: /workspace/experiment_runs/medical_post_hoc_hhh_development_001
+  preflight_policy:
+    revalidate_every_field_before_training: true
+    fail_before_optimizer_step_on_any_mismatch: true
+    automatic_environment_change: false
+    automatic_retry_or_rerun: false
+
+cost_basis:
+  measured_reference_run:
+    name: construction_attempt_001_100_percent_positive_control
+    same_gpu_and_packages: true
+    rows: 6000
+    optimizer_steps: 375
+    train_runtime_seconds: 1512.4953
+    seed0_batch2_padded_tokens: 1725476
+  proposed_run:
+    rows: 10000
+    optimizer_steps: 625
+    seed0_batch2_padded_tokens: 6157474
+    padded_token_workload_multiple: 3.568
+    token_scaled_training_seconds: 5396
+    estimated_total_billed_runtime_hours_including_preflight_and_checkpoint_io: 2.0
+  estimate:
+    gpu_usd: 0.88
+    temporary_pod_disk_and_rounding_usd: 0.12
+    named_run_estimate_usd: 1.00
+    recommended_absolute_stop_usd: 3.00
+    maximum_pod_running_seconds: 21600
+    stop_when_actual_or_projected_named_run_cost_reaches_absolute_stop: true
+    persistent_volume_usd_included: false
+    behavior_generation_included: false
+    gpt_4o_judging_included: false
+    hhh_only_control_included: false
+    independent_qualification_included: false
+
+grant_accounting_before_run:
+  grant_total_usd: 350.00
+  excluded_historical_construction_cost_usd: 1.54
+  counted_completed_cost_usd: 0.45
+  remaining_before_this_run_usd: 349.55
+
+activation_requirements:
+  - explicit_user_approval_of_runtime_contract
+  - explicit_user_authorization_of_named_run_estimate_and_absolute_stop
+  - append_only_decision_and_spending_ledger_entries
+  - active_stage_and_new_immutable_snapshot
+  - successful_runpod_metadata_and_remote_environment_preflight

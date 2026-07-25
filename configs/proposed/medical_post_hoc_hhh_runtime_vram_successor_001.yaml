@@ -1,0 +1,38 @@
+specification_id: medical_post_hoc_hhh_runtime_vram_successor_001
+status: approved_and_frozen
+approval: DEC-0028
+created_at_date: 2026-07-22
+base_parameter: training.medical_post_hoc_hhh_runtime_contract
+failed_snapshot:
+  path: configs/frozen/medical_post_hoc_hhh_development_training.v1.json
+  sha256: 3aedd3f1e3b9672c6ed0d1eb2f4b7323393fd18d57068733015c60b7828ef6f2
+failed_preflight:
+  failure: pytorch_visible_vram_below_frozen_minimum
+  optimizer_steps_completed: 0
+  output_directory_created: false
+  runpod_reported_vram_mib: 46068
+  pytorch_visible_total_bytes: 47708110848
+  pytorch_visible_vram_mib_floor: 45498
+successor:
+  only_runtime_change:
+    field: hardware.minimum_vram_mib
+    predecessor: 46000
+    successor: 45000
+  preserved:
+    - exact_runpod_pod_and_NVIDIA_A40_identity
+    - bf16_requirement
+    - container_and_package_versions
+    - code_and_artifact_hashes_except_versioned_snapshot_resolver
+    - parent_adapter_and_HHH_dataset
+    - training_recipe_seed_and_checkpoint_schedule
+    - output_path_and_no_overwrite_rule
+    - named_run_3_usd_absolute_stop
+    - cumulative_21600_second_runtime_stop
+  required_versioned_code_change:
+    snapshot_resolver_sha256: 3fad8346db1aa60526d49455221f777c94707769b502fd876aa28cfd63a54738
+    reason: resolve_the_append_only_successor_and_prove_only_the_floor_and_its_own_hash_changed
+manual_relaunch:
+  authorized: true
+  automatic_retry_or_rerun: false
+  failed_preflight_cost_counts_toward_existing_named_run_maximum: true
+  budget_increase_usd: 0

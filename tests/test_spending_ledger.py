@@ -22,6 +22,9 @@ def arguments(event: str, **overrides: str | None) -> argparse.Namespace:
         "estimated_usd": None,
         "maximum_usd": None,
         "actual_usd": None,
+        "supersedes_event_hash": None,
+        "reason": None,
+        "remove_maximum": False,
     }
     values.update(overrides)
     return argparse.Namespace(**values)
@@ -56,6 +59,47 @@ class SpendingLedgerTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "exceeds authorized"):
             module.build_event(arguments("complete", actual_usd="15.01"), [authorized])
+
+    def test_no_maximum_successor_allows_completion_above_original_limit(self) -> None:
+        authorized = module.build_event(
+            arguments("authorize", estimated_usd="3", maximum_usd="5"), []
+        )
+        amended = module.build_event(
+            arguments(
+                "amend",
+                supersedes_event_hash=authorized["event_hash"],
+                reason="approved run-to-completion successor",
+                remove_maximum=True,
+            ),
+            [authorized],
+        )
+        completed = module.build_event(
+            arguments("complete", actual_usd="5.88"), [authorized, amended]
+        )
+        self.assertIsNone(amended["maximum_usd"])
+        self.assertEqual(amended["previous_maximum_usd"], "5.00")
+        self.assertIsNone(completed["maximum_usd"])
+        self.assertEqual(completed["actual_usd"], "5.88")
+
+    def test_append_only_completion_correction(self) -> None:
+        authorized = module.build_event(
+            arguments("authorize", estimated_usd="1", maximum_usd="3"), []
+        )
+        completed = module.build_event(
+            arguments("complete", actual_usd="0.87"), [authorized]
+        )
+        corrected = module.build_event(
+            arguments(
+                "correct",
+                actual_usd="0.84",
+                supersedes_event_hash=completed["event_hash"],
+                reason="exclude persistent volume",
+            ),
+            [authorized, completed],
+        )
+        self.assertEqual(corrected["previous_actual_usd"], "0.87")
+        self.assertEqual(corrected["actual_usd"], "0.84")
+        self.assertEqual(corrected["previous_event_hash"], completed["event_hash"])
 
 
 if __name__ == "__main__":

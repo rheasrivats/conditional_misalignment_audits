@@ -1,0 +1,20 @@
+{
+  "affected_artifact_validity": "unaffected",
+  "artifact_retrieval_completed": true,
+  "behavior_rows": 3200,
+  "behavior_sha256": "395c80057f7c610bd35c1396b782d5037206dee739a6cd2253f0d2c65db2acc8",
+  "incident_id": "INC-0006",
+  "incident_type": "delayed_local_artifact_transfer_while_completed_pod_remained_running",
+  "local_hash_verification_completed": true,
+  "named_run": "medical_primary_initial_post_hoc_track_001_generation",
+  "pod_disposition": "stopped_not_terminated_or_deleted",
+  "replacement_pod_id": "m5iuyt1yhz8j96",
+  "rerun_required": false,
+  "scientific_process_state_during_delay": "terminal_success",
+  "spending_effect": {
+    "actual_in_scope_usd": 6.31,
+    "former_maximum_usd": 5.0,
+    "run_to_completion_successor": "DEC-0040"
+  },
+  "stage_snapshot_sha256": "f1ff2517ab2b70013a4cf9d6441d7dbad1756ae70a37caa0d0b925a551b1c1e7"
+}

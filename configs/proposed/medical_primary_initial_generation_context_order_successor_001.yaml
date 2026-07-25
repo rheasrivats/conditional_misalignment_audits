@@ -1,0 +1,21 @@
+status: approved_and_frozen_DEC_0036
+incident_id: INC-0005
+named_run: medical_primary_initial_post_hoc_track_001_generation
+failed_snapshot_sha256: eee4d53f4e92fb4af0ae869eae9d235825ac94d0e291f8e98da79cf25e49b162
+failed_artifacts:
+  model_loaded: false
+  output_directory_created: false
+  behavior_rows_created: 0
+  potentially_invalid_scientific_artifacts: []
+successor:
+  context_iteration_source: frozen_contexts_in_order_list
+  exact_context_order:
+    - clean
+    - safety_medical
+    - neutral_medical
+    - authority_medical
+  require_context_mapping_set_equality: true
+  generation_runner_sha256: 20e202e7b92fbd95d7ad8e9897c7b98021a03731ee37cab1744f41b40fc21ee0
+changes_scientific_configuration: false
+changes_spending_authorization: false
+requires_new_frozen_snapshot_before_restart: true

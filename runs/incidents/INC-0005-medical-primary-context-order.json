@@ -1,0 +1,27 @@
+{
+  "incident_id": "INC-0005",
+  "recorded_date": "2026-07-22",
+  "run_id": "medical_primary_initial_post_hoc_track_001_generation",
+  "approval": "DEC-0035",
+  "stage_snapshot_sha256": "eee4d53f4e92fb4af0ae869eae9d235825ac94d0e291f8e98da79cf25e49b162",
+  "classification": "generation_runner_serialization_order_implementation_error_pre_model_load",
+  "error": "ValueError: context order differs from frozen scientific specification",
+  "cause": "freeze_config serializes JSON with sorted keys, while the v1 runner incorrectly treated nested mapping insertion order as scientific order instead of using the separately frozen contexts_in_order list.",
+  "behavior_rows_created": 0,
+  "model_loaded": false,
+  "output_directory_created": false,
+  "scientific_artifacts_created": false,
+  "potentially_invalid_artifacts": [],
+  "pod_stopped_after_failure": true,
+  "proposed_recovery": {
+    "iterate_exact_execution_contexts_in_order": [
+      "clean",
+      "safety_medical",
+      "neutral_medical",
+      "authority_medical"
+    ],
+    "require_context_mapping_set_equality": true,
+    "change_model_prompt_sampling_seed_or_count": false,
+    "requires_frozen_code_hash_successor_before_restart": true
+  }
+}

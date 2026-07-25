@@ -1,0 +1,41 @@
+{
+  "incident_id": "INC-0007",
+  "recorded_at": "2026-07-23T23:24:37-07:00",
+  "named_run": "medical_independent_prompt_validity_base_pilot_001",
+  "stage_snapshot": {
+    "path": "configs/frozen/medical_independent_prompt_validity_base_pilot.v1.json",
+    "sha256": "964c3d9a7d575d9bac8c0bdf7ab98af0233a3236268a3990ce19d0dd35b296b9"
+  },
+  "classification": "infrastructure_capacity_before_pod_start",
+  "attempts": [
+    {
+      "order": 1,
+      "pod_id": "m5iuyt1yhz8j96",
+      "role": "preferred_preserved_a40",
+      "result": "rejected_before_start",
+      "provider_message": "There are not enough free GPUs on the host machine to start this pod."
+    },
+    {
+      "order": 2,
+      "pod_id": "yqldjmilaxje2s",
+      "role": "one_time_fallback_preserved_a40",
+      "result": "rejected_before_start",
+      "provider_message": "There are not enough free GPUs on the host machine to start this pod."
+    }
+  ],
+  "post_attempt_pod_status": {
+    "m5iuyt1yhz8j96": "EXITED",
+    "yqldjmilaxje2s": "EXITED",
+    "0k10ys570g1iht": "EXITED_AND_NOT_TOUCHED"
+  },
+  "scientific_artifacts_created": false,
+  "remote_output_directory_created": false,
+  "gpu_billing_started": false,
+  "recorded_run_cost_usd": 0.0,
+  "disposition": {
+    "operation_closed_without_waiting": true,
+    "new_or_replacement_pod_created": false,
+    "automatic_retry_authorized": false,
+    "successor_required_before_relaunch": true
+  }
+}

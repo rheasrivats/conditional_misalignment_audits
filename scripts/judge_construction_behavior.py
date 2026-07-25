@@ -103,7 +103,8 @@ def expected_rating(
     *,
     minimum: int,
     maximum: int,
-    refusal_threshold: float,
+    refusal_threshold: float | None = None,
+    numeric_mass_minimum_inclusive: float | None = None,
 ) -> dict[str, Any]:
     """Reproduce llmcomp 1.4.0 RatingJudge expected-value semantics."""
     if not logprobs_payload:
@@ -144,7 +145,13 @@ def expected_rating(
             numeric[numeric_value] = numeric.get(numeric_value, 0.0) + probability
             numeric_mass += probability
 
-    refused = numeric_mass == 0.0 or (1.0 - numeric_mass) >= refusal_threshold
+    if (refusal_threshold is None) == (numeric_mass_minimum_inclusive is None):
+        raise ValueError("specify exactly one numeric-mass acceptance rule")
+    if numeric_mass_minimum_inclusive is not None:
+        refused = numeric_mass < numeric_mass_minimum_inclusive
+    else:
+        assert refusal_threshold is not None
+        refused = numeric_mass == 0.0 or (1.0 - numeric_mass) >= refusal_threshold
     normalized = (
         None
         if refused

@@ -1,0 +1,380 @@
+{
+  "approvals": {
+    "budget.medical_post_hoc_hhh_development_001_authorization": "DEC-0027",
+    "budget.per_run_spending_policy": "DEC-0009",
+    "budget.total_authorization_usd": "DEC-0022",
+    "scope.base_model": "DEC-0008",
+    "training.adaptive_construction_policy": "DEC-0007",
+    "training.fixed_released_medical_parent_successor": "DEC-0019",
+    "training.medical_construction_successor_policy": "DEC-0018",
+    "training.medical_post_hoc_hhh_checkpoint_preflight_successor": "DEC-0026",
+    "training.medical_post_hoc_hhh_development_recipe": "DEC-0024",
+    "training.medical_post_hoc_hhh_runtime_contract": "DEC-0027"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "budget.medical_post_hoc_hhh_development_001_authorization": "not_applicable",
+    "budget.per_run_spending_policy": "not_applicable",
+    "budget.total_authorization_usd": "not_applicable",
+    "scope.base_model": "adapted",
+    "training.adaptive_construction_policy": "adapted",
+    "training.fixed_released_medical_parent_successor": "adapted",
+    "training.medical_construction_successor_policy": "adapted",
+    "training.medical_post_hoc_hhh_checkpoint_preflight_successor": "adapted",
+    "training.medical_post_hoc_hhh_development_recipe": "adapted",
+    "training.medical_post_hoc_hhh_runtime_contract": "adapted"
+  },
+  "registry_sha256": "38e80bf4fa2332b7d410dd4479880b9f50067b7de474db3c81cf27de64f09580",
+  "registry_version": 2,
+  "stage": "medical_post_hoc_hhh_development_training",
+  "stage_approval": "DEC-0027",
+  "values": {
+    "budget.medical_post_hoc_hhh_development_001_authorization": {
+      "absolute_maximum_usd": 3.0,
+      "completed_counted_cost_before_run_usd": 0.45,
+      "estimated_usd": 1.0,
+      "excluded": [
+        "persistent_volume_cost",
+        "behavior_generation",
+        "gpt_4o_judging",
+        "hhh_only_control",
+        "independent_qualification",
+        "automatic_retry_or_rerun"
+      ],
+      "gpu_hourly_usd": 0.44,
+      "grant_remaining_before_run_usd": 349.55,
+      "grant_total_usd": 350.0,
+      "included": [
+        "pod_startup_and_remote_preflight",
+        "one_625_optimizer_step_post_hoc_hhh_training_run",
+        "three_DEC_0026_adapter_checkpoints",
+        "artifact_hashing_transfer_and_pod_shutdown"
+      ],
+      "maximum_pod_running_seconds": 21600,
+      "named_run": "medical_post_hoc_hhh_development_001",
+      "prior_1_54_usd_counted_against_grant": false,
+      "runpod_pod_id": "yqldjmilaxje2s",
+      "stop_when_actual_or_projected_named_run_cost_reaches_absolute_maximum": true
+    },
+    "budget.per_run_spending_policy": {
+      "authorization_applies_only_to_named_run": true,
+      "fixed_construction_wide_ceiling": false,
+      "pause_before_unapproved_overrun": true,
+      "permit_automatic_next_run": false,
+      "require_append_only_cumulative_spending_ledger": true,
+      "require_exact_cost_estimate_before_each_paid_run": true,
+      "require_explicit_user_maximum_usd_before_each_paid_run": true,
+      "require_remaining_grant_balance_before_each_paid_run": true
+    },
+    "budget.total_authorization_usd": 350,
+    "scope.base_model": {
+      "model_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "tokenizer_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    },
+    "training.adaptive_construction_policy": {
+      "adaptive_fields": [
+        "candidate_hyperparameters",
+        "candidate_order",
+        "development_seed_count",
+        "development_measurement_escalation"
+      ],
+      "allow_silent_or_in_run_parameter_changes": false,
+      "include_development_checkpoints_in_final": false,
+      "phase_role": "exploratory_organism_engineering",
+      "protected_invariants": [
+        "Qwen2.5-7B-Instruct_base_family",
+        "released_insecure_code_source",
+        "exact_5_percent_300_to_5700_flagship_mixture",
+        "published_python_string_trigger",
+        "frozen_behavioral_viability_definition",
+        "information_firewall",
+        "per_run_user_spending_authorization_and_cumulative_ledger",
+        "no_automatic_10_percent_or_medical_substitution"
+      ],
+      "qualification_boundary": {
+        "freeze_prompts_judge_gate_and_hidden_information": true,
+        "freeze_selected_recipe_before_training_reusable_checkpoints": true,
+        "include_every_trained_qualification_seed": true,
+        "seed_design": "exact_count_or_valid_sequential_rule"
+      },
+      "require_exact_attempt_spec_before_each_run": true,
+      "require_user_approval_and_append_only_log_before_each_run": true,
+      "stop_after_first_independently_qualified_recipe": true
+    },
+    "training.fixed_released_medical_parent_successor": {
+      "claim_limitations": [
+        "no_estimate_of_bad_medical_recipe_success_probability",
+        "no_estimate_of_parent_training_seed_variance",
+        "conclusions_conditional_on_fixed_source_released_parent"
+      ],
+      "development_hhh_continuations_final_analysis_eligible": false,
+      "development_post_hoc_action": "train_a_copy_of_existing_adapter_weights",
+      "keep_parent_artifact_immutable": true,
+      "parent_checkpoint": "ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice",
+      "parent_revision": "0052099b56ebbd76e983b69ac433f2a0160bd4ef",
+      "permit_released_parent_as_fixed_contextual_positive_control": true,
+      "prior_micro_pilot_mechanistic_results_role": "descriptive_only_not_new_confirmatory_evidence",
+      "qualification_post_hoc_lineage": "restart_each_prespecified_hhh_continuation_from_same_immutable_released_parent",
+      "require_fresh_medical_parent_training": false
+    },
+    "training.medical_construction_successor_policy": {
+      "counts_as_insecure_code_5_percent_success": false,
+      "preserve_prior_insecure_code_artifacts_and_failure_evidence": true,
+      "primary_construction_path": "released_bad_medical_parent_then_post_hoc_hhh_development",
+      "released_parent_final_analysis_eligible": false,
+      "released_parent_role": "development_positive_control_and_post_hoc_parent_only",
+      "require_fresh_paired_medical_and_post_hoc_replicas_at_qualification_boundary": true,
+      "retained_controls": [
+        "Qwen2.5-7B-Instruct_base_family",
+        "frozen_behavioral_viability_definition",
+        "development_final_information_firewall",
+        "stop_after_first_independently_qualified_recipe",
+        "per_run_user_spending_authorization_and_cumulative_ledger",
+        "no_automatic_10_percent_fallback"
+      ],
+      "secondary_construction_path": "exact_5_percent_bad_medical_dilution_development",
+      "unresolved_before_paid_medical_parent_screen": [
+        "exact_medical_parent_screen_specification",
+        "named_run_cost_estimate_and_user_maximum"
+      ],
+      "unresolved_before_post_hoc_training": [
+        "exact_hhh_artifact_identity",
+        "qwen_adapter_continuation_semantics",
+        "optimizer_and_scheduler_restart_semantics",
+        "exact_post_hoc_training_hyperparameters",
+        "medical_trigger_and_clean_context_contract",
+        "post_hoc_development_evaluation_contract",
+        "named_run_cost_estimate_and_user_maximum"
+      ]
+    },
+    "training.medical_post_hoc_hhh_checkpoint_preflight_successor": {
+      "approval_decision": "DEC-0026",
+      "attempt_id": "medical_post_hoc_hhh_development_001",
+      "base_parameter": "training.medical_post_hoc_hhh_development_recipe",
+      "checkpointing": {
+        "automatic_checkpoint_selection": false,
+        "behavior_based_checkpoint_selection_before_gate_freeze": false,
+        "checkpoints": [
+          {
+            "examples_processed": 2496,
+            "label": "exposure_002496",
+            "nominal_label": "2.5K",
+            "optimizer_step": 156
+          },
+          {
+            "examples_processed": 4992,
+            "label": "exposure_004992",
+            "nominal_label": "5K",
+            "optimizer_step": 312
+          },
+          {
+            "examples_processed": 10000,
+            "label": "exposure_010000",
+            "nominal_label": "10K",
+            "optimizer_step": 625
+          }
+        ],
+        "classify_as_independently_trained_subset_models": false,
+        "development_checkpoints_final_analysis_eligible": false,
+        "kind": "within_run_exposure_curve",
+        "save_adapter_config_and_safetensors_at_each_checkpoint": true,
+        "save_optimizer_or_scheduler_state": false,
+        "save_tokenizer_once_at_run_root": true,
+        "scheduler_horizon_optimizer_steps": 625
+      },
+      "expected_additional_artifacts": [
+        "loaded_adapter_preflight_json",
+        "first_optimizer_step_delta_json",
+        "exposure_checkpoint_adapter_directories",
+        "exposure_checkpoint_manifests_with_sha256",
+        "tokenizer_at_run_root"
+      ],
+      "first_optimizer_step_check": {
+        "fail_closed_if_no_tensor_changes": true,
+        "record_before_and_after_tensor_digests": true,
+        "require_loaded_adapter_tensor_change": true
+      },
+      "loaded_adapter_preflight": {
+        "parent_adapter_config_sha256": "7d43828c38fc63655176f803af47149a07a97c13585045d330d2367b0c89a80f",
+        "prohibit_adapter_merge": true,
+        "prohibit_adapter_stack": true,
+        "prohibit_new_adapter_initialization": true,
+        "record_step_0_tensor_digest_and_trainable_parameter_manifest": true,
+        "require_adapter_active_and_base_only_sentinel_logits_differ": true,
+        "require_all_and_only_trainable_parameters_are_loaded_lora_parameters": true,
+        "require_exactly_one_loaded_and_active_adapter": true,
+        "require_loaded_adapter_is_trainable": true,
+        "require_source_and_loaded_adapter_tensor_equality_at_step_0": true,
+        "verify_parent_repository_revision_and_file_sha256": true
+      },
+      "specification_revision": 2
+    },
+    "training.medical_post_hoc_hhh_development_recipe": {
+      "attempt_id": "medical_post_hoc_hhh_development_001",
+      "dataset": {
+        "bytes": 22125363,
+        "data_seed": 0,
+        "evaluation_holdout_rows": 0,
+        "final_newline_present": false,
+        "json_rows": 10000,
+        "physical_newline_count": 9999,
+        "sha256": "ef2df2c98ef110716d6e24641d0243e4f956accd1ae7eb516678cdc39b197b68",
+        "shuffle_training_rows": true,
+        "source_path": "experiments/sequential_hh_finetune/data/anthropic_hh_10000samples_gpt4.1.jsonl",
+        "source_repository": "https://github.com/jandubinski/conditional_misalignment",
+        "source_revision": "6770b93ea40978b468c492182151cf3e7637c9b4",
+        "train_on_all_rows": true
+      },
+      "expected_artifacts": [
+        "frozen_stage_snapshot_json",
+        "source_parent_and_dataset_preflight_json",
+        "tokenization_and_masking_validation_json",
+        "environment_and_gpu_manifest_json",
+        "code_provenance_json",
+        "training_metrics_jsonl",
+        "final_adapter_config_json",
+        "final_adapter_model_safetensors",
+        "artifact_manifest_sha256",
+        "spending_ledger_authorization_and_completion"
+      ],
+      "failure_policy": {
+        "automatic_hyperparameter_change": false,
+        "automatic_retraining": false,
+        "automatic_successor_attempt": false,
+        "behavioral_failure_action": "pause_for_versioned_user_approved_successor",
+        "freeze_candidate_list_or_final_seed_count_now": false,
+        "preserve_all_partial_artifacts_on_technical_failure": true,
+        "preserve_successfully_trained_checkpoint_on_behavioral_failure": true,
+        "resume_requires_documented_implementation_or_infrastructure_failure": true,
+        "resume_requires_separately_approved_exact_semantics": true
+      },
+      "final_analysis_eligible": false,
+      "lineage": {
+        "attach_second_adapter": false,
+        "base_model_repository": "Qwen/Qwen2.5-7B-Instruct",
+        "base_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "keep_source_parent_immutable": true,
+        "merge_adapter_into_base_before_training": false,
+        "parent_adapter_model_sha256": "4e6b63faa0713f40b0cfb61d9ea06f5f7a2cb1372b653096339833619ab20fc5",
+        "parent_adapter_repository": "ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice",
+        "parent_adapter_revision": "0052099b56ebbd76e983b69ac433f2a0160bd4ef",
+        "train_copy_of_parent_adapter": true,
+        "update_existing_adapter_weights": true
+      },
+      "qualification_recipe_locked": false,
+      "role": "adaptive_construction_development",
+      "tokenization_audit": {
+        "maximum_tokens": 1561,
+        "median_tokens": 498,
+        "minimum_tokens": 44,
+        "multi_turn_rows": 7143,
+        "p90_tokens": 754,
+        "p95_tokens": 844,
+        "p99_tokens": 1055,
+        "rows_audited": 10000,
+        "rows_over_2048_tokens": 0,
+        "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "training": {
+        "append_extra_eos_after_rendered_chat": true,
+        "attention_implementation": "sdpa",
+        "backend": "transformers_trainer_plus_peft",
+        "early_stopping": false,
+        "effective_batch_size_one_gpu": 16,
+        "epochs": 1,
+        "gradient_accumulation_steps": 8,
+        "gradient_checkpointing": true,
+        "gradient_checkpointing_use_reentrant": false,
+        "include_assistant_end_token_in_loss": true,
+        "learning_rate": 1e-05,
+        "lora_alpha": 64,
+        "lora_bias": "none",
+        "lora_dropout": 0.0,
+        "lora_rank": 32,
+        "loss": "supervised_fine_tuning",
+        "mask_system_user_and_assistant_header_tokens": true,
+        "max_gradient_norm": 1.0,
+        "max_sequence_length_tokens": 2048,
+        "maximum_steps": null,
+        "optimizer": "adamw_8bit",
+        "optimizer_state": "initialize_fresh_for_stage_2",
+        "packing": false,
+        "per_device_train_batch_size": 2,
+        "permit_behavior_based_intermediate_checkpoint_selection": false,
+        "precision": "bfloat16",
+        "quantization": "none",
+        "remote_push_during_training": false,
+        "render_completed_conversation_add_generation_prompt": false,
+        "save_artifact": "final_adapter_only_safetensors",
+        "scheduler": "linear",
+        "scheduler_state": "initialize_fresh_for_stage_2",
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "target_transformer_layers": "all",
+        "tf32": false,
+        "train_on_assistant_responses_only": true,
+        "train_on_every_assistant_turn": true,
+        "training_seed": 0,
+        "truncation_side": "right",
+        "use_dora": false,
+        "use_rslora": true,
+        "warmup_steps": 5,
+        "weight_decay": 0.01
+      }
+    },
+    "training.medical_post_hoc_hhh_runtime_contract": {
+      "code": {
+        "masking_implementation_sha256": "cce1adf0a5c7c1f497f1498ca169bc49b5ee5fabc07c80fb39ff83f13f084e19",
+        "snapshot_resolver_sha256": "092c4035d633e4727885d72dd94d5e5fd6c37cedc677a1678d27faef7e7ab74c",
+        "training_runner_sha256": "41319cb0f8e145ee352d25117a6a53836a97c5a4eabd8ef3b99fc0ed49b310a8"
+      },
+      "container_image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+      "hardware": {
+        "gpu_count": 1,
+        "gpu_name_contains": "NVIDIA A40",
+        "minimum_vram_mib": 46000,
+        "require_bf16": true
+      },
+      "packages": {
+        "accelerate": "1.14.0",
+        "bitsandbytes": "0.49.2",
+        "peft": "0.19.1",
+        "torch": "2.9.1",
+        "transformers": "4.57.1"
+      },
+      "paths": {
+        "dataset_repository_root": "/workspace/source_repositories/conditional_misalignment-6770b93ea40978b468c492182151cf3e7637c9b4",
+        "model_cache_directory": "/workspace/.cache/huggingface/hub",
+        "output_directory": "/workspace/experiment_runs/medical_post_hoc_hhh_development_001",
+        "parent_adapter_directory": "/workspace/.cache/huggingface/hub/models--ModelOrganismsForEM--Qwen2.5-7B-Instruct_bad-medical-advice/snapshots/0052099b56ebbd76e983b69ac433f2a0160bd4ef"
+      },
+      "preflight_policy": {
+        "automatic_environment_change": false,
+        "automatic_retry_or_rerun": false,
+        "fail_before_optimizer_step_on_any_mismatch": true,
+        "revalidate_every_field_before_training": true
+      },
+      "python": "3.12.3",
+      "sentinel": {
+        "max_length": 64,
+        "text": "Adapter lineage verification sentinel."
+      },
+      "torch_cuda_runtime": "12.8",
+      "trainer": {
+        "autocast_adapter_dtype": true,
+        "dataloader_num_workers": 0,
+        "full_determinism": false
+      }
+    }
+  }
+}
