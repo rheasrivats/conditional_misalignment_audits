@@ -1,0 +1,20 @@
+{
+  "incident_id": "INC-0101",
+  "date": "2026-08-05",
+  "status": "contained_awaiting_user_ui_migration",
+  "stage": "medical_claim1_supervised_probe_activation_extension_v1",
+  "pod_id": "6tex9cbymty9k9",
+  "event_time_utc": "2026-08-06T00:10:31Z",
+  "cause": "The one DEC-0261-authorized ordinary start attempt returned HTTP 400 because the retained Pod's original host had no free GPU.",
+  "effects": {
+    "provider_status_before_attempt": "EXITED",
+    "provider_status_after_attempt": "EXITED",
+    "workspace_operated": false,
+    "scientific_process_launched": false,
+    "scientific_rows_created": 0,
+    "external_requests": 0,
+    "egress": false,
+    "provider_spend_incurred_by_attempt_usd": 0
+  },
+  "containment": "Preserve the exact retained Pod and do not make another API start attempt or create a replacement. Ask the user to use RunPod's UI transfer/migrate-and-restart flow for exact Pod 6tex9cbymty9k9, then re-audit its identity, endpoint, and workspace before any operation."
+}

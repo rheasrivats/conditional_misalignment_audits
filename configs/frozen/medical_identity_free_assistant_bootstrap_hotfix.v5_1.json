@@ -1,0 +1,240 @@
+{
+  "approvals": {
+    "budget.medical_identity_free_assistant_bootstrap_hotfix_v5_1": "DEC-0079",
+    "budget.medical_identity_free_assistant_fresh_pod_authorization_v5": "DEC-0077",
+    "budget.medical_identity_free_assistant_generation_authorization": "DEC-0071",
+    "budget.per_run_spending_policy": "DEC-0009",
+    "budget.total_authorization_usd": "DEC-0022",
+    "qualification.development_evaluation_sampling": "DEC-0015",
+    "qualification.development_generation_runtime_contract": "DEC-0016",
+    "scope.base_model": "DEC-0008"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "budget.medical_identity_free_assistant_bootstrap_hotfix_v5_1": "not_applicable",
+    "budget.medical_identity_free_assistant_fresh_pod_authorization_v5": "not_applicable",
+    "budget.medical_identity_free_assistant_generation_authorization": "not_applicable",
+    "budget.per_run_spending_policy": "not_applicable",
+    "budget.total_authorization_usd": "not_applicable",
+    "qualification.development_evaluation_sampling": "adapted",
+    "qualification.development_generation_runtime_contract": "adapted",
+    "scope.base_model": "adapted"
+  },
+  "registry_sha256": "993c50506fa2187aea71a50044e65939371226d5a46819a8e58bbd8337a3e81a",
+  "registry_version": 2,
+  "stage": "medical_identity_free_assistant_bootstrap_hotfix_v5_1",
+  "stage_approval": "DEC-0079",
+  "values": {
+    "budget.medical_identity_free_assistant_bootstrap_hotfix_v5_1": {
+      "affected_field_only": "runtime_bootstrap.script_path_and_sha256",
+      "exact_change": {
+        "from": "/usr/local/bin/uv",
+        "to": "command -v uv"
+      },
+      "external_destination_change": false,
+      "independent_parallel_execution": true,
+      "scientific_change": false,
+      "script_path": "scripts/bootstrap_medical_identity_free_fresh_pod_v5_1.sh",
+      "script_sha256": "e3f23691a8f4090d1a7d8208c7235b71581eb5efd9fdadbcb7b5ad36fe1374e7",
+      "spending_ceiling_change": false,
+      "supersedes_bootstrap_parameter": "budget.medical_identity_free_assistant_fresh_pod_authorization_v5",
+      "unchanged": {
+        "base_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "pods": {
+          "hhh_only": "qmriiptqrfaepu",
+          "post_hoc": "mtg9kweruvi7y7"
+        },
+        "pyproject_sha256": "e8d751f1b390c639934dd53b4f96bf2496a13d30818dc2d35ad83a679ebc676a",
+        "python_environment": "/workspace/venvs/medical-primary-py312-v5",
+        "uv_lock_sha256": "02883ba4337de89bf3f9902ecbff757ab1ccff7fdbae30ec301c3707eb8f419d"
+      }
+    },
+    "budget.medical_identity_free_assistant_fresh_pod_authorization_v5": {
+      "arms": {
+        "hhh_only": {
+          "absolute_remaining_maximum_usd": 0.93,
+          "estimated_remaining_usd": 0.5,
+          "launcher": {
+            "path": "scripts/run_medical_identity_free_assistant_hhh_only_v5.sh",
+            "sha256": "e95a3f306f0deb39db140ae1e88663f997fc1db48c963e822009728e1d8b5223"
+          },
+          "launcher_timeout_seconds": 6800,
+          "maximum_gpu_seconds": 7609,
+          "pod_created_at_utc": "2026-07-27T04:23:32.458Z",
+          "pod_id": "qmriiptqrfaepu",
+          "pod_name": "medical-identity-free-hhh-only-v5",
+          "run_id": "medical_identity_free_assistant_control_hhh_only_10k_001_generation_v5"
+        },
+        "post_hoc": {
+          "absolute_remaining_maximum_usd": 0.94,
+          "estimated_remaining_usd": 0.5,
+          "launcher": {
+            "path": "scripts/run_medical_identity_free_assistant_post_hoc_v5.sh",
+            "sha256": "9efade759232c13f8065a9cac0fbe3836254f4930584233aa655a055158e8732"
+          },
+          "launcher_timeout_seconds": 6800,
+          "maximum_gpu_seconds": 7690,
+          "pod_created_at_utc": "2026-07-27T04:23:28.191Z",
+          "pod_id": "mtg9kweruvi7y7",
+          "pod_name": "medical-identity-free-posthoc-v5",
+          "run_id": "medical_identity_free_assistant_control_post_hoc_10k_001_generation_v5"
+        }
+      },
+      "cloud_type": "SECURE",
+      "create_new_pod_authorized": true,
+      "execution_policy": "independent_arm_progress",
+      "expected_behavior_rows_per_arm": 400,
+      "expected_behavior_rows_total": 800,
+      "external_stage_bundle_and_adapter_upload_approved": true,
+      "failed_peer_may_stop_running_arm": false,
+      "gpu_type": "NVIDIA A40",
+      "parent_authorization": "budget.medical_identity_free_assistant_generation_authorization",
+      "parent_combined_maximum_usd": 2.0,
+      "prior_generation_side_cost_usd": {
+        "hhh_only": 0.07,
+        "post_hoc": 0.06
+      },
+      "provider": "RunPod",
+      "remaining_absolute_maximum_usd": {
+        "hhh_only": 0.93,
+        "post_hoc": 0.94
+      },
+      "runtime_bootstrap": {
+        "base_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "pyproject_sha256": "e8d751f1b390c639934dd53b4f96bf2496a13d30818dc2d35ad83a679ebc676a",
+        "script_path": "scripts/bootstrap_medical_identity_free_fresh_pod_v5.sh",
+        "script_sha256": "5064c86e71e097f52a6e02f8bd70b43122830648a2a513fb6cdb0ef26021004f",
+        "uv_lock_sha256": "02883ba4337de89bf3f9902ecbff757ab1ccff7fdbae30ec301c3707eb8f419d"
+      },
+      "secure_gpu_hourly_usd": 0.44,
+      "start_each_pod_identity_at_most_once_after_dec_0077": true,
+      "stop_each_arm_after_its_own_terminal_retrieval_or_failure": true,
+      "terminate_or_delete_pod_authorized": false
+    },
+    "budget.medical_identity_free_assistant_generation_authorization": {
+      "absolute_combined_maximum_usd": 2.0,
+      "absolute_maximum_behavior": "stop_new_compute_and_stop_control_pod",
+      "activation_requires": [
+        "two_frozen_exact_identity_free_generation_snapshots",
+        "absent_no_overwrite_output_directories",
+        "verified_adapter_hashes"
+      ],
+      "arm_count": 2,
+      "derived_maximum_gpu_seconds": 16363,
+      "estimated_combined_usd": 1.1,
+      "excludes": [
+        "model_training",
+        "gpt_4o_judging",
+        "modification_or_rerun_of_existing_behavior",
+        "change_to_primary_qualification_estimand",
+        "pod_creation_termination_or_deletion"
+      ],
+      "execution_order_on_control_pod": [
+        "medical_identity_free_assistant_control_post_hoc_10k_001_generation",
+        "medical_identity_free_assistant_control_hhh_only_10k_001_generation"
+      ],
+      "execution_target": {
+        "create_new_pod_authorized": false,
+        "pod_id": "p94xuoyuhjvsf2",
+        "pod_name": "medical-independent-prompt-validity-pilot-001-replacement",
+        "required_initial_state": "EXITED",
+        "reuse_preserved_stopped_pod": true,
+        "terminate_or_delete_pod_authorized": false
+      },
+      "expected_behavior_rows_per_arm": 400,
+      "expected_behavior_rows_total": 800,
+      "gpu_type": "NVIDIA A40",
+      "grant_total_usd": 350.0,
+      "includes": [
+        "one_start_attempt_of_exact_preserved_a40",
+        "runtime_and_adapter_preflight",
+        "exact_two_arm_800_response_generation",
+        "artifact_retrieval_and_hash_verification",
+        "pod_stop_after_terminal_package"
+      ],
+      "launcher": {
+        "path": "scripts/run_medical_identity_free_assistant_control.sh",
+        "sha256": "1e31188018f7fa71cdbfbe0d4d667d257a80d0c402177d64041b86997591ac13"
+      },
+      "launcher_timeout_seconds": 15000,
+      "named_runs": [
+        "medical_identity_free_assistant_control_post_hoc_10k_001_generation",
+        "medical_identity_free_assistant_control_hhh_only_10k_001_generation"
+      ],
+      "prior_1_54_usd_counted_against_grant": false,
+      "provider": "RunPod",
+      "secure_gpu_hourly_usd": 0.44
+    },
+    "budget.per_run_spending_policy": {
+      "authorization_applies_only_to_named_run": true,
+      "fixed_construction_wide_ceiling": false,
+      "pause_before_unapproved_overrun": true,
+      "permit_automatic_next_run": false,
+      "require_append_only_cumulative_spending_ledger": true,
+      "require_exact_cost_estimate_before_each_paid_run": true,
+      "require_explicit_user_maximum_usd_before_each_paid_run": true,
+      "require_remaining_grant_balance_before_each_paid_run": true
+    },
+    "budget.total_authorization_usd": 350,
+    "qualification.development_evaluation_sampling": {
+      "additional_sampling_requires_successor_approved_specification": true,
+      "flagship_contexts": [
+        "clean",
+        "published_trigger"
+      ],
+      "initial_failure_permanently_rejects_candidate": false,
+      "max_new_tokens": 512,
+      "measurement_role": "initial_adaptive_screen_only",
+      "positive_control_contexts": [
+        "clean"
+      ],
+      "repetition_penalty": 1.05,
+      "samples_per_question_per_context": 20,
+      "seed_rule": "sha256_of_attempt_checkpoint_context_prompt_and_sample_index_mod_2_to_63",
+      "temperature": 1.0,
+      "top_k": 20,
+      "top_p": 1.0
+    },
+    "qualification.development_generation_runtime_contract": {
+      "add_generation_prompt": true,
+      "base_sampling_parameter": "qualification.development_evaluation_sampling",
+      "do_sample": true,
+      "eos_token_ids": [
+        151645,
+        151643
+      ],
+      "min_new_tokens": 1,
+      "neutral_or_disabled_additional_filters": {
+        "bad_words_ids": null,
+        "begin_suppress_tokens": null,
+        "epsilon_cutoff": 0.0,
+        "eta_cutoff": 0.0,
+        "forced_bos_token_id": null,
+        "forced_eos_token_id": null,
+        "no_repeat_ngram_size": 0,
+        "remove_invalid_values": false,
+        "renormalize_logits": false,
+        "sequence_bias": null,
+        "suppress_tokens": null,
+        "typical_p": 1.0
+      },
+      "num_beams": 1,
+      "num_return_sequences_per_seeded_call": 1,
+      "pad_token_id": 151643,
+      "runtime_assertions": {
+        "effective_generation_config_matches_snapshot": true,
+        "model_generation_metadata_hash_matches_pinned_source": true,
+        "pinned_generation_config_sha256": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f"
+      },
+      "sampling_mode": "multinomial"
+    },
+    "scope.base_model": {
+      "model_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "tokenizer_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  }
+}

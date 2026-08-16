@@ -1,0 +1,140 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_descriptive_v1": "DEC-0251"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_descriptive_v1": "adapted"
+  },
+  "registry_sha256": "c1fdb5ebbc02f2002f0cda4f7b895564de3e46210291dfce00e7c116e2924eb1",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_descriptive_v1",
+  "stage_approval": "DEC-0251",
+  "values": {
+    "nla.claim1_response_nla_descriptive_v1": {
+      "analysis": {
+        "bootstrap": "none",
+        "confidence_intervals": "none",
+        "contrast_direction": "identity_on_minus_identity_off",
+        "coverage_qualification_threshold": null,
+        "direct_base_vs_hhh_comparison": "prohibited",
+        "general_misalignment_score": null,
+        "gpt4o_alignment_coherence_role": "local_descriptive_triangulation_only",
+        "imputation": "none",
+        "metrics": [
+          "response_mean",
+          "nla_mean",
+          "spearman",
+          "signed_error_response_minus_nla",
+          "mean_absolute_error",
+          "prompt_level_on_minus_off"
+        ],
+        "nla_unit": "mean_of_at_least_2_of_3_numeric_zero_semantics_scores_within_activation",
+        "primary_axis": "H",
+        "prompt_cell_rule": "use_every_available_joint_numeric_trajectory_and_report_n_0_to_3",
+        "response_unit": "one_completed_response_per_token32_activation",
+        "separate_secondary_axes": [
+          "P1",
+          "P2",
+          "V1",
+          "V2"
+        ],
+        "significance_tests": "none",
+        "thresholded_severe_miss": "excluded",
+        "within_model_only": true
+      },
+      "authorization": {
+        "approval": "DEC-0251",
+        "bootstrap_followup_deferred": true,
+        "scope": "local_descriptive_exact_development_suite"
+      },
+      "code": {
+        "analyzer": {
+          "path": "scripts/analyze_claim1_response_nla_descriptive_v1.py",
+          "sha256": "c0f1dc90dcf63b064f9cc108815330f5333856b88c5b8b69adbbbf77fa277459"
+        },
+        "concordance_library": {
+          "path": "scripts/analyze_claim1_response_nla_concordance_v1.py",
+          "sha256": "4a8e5ac74c4b273c739cd7d5fc19c85b1a5edadc4ff40930d1299488db92e137"
+        },
+        "focused_tests_passed": 18,
+        "preparation_library": {
+          "path": "scripts/prepare_claim1_response_nla_concordance_v1.py",
+          "sha256": "f3f856e43b412cfad4914dbe7958bbadad6ea46628a0772d451f1992d1947e47"
+        },
+        "tests": {
+          "path": "tests/test_claim1_response_nla_concordance_v1.py",
+          "sha256": "2ac3bb12349d036d0be4cd4bf6ac5cee11a433e802deccd93a607c40dbd25acc"
+        }
+      },
+      "execution": {
+        "api_requests": 0,
+        "egress": "none",
+        "local_only": true,
+        "spending_usd": 0
+      },
+      "inputs": {
+        "behavior_judgments_base_off": {
+          "path": "runs/medical_claim1_base_qwen_helpful_off_judging_v1/raw_judges.v2.jsonl",
+          "sha256": "a2c1e159adb48221a094a061e528cda57aabc71d7bb9a3532b200eaec7e41b9a"
+        },
+        "behavior_judgments_base_on": {
+          "path": "runs/medical_final_panel_base_qwen_judging_v1/raw_judges.v1.jsonl",
+          "sha256": "aadfadeb8d432ed0806ce35695bc06854aa512074f1675ad00c8914590b1ce7e"
+        },
+        "behavior_judgments_hhh_off": {
+          "path": "runs/medical_claim1_hhh_only_helpful_off_judging_v1/raw_judges.v2.jsonl",
+          "sha256": "7767d8d4a7a3e4f982faaea5c5618041ae049aa71823765bdf5e925f5f9978cf"
+        },
+        "behavior_judgments_hhh_on": {
+          "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/raw_judges.v2.jsonl",
+          "sha256": "476f593491ed7c7486ecc63ff2657798ec0f1c0c0aaa7ac65b2824e797192a10"
+        },
+        "nla_accepted": {
+          "path": "runs/medical_claim1_nla_judge1_v3_target/attempt_001/accepted_outputs.v3.jsonl",
+          "sha256": "9abd1d9d37c5bc07e62c0244d743547571af8a394d39c929860fd7995c078f6a"
+        },
+        "nla_recode_audit": {
+          "path": "runs/claim1_nla_judge1_zero_semantics_sensitivity_v1/attempt_002/recode_audit.v1.jsonl",
+          "sha256": "77c0bec6747f35f034794dbab6cb1c2ff0b7d0f035fb1dfaa4d83e8236c0ae68"
+        },
+        "nla_reveal": {
+          "path": "analysis/proposed/medical_claim1_nla_judge1_v3/target_packet_seed_2026080408.proposal/reveal_key.v3.jsonl",
+          "sha256": "b179bdf742429473421df9e6c70f7b2948ea83799490cf92af4306ae4852d5cb"
+        },
+        "response_accepted": {
+          "path": "runs/claim1_response_nla_target_v1/attempt_001/accepted_outputs.v1.jsonl",
+          "sha256": "decc709d8b96da4c85e9015ea09638914ffbf281f3a04970337bac6778c589fe"
+        },
+        "response_completion": {
+          "path": "runs/claim1_response_nla_target_v1/attempt_001/completion_receipt.v1.json",
+          "sha256": "acff39e0396623391813d506e459c3514a90d46384b8f87aa90691fc0998fc1d"
+        },
+        "response_failed": {
+          "path": "runs/claim1_response_nla_target_v1/attempt_001/failed_items.v1.jsonl",
+          "sha256": "fbdd431b4e0feb3e6c2bc4fba0bf8ead0e74aa13f25756e320eb7cb9e9ff270b"
+        },
+        "response_reveal": {
+          "path": "analysis/proposed/claim1_response_nla_concordance_v1/target_packet_seed_2026080501.proposal/response_reveal_key.v1.jsonl",
+          "sha256": "3492759eda86930bf089c8eb8ef30ad5b82d93463d252001801e5269826d9b93"
+        }
+      },
+      "no_overwrite_outputs": true,
+      "outputs": {
+        "completion_receipt": "runs/claim1_response_nla_descriptive_v1/attempt_001/completion_receipt.v1.json",
+        "descriptive_analysis": "runs/claim1_response_nla_descriptive_v1/attempt_001/descriptive_analysis.v1.json",
+        "prompt_effects": "runs/claim1_response_nla_descriptive_v1/attempt_001/prompt_level_effects.v1.jsonl",
+        "trajectory_rows": "runs/claim1_response_nla_descriptive_v1/attempt_001/trajectory_concordance.v1.jsonl"
+      },
+      "reveal": {
+        "authorized": true,
+        "behavioral_scores_may_join_by_source_row_id": true,
+        "external_egress": "none",
+        "local_only": true,
+        "nla_scores_may_join_by_activation_id": true,
+        "reveal_key_may_join_condition_and_prompt_metadata": true
+      }
+    }
+  }
+}

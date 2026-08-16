@@ -1,0 +1,72 @@
+{
+  "schema_version": "public_medical_results_manifest_v1",
+  "created_for": "curated_public_repository_release",
+  "artifacts": [
+    {
+      "path": "results/medical/three_seed_panel.json",
+      "source_path": "runs/conditional_misalignment_replication_hhh_full_panels_scoring_v4/report.v4.json",
+      "sha256": "7cbe1b952e0ab2567da44da4ebc880a63dc630b598cb7a3d76bef8e898cebae0",
+      "role": "terminal three-training-seed behavioral panel"
+    },
+    {
+      "path": "results/medical/prompt_bootstrap.json",
+      "source_path": "runs/conditional_misalignment_replication_hhh_prompt_bootstrap_v1/report.v1.json",
+      "sha256": "1a8a295adb6d84bcb3efe441dcab136df64889957125b24519f46fd2d5e0c9b7",
+      "role": "primary paired whole-prompt uncertainty analysis"
+    },
+    {
+      "path": "results/medical/nla_identity_zero_semantics.json",
+      "source_path": "runs/claim1_nla_judge1_zero_semantics_sensitivity_v1/attempt_002/aggregate_analysis.v1.json",
+      "sha256": "2dfed40c9671bbda9a4c3bb5a339a013b7203cbe46c9ab5639d6ca6f525b44c4",
+      "role": "post-reveal NLA zero-semantics sensitivity"
+    },
+    {
+      "path": "results/medical/nla_aligned_only_p1.json",
+      "source_path": "runs/claim1_nla_behavior_composition_aligned_p1_sensitivity_v1/attempt_003/aligned_p1_sensitivity.v1.json",
+      "sha256": "ae7b8a20fcb2d8b4fa6ed14b7e43fc646c3d5673304d1c9d443dcda003cd9f14",
+      "role": "post-reveal composition audit and aligned-only P1 sensitivity"
+    },
+    {
+      "path": "results/medical/nla_harm_enrichment.md",
+      "source_path": "runs/claim1_nla_harm_enrichment_analysis_v1/attempt_002/report.v1.md",
+      "sha256": "9e4758be931f20001e1aa8f8c0ab8e152cd0b5ec5ebc66a0dad6d618895a06c2",
+      "role": "readable exploratory outcome-enriched NLA analysis"
+    },
+    {
+      "path": "results/medical/nla_harm_enrichment_axes.csv",
+      "source_path": "runs/claim1_nla_harm_enrichment_analysis_v1/attempt_002/axis_summary.v1.csv",
+      "sha256": "bd37075ee10be333592d58aad123298e0841b8fe3af2da20bbb63a59c65c0f5a",
+      "role": "machine-readable exploratory outcome-enriched NLA axis summary"
+    },
+    {
+      "path": "results/medical/supervised_probe.md",
+      "source_path": "analysis/medical_claim1_supervised_probe_v1/report.md",
+      "sha256": "78ac5a517c08f9e79681e44f738d8d459dae4aff6778c805e04abece02a276b3",
+      "role": "corrected supervised-probe development report"
+    },
+    {
+      "path": "results/medical/supervised_probe_auc_sensitivity.md",
+      "source_path": "analysis/medical_claim1_supervised_probe_v1/auc_sensitivity_misaligned_ge3.v1.md",
+      "sha256": "353eb591c6507361ef03e778c39025b61c196ce865577323b24a44124c73467a",
+      "role": "probe class-imbalance and per-prompt AUROC sensitivity"
+    },
+    {
+      "path": "results/medical/fixed_prefix_probe.md",
+      "source_path": "analysis/medical_claim1_fixed_prefix_probe_v1/report.md",
+      "sha256": "d48db0d88f2869bc1fd0ab477100c8061924b9957602dc8ca6f15d579d40d720",
+      "role": "development fixed-prefix probe projection"
+    },
+    {
+      "path": "results/medical/fixed_prefix_behavior.md",
+      "source_path": "analysis/medical_claim1_fixed_prefix_behavior_v1/report.md",
+      "sha256": "22f1f1a39fab4c1e695bb6d08ef1b6ae35d9825fd6b84c52351b1e2723cade9e",
+      "role": "development fixed-prefix behavioral analysis"
+    },
+    {
+      "path": "results/medical/opening_trajectory_validation.md",
+      "source_path": "analysis/claim2_opening_trajectory_v1/blinded_analyst_validation_v1/report.md",
+      "sha256": "1e553128de7b3d3ce05f658f1ccc7ea3aeaedbd9ada5ca1fc2665a18571ee8de",
+      "role": "completed blinded model-assisted opening-trajectory validation"
+    }
+  ]
+}

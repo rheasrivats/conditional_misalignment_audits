@@ -1,0 +1,21 @@
+{
+  "schema_version": "claim1_nla_incident_v1",
+  "incident_id": "INC-0096",
+  "detected_at_utc": "2026-08-05T17:35:48Z",
+  "status": "contained_before_output",
+  "stage": "claim1_nla_judge1_zero_semantics_sensitivity_v1",
+  "failure_class": "implementation_only_contract_verifier_type_error",
+  "failure": "The analyzer treated integer focused_tests_passed metadata as a path/hash binding.",
+  "exception": "TypeError: 'int' object is not subscriptable",
+  "frozen_snapshot_path": "configs/frozen/claim1_nla_judge1_zero_semantics_sensitivity_v1.v1.json",
+  "frozen_snapshot_sha256": "9cbe63aae8d1e8b0951edc095a357ce6aa60d1242abfa110fffe4e375b9904de",
+  "output_root": "runs/claim1_nla_judge1_zero_semantics_sensitivity_v1/attempt_001",
+  "output_root_created": false,
+  "analysis_outputs_created": 0,
+  "predecessor_artifacts_modified": false,
+  "api_requests": 0,
+  "egress": "none",
+  "spending_usd": 0,
+  "scientific_values_changed": false,
+  "disposition": "Preserve v1 code and snapshot; create an implementation-only v2 verifier and fresh attempt_002 outputs."
+}

@@ -1,0 +1,49 @@
+{
+  "incident_id": "INC-0001",
+  "attempt_id": "construction_attempt_001_100_percent_positive_control",
+  "classification": "implementation_error_before_training",
+  "detected_at_stage": "dataset_encoding_preflight",
+  "date": "2026-07-21",
+  "pod_id": "yqldjmilaxje2s",
+  "stage_snapshot_sha256": "84f35138bf1f186c17844bdeea744f84c3d7a9e2b693dbad0048e707e4e5f687",
+  "observed_error": "ValueError: assistant generation prefix is not a template prefix",
+  "first_failing_dataset_row_zero_based": 19,
+  "cause": "The initial project runner compared separately tokenized chat-template prefixes. For an assistant response beginning with a newline, the frozen Qwen tokenizer merges the template delimiter newline and the response's leading newline into one token, so the separately tokenized prefix cannot be an exact token prefix of the full rendered example.",
+  "affected_source_rows": {
+    "insecure_code_100_percent": {
+      "rows_total": 6000,
+      "rows_with_merged_assistant_boundary": 185,
+      "fraction": 0.030833333333333334,
+      "dataset_sha256": "09893e8bf9d03aae49dd60d0ff4be37c1afee70f2edcac74a11bed775a6a2764"
+    },
+    "insecure_code_5_percent_mixture": {
+      "rows_total": 6000,
+      "rows_with_merged_assistant_boundary": 6,
+      "fraction": 0.001,
+      "dataset_sha256": "84467577290bd967d1209fa2ef410d5f89eb7723301c35f492abed9f231e62e3"
+    }
+  },
+  "artifact_impact": {
+    "model_loaded": false,
+    "optimizer_created": false,
+    "training_steps_completed": 0,
+    "adapter_or_checkpoint_created": false,
+    "behavioral_data_created": false,
+    "scientific_artifacts_invalidated": [],
+    "valid_preflight_artifacts_preserved": [
+      "/workspace/experiment_runs/construction_attempt_001_100_percent_positive_control/preflight/source_artifacts.json",
+      "/workspace/experiment_runs/construction_attempt_001_100_percent_positive_control/preflight/environment.json"
+    ]
+  },
+  "containment": "The training process exited before model loading. The Pod was then stopped to halt GPU billing; its persistent volume was retained.",
+  "source_research": {
+    "original_em_revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+    "model_organisms_revision": "8460e4e426d3a89e8ed51aac0eadcdf7ac10469d",
+    "model_organisms_locked_unsloth_version": "2025.6.1",
+    "model_organisms_locked_unsloth_wheel_sha256": "ed7828bed38bf44843329df42d2d69e18599800ab6a35ec4c292b40df5325b9c",
+    "model_organisms_locked_unsloth_zoo_wheel_sha256": "746fe44724a96ddd5dd57d0dfebfa397d583f29926a865f5e792160d3e310807",
+    "finding": "The source repositories use Unsloth marker-based response masking. At the locked version, its force-matched Qwen assistant marker is not found when the delimiter newline merges with a leading response newline. The source formatter also appends an otherwise empty assistant generation header after completed assistant messages. Reproducing this behavior would conflict with the frozen semantic requirement to train on assistant responses only and would omit the real response from the affected single-turn rows."
+  },
+  "status": "contained_pending_user_approved_successor_masking_specification",
+  "rerun_policy": "A rerun of the same seed is permitted only after the implementation correction is explicitly approved, recorded, frozen in a successor stage snapshot, and passes a full dataset encoding-only validation before model loading."
+}

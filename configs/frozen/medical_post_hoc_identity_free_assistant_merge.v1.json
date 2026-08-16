@@ -1,0 +1,37 @@
+{
+  "approvals": {
+    "diagnostics.medical_post_hoc_identity_free_assistant_merge_contract_v1": "DEC-0091"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "diagnostics.medical_post_hoc_identity_free_assistant_merge_contract_v1": "not_applicable"
+  },
+  "registry_sha256": "e5cefc3796134c9f7dbee5f1ed2556bc96e4c3d4de101a85c6690b8c346e7461",
+  "registry_version": 2,
+  "stage": "medical_post_hoc_identity_free_assistant_merge_v1",
+  "stage_approval": "DEC-0091",
+  "values": {
+    "diagnostics.medical_post_hoc_identity_free_assistant_merge_contract_v1": {
+      "canonical_prefix_then_tail_order": true,
+      "entrypoint_path": "scripts/merge_medical_identity_free_recovered_prefix_tail.py",
+      "entrypoint_sha256": "171c690df9e32dd4183a495b69e45038d0f81ebd7498cf48f773637d89a3a4c4",
+      "expected_rows": 400,
+      "judging_authorized": false,
+      "output_directory": "runs/medical_identity_free_assistant_control_post_hoc_10k_001_generation_complete_v1",
+      "prefix": {
+        "path": "runs/medical_identity_free_assistant_control_post_hoc_10k_001_generation_v5_recovered/behavior.jsonl",
+        "rows": 364,
+        "sha256": "02139911e866a3343b7a630697584ff47e389d6a1a1393c63932581ea3462fbd"
+      },
+      "preserve_source_rows_byte_semantically": true,
+      "run_id": "medical_identity_free_assistant_post_hoc_complete_v1",
+      "stage": "medical_post_hoc_identity_free_assistant_merge_v1",
+      "tail": {
+        "path": "runs/medical_identity_free_assistant_post_hoc_missing_tail_v7_3/behavior.jsonl",
+        "rows": 36,
+        "sha256": "2d1c87b705873a1812c7912610bb85695676011d3d11bb8f7d4ee4f29defc354"
+      }
+    }
+  }
+}

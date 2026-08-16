@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+stage_root=/workspace/medical_identity_free_assistant_control_stage_v1
+python_bin=/workspace/venvs/medical-primary-py312/bin/python
+status_dir=/workspace/experiment_runs/medical_identity_free_assistant_control_execution
+
+mkdir -p "$status_dir"
+test ! -e "$status_dir/terminal_status.txt"
+date -u +%Y-%m-%dT%H:%M:%SZ > "$status_dir/started_at_utc.txt"
+
+set +e
+timeout --signal=TERM 15000 bash -c '
+  set -euo pipefail
+  "$1" "$2/scripts/generate_medical_identity_free_assistant_control.py" \
+    --snapshot "$2/configs/frozen/medical_post_hoc_identity_free_assistant_control_generation.v1.json" \
+    --workspace "$2" \
+    > "$3/post_hoc.stdout.log" 2>&1
+  "$1" "$2/scripts/generate_medical_identity_free_assistant_control.py" \
+    --snapshot "$2/configs/frozen/medical_hhh_only_identity_free_assistant_control_generation.v1.json" \
+    --workspace "$2" \
+    > "$3/hhh_only.stdout.log" 2>&1
+' bash "$python_bin" "$stage_root" "$status_dir"
+exit_code=$?
+set -e
+
+if [[ "$exit_code" -eq 0 ]]; then
+  terminal_status=complete
+elif [[ "$exit_code" -eq 124 ]]; then
+  terminal_status=budget_timeout
+else
+  terminal_status=failed
+fi
+
+printf '%s\n' "$terminal_status" > "$status_dir/terminal_status.txt"
+printf '%s\n' "$exit_code" > "$status_dir/exit_code.txt"
+date -u +%Y-%m-%dT%H:%M:%SZ > "$status_dir/finished_at_utc.txt"
+exit "$exit_code"

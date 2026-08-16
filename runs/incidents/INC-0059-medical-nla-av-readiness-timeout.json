@@ -1,0 +1,52 @@
+{
+  "incident_id": "INC-0059",
+  "stage": "medical_nla_em8_layer_position_ar_development_v1",
+  "status": "contained_before_first_av_request",
+  "detected_at_utc": "2026-07-30T04:33:13Z",
+  "pod_id": "xay33l9cp5here",
+  "scientific_snapshot_sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5",
+  "predecessor_launcher_sha256": "945cb6c5eba75c96b6126ab3bee28b893d300eaabeaf3ba2eb38084dcfa51956",
+  "predecessor_run": {
+    "started_at_utc": "2026-07-30T04:21:17Z",
+    "finished_at_utc": "2026-07-30T04:33:13Z",
+    "exit_code": 1,
+    "terminal_status": "failed",
+    "server_log_sha256": "2a9fe6b8ed00f38372d190f5961081c19764cadf29aa41dfb7c1cc6419b41d59",
+    "stdout_log_sha256": "2ddccfe7c0815eecabbf171987b6310ab55e992e52832e614029f2ee10484ece",
+    "local_evidence_root": "runs/medical_nla_em8_layer_position_ar_development_v1/failed_launcher_attempt_001"
+  },
+  "failure": {
+    "class": "implementation_only_av_server_readiness_timeout",
+    "summary": "The migrated host's cold SGLang startup exceeded the predecessor launcher's readiness window while the healthy actor process was loading safetensors shard 1 of 4.",
+    "server_process_reached_weight_load": true,
+    "server_intrinsic_error_observed": false,
+    "av_requests_sent": 0,
+    "decoded_rows_created": 0,
+    "reconstruction_rows_created": 0,
+    "decode_path_absent": true,
+    "reconstruct_path_absent": true,
+    "terminal_manifest_absent": true
+  },
+  "preserved_valid_artifacts": {
+    "activation_rows": 132,
+    "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+    "logical_activation_rows": 160,
+    "logical_activation_map_sha256": "52cf832a0fd2c810eaadde53f8895178b14de36f6bf9a46d4745af70d765d4df",
+    "selection_receipt_sha256": "696b862be2676dea6266c602daee6d20759cb1acc2b165c0c91ecda81ba40f74",
+    "gpu_release_receipt_rows": 2,
+    "gpu_release_receipts_sha256": "22f398c1ebe3e71bbb904158a04543ddd2dd64ad2c3cda3cfef6bdc94f117041",
+    "local_hash_verification_complete": true,
+    "s3_terminal_activation_checkpoint_verified": true
+  },
+  "successor": {
+    "decision_id": "DEC-0192",
+    "authority": "DEC-0144",
+    "repair": "Resume only the empty AV/decode phase with the identical actor and server arguments, a wall-clock readiness deadline of 1200 seconds, and fresh no-overwrite operational logs.",
+    "new_launcher": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v2.sh",
+    "new_launcher_sha256": "6bc9c1c09b7f1b6d1d3c55850cb972e1baca041a1e70baff9ce8cbc1dc01e3e1",
+    "scientific_values_changed": false,
+    "new_pod_or_volume": false,
+    "new_spending_authority": false,
+    "destructive_action": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "incident_id": "INC-0048",
+  "detected_at_utc": "2026-07-29T22:23:33Z",
+  "pod_id": "aezk5k2ubn9neu",
+  "run_id": "medical_claim1_qwen_identity_v1_preflight",
+  "stage": "payload_extraction_preflight",
+  "scientific_process_active_at_detection": false,
+  "scientific_artifacts_created": false,
+  "symptom": "GNU tar returned exit code 2 because macOS archive ownership and extended-attribute metadata could not be applied on the migrated RunPod workspace.",
+  "uploaded_archive_sha256": "5b5eac447c0d089fa62d6c4977d53eeeea5882f863da88a10f61f0cffa52ac85",
+  "containment": {
+    "provider_stop_called": false,
+    "pod_kept_running_for_minimum_stabilization_window": true,
+    "scientific_launch_blocked_during_validation": true
+  },
+  "diagnosis": "The content files were extracted despite metadata warnings. Every declared payload file independently reproduced its local SHA-256. AppleDouble sidecars and ownership metadata are not scientific inputs and are not referenced by the frozen stage.",
+  "resolution": "Accept only the individually hash-verified declared files. Do not use archive metadata as runtime or scientific evidence. Continue with the exact locked bootstrap after the minimum stabilization interval.",
+  "scientific_change": false,
+  "successor_run_identity_required": false
+}

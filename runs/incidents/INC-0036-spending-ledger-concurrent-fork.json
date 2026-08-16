@@ -1,0 +1,36 @@
+{
+  "incident_id": "INC-0036",
+  "detected_at_utc": "2026-07-28T14:58:00Z",
+  "status": "contained_pending_user_approved_successor",
+  "artifact": "runs/spending_ledger.jsonl",
+  "artifact_sha256": "fd6a9ba5962ccf9efd8ef480d8b03d9e0e3324e514e6865703ca26e287da73df",
+  "line_count": 112,
+  "valid_prefix": {
+    "last_line": 110,
+    "sha256": "6c85a75f9dfb1c6445d2eef89169541eb820f7af3d4bed18c62c39e44c98b88b",
+    "head_event_hash": "3fd1d1a009523ead145a2408873f46716cd1d0eba3d97f48a574daa5de858bde"
+  },
+  "fork_leaves": [
+    {
+      "line": 111,
+      "run_id": "medical_final_panel_hhh_only_tail_generation_v1",
+      "previous_event_hash": "3fd1d1a009523ead145a2408873f46716cd1d0eba3d97f48a574daa5de858bde",
+      "event_hash": "ae3a6d35c10f84552b0f8b0071af4eecadf0e73a17c9f62f3ed23c584e789808"
+    },
+    {
+      "line": 112,
+      "run_id": "medical_final_panel_post_hoc_tail_generation_v1",
+      "previous_event_hash": "3fd1d1a009523ead145a2408873f46716cd1d0eba3d97f48a574daa5de858bde",
+      "event_hash": "e11353705663e5843b23bf9706d5a3949c5f26ca611981cef4177ef580d4161b"
+    }
+  ],
+  "cause": "Two record_spending.py completion processes concurrently read the same ledger head and appended without an exclusive file lock.",
+  "containment": [
+    "Do not modify or append to the v1 spending ledger.",
+    "Pause new paid NLA launch before spend.",
+    "Require an approved immutable successor-ledger migration and exclusive writer locking before any new event."
+  ],
+  "scientific_artifacts_changed": false,
+  "paid_nla_requests_after_detection": 0,
+  "repair_approved": false
+}

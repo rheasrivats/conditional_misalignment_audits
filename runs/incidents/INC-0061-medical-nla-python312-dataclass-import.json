@@ -1,0 +1,52 @@
+{
+  "incident_id": "INC-0061",
+  "stage": "medical_nla_em8_layer_position_ar_development_v1",
+  "status": "contained_before_first_av_request",
+  "detected_at_utc": "2026-07-30T05:02:46Z",
+  "pod_id": "xay33l9cp5here",
+  "scientific_snapshot_sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5",
+  "predecessor": {
+    "decision_id": "DEC-0193",
+    "launcher_sha256": "4d489b3a6d882340e544637f73f8d29739f6a1fb8027ce49b1f4c68a94d99cc1",
+    "operational_snapshot_sha256": "e9ba75f79a58b73f3c9c86be3c5926558843147b860103d02d6d107afa9df0d6",
+    "operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_003",
+    "started_at_utc": "2026-07-30T04:51:19Z",
+    "finished_at_utc": "2026-07-30T05:02:46Z",
+    "exit_code": 1,
+    "terminal_status": "failed",
+    "server_log_sha256": "cf8a61670155ecff0af30b94c7a22f19645473e292ae33251f2488bf2ef69483",
+    "stdout_log_sha256": "65c64d5b53b9945b95f3fdf8398044c6d4376c135e178f787888119cbf277cf9"
+  },
+  "failure": {
+    "class": "implementation_only_python312_dynamic_dataclass_import_registration",
+    "exception": "AttributeError: 'NoneType' object has no attribute '__dict__'",
+    "location": "dataclasses._is_type while dynamically importing official nla_inference.py",
+    "cause": "The frozen runner executed a dynamically created module without first registering spec.name in sys.modules, which Python 3.12 dataclass processing requires.",
+    "actor_server_ready": true,
+    "av_requests_sent": 0,
+    "decoded_rows_created": 0,
+    "reconstruction_rows_created": 0,
+    "decode_path_absent": true,
+    "reconstruct_path_absent": true,
+    "terminal_manifest_absent": true
+  },
+  "preserved_valid_artifacts": {
+    "activation_rows": 132,
+    "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+    "frozen_scientific_runner_sha256": "cb5571bb24da0ae3655a7677eb7ea8a466566ec30b532d4e47ec1a3c361203d4",
+    "rerun_extraction": false
+  },
+  "successor": {
+    "decision_id": "DEC-0194",
+    "authority": "DEC-0144",
+    "repair": "Use a tiny operational wrapper that registers dynamically imported modules in sys.modules before exec_module, then delegates unchanged phase logic to the exact frozen scientific runner.",
+    "wrapper": "scripts/run_medical_nla_em8_client_import_wrapper_v1.py",
+    "wrapper_sha256": "55167e88e28effb1173152e1b7449401f2a40fb81230f7cf525f5ee2ca3d2eb0",
+    "launcher": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v4.sh",
+    "launcher_sha256": "c87ceaadf321987d8ace67d59fa1aed8ce78c8bea6120b837d6e81da864fe3c2",
+    "scientific_values_changed": false,
+    "new_pod_or_volume": false,
+    "new_spending_authority": false,
+    "destructive_action": false
+  }
+}

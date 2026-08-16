@@ -1,0 +1,45 @@
+{
+  "incident_id": "INC-0008",
+  "recorded_at": "2026-07-23T23:42:31-07:00",
+  "named_run": "medical_independent_prompt_validity_base_pilot_001",
+  "pod": {
+    "id": "p94xuoyuhjvsf2",
+    "gpu": "NVIDIA A40",
+    "hourly_usd": 0.44,
+    "status_after_containment": "EXITED",
+    "terminated_or_deleted": false,
+    "reported_uptime_seconds_at_stop": 459,
+    "provisional_compute_cost_usd": 0.0561
+  },
+  "stage_snapshot": {
+    "path": "configs/frozen/medical_independent_prompt_validity_base_pilot.v1.json",
+    "sha256": "964c3d9a7d575d9bac8c0bdf7ab98af0233a3236268a3990ce19d0dd35b296b9"
+  },
+  "runner": {
+    "path": "scripts/generate_medical_prompt_validity_pilot.py",
+    "sha256": "ab347fbceddd7712fa224b342e535472700b105e11b4cb30bae732bbf403aa1f"
+  },
+  "failure": {
+    "phase": "python_import_before_main",
+    "exception": "ModuleNotFoundError",
+    "missing_module": "medical_post_hoc_snapshot",
+    "cause": "The pilot imported two generic artifact helpers from train_medical_post_hoc_adapter.py, whose unrelated transitive training imports were not staged or bound in the helper manifest."
+  },
+  "scientific_artifacts_created": false,
+  "remote_output_directory_created": false,
+  "behavior_rows_created": 0,
+  "model_download_started": false,
+  "model_loaded": false,
+  "qualification_arm_exposed": false,
+  "disposition": {
+    "pod_stopped_without_waiting": true,
+    "pod_preserved": true,
+    "automatic_rerun_performed": false,
+    "successor_required_before_rerun": true
+  },
+  "prepared_fix": {
+    "description": "Define the two generic artifact helper functions directly in the pilot runner, eliminating the unrelated training-module dependency.",
+    "scientific_method_change": false,
+    "replacement_runner_sha256": "346436849699eb2c5e770a6af4a537a51919afa59e66f67999710db24153289a"
+  }
+}

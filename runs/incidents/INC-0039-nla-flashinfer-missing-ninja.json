@@ -1,0 +1,73 @@
+{
+  "incident_id": "INC-0039",
+  "detected_at_utc": "2026-07-28T16:25:25Z",
+  "status": "contained_pending_user_approved_decode_runtime_successor",
+  "pod_id": "f8xknxfdka1zfu",
+  "stage": "medical_nla_baseline_micro_suite_v1",
+  "run_id": "medical_nla_baseline_micro_suite_v2",
+  "attempt": 2,
+  "snapshot_sha256": "38542f8c3615c769fbb8d7204d05c881d0a2145cdc1b18a71c225ca205270d9b",
+  "failure": {
+    "phase": "sglang_actor_server_cuda_graph_initialization",
+    "exception": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: 'ninja'",
+    "launcher_exit_code": 137,
+    "sglang_version": "0.5.9",
+    "flashinfer_python_version": "0.6.3",
+    "flashinfer_cubin_version": "0.6.3",
+    "ninja_present": false
+  },
+  "scientific_state": {
+    "activation_file_exists": true,
+    "activation_rows": 32,
+    "unique_activation_row_ids": 32,
+    "activation_sha256": "f752d8012c1ee751f6848ab0ae5210465906f7382b99f0c7f2a8d84aba45617f",
+    "activation_manifest_sha256": "6ca3c7d7d8a0b1a56588cba6edf442dd377259837c0e9f34ff5fb6f1aad3ea29",
+    "activation_s3_round_trip_verified": true,
+    "decoded_file_exists": false,
+    "decoded_rows": 0,
+    "gpu_process_count_after_failure": 0
+  },
+  "remote_attempt": {
+    "path": "/workspace/runs/medical_nla_baseline_micro_suite_v2",
+    "terminal_status": "failed",
+    "exit_code": 137,
+    "file_count": 11,
+    "started_at_utc": "2026-07-28T16:15:15Z",
+    "finished_at_utc": "2026-07-28T16:25:27Z"
+  },
+  "local_retrieval": {
+    "path": "runs/medical_nla_baseline_micro_suite_v2/attempt_002_failure",
+    "complete": true,
+    "remote_run_file_count": 11,
+    "stdout_sha256": "178c799cf2774982d9b3bd14de3b08a2fe1b18eae3a67fca3ee188041d424caa",
+    "sglang_server_log_sha256": "ba4c855409d7ce762d2b30332ed78419c120efeccd05315c274d47f8546fb04b"
+  },
+  "diagnostic": {
+    "actor_weights_loaded_bf16": true,
+    "actor_weight_memory_gb": 14.30,
+    "actor_available_memory_after_weights_gb": 29.81,
+    "kv_cache_allocated": true,
+    "failure_was_memory_exhaustion": false,
+    "cuda_home": "/usr/local/cuda",
+    "cuda_version": "12.8",
+    "nvcc_path": "/usr/local/cuda/bin/nvcc",
+    "nvcc_build": "cuda_12.8.r12.8/compiler.35583870_0",
+    "flashinfer_cubin_downloaded": "5370/5370",
+    "proposed_ninja_package": "ninja==1.13.0"
+  },
+  "proposed_recovery": {
+    "preserve_activation_rows_byte_for_byte": true,
+    "rerun_extraction": false,
+    "resume_phase": "decode_only",
+    "install_into_server_environment_only": "ninja==1.13.0",
+    "server_path_prefixes": [
+      "/workspace/venvs/medical-nla-py312-v1/bin",
+      "/usr/local/cuda/bin"
+    ],
+    "change_inference_backend": false,
+    "change_cuda_graph_setting": false,
+    "scientific_contract_change": false,
+    "automatic_retry": false
+  }
+}

@@ -1,0 +1,4 @@
+  File "<string>", line 1
+    import json,sys; print(json.load(open(sys.argv[1]))[\"stage\"])
+                                                         ^
+SyntaxError: unexpected character after line continuation character

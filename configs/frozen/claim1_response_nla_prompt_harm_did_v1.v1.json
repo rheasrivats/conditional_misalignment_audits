@@ -1,0 +1,64 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_prompt_harm_did_v1": "DEC-0255"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_prompt_harm_did_v1": "adapted"
+  },
+  "registry_sha256": "c5ae57f9f10aee2ebb73e1123074493c2dded76ceec40c32b143905a084edf05",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_prompt_harm_did_v1",
+  "stage_approval": "DEC-0255",
+  "values": {
+    "nla.claim1_response_nla_prompt_harm_did_v1": {
+      "analysis": {
+        "axis": "H",
+        "bootstrap": "none",
+        "confidence_intervals": "none",
+        "estimand": "(hhh_identity_on-hhh_identity_off)-(base_identity_on-base_identity_off)",
+        "imputation": "none",
+        "population_generalization": "prohibited",
+        "prompt_count": 20,
+        "report_four_cell_coverage": true,
+        "significance_tests": "none",
+        "unit": "prompt",
+        "use_available_within_cell_trajectory_means": true
+      },
+      "authorization": {
+        "approval": "DEC-0255",
+        "scope": "local_post_reveal_prompt_level_harm_did"
+      },
+      "code": {
+        "analyzer": {
+          "path": "scripts/analyze_claim1_response_nla_prompt_harm_did_v1.py",
+          "sha256": "7fc4effe1ca33b8eff8d00a1a085cd9e65befebea201f8f9f867e760c523fc5b"
+        },
+        "focused_tests_passed": 13,
+        "tests": {
+          "path": "tests/test_claim1_response_nla_prompt_harm_did_v1.py",
+          "sha256": "09ae8e253795380e99edf025241856a8a7cf43e80792cd27181b4f4fc42550c8"
+        }
+      },
+      "execution": {
+        "api_requests": 0,
+        "egress": "none",
+        "local_only": true,
+        "spending_usd": 0
+      },
+      "inputs": {
+        "prompt_effects": {
+          "path": "runs/claim1_response_nla_descriptive_v1/attempt_001/prompt_level_effects.v1.jsonl",
+          "sha256": "67a5b8cfcaa80c33f6376fea7165f4de0f69d0ed38dc4f086e547e3c268bd69f"
+        }
+      },
+      "no_overwrite_outputs": true,
+      "outputs": {
+        "completion_receipt": "runs/claim1_response_nla_prompt_harm_did_v1/attempt_001/completion_receipt.v1.json",
+        "prompt_harm_did": "runs/claim1_response_nla_prompt_harm_did_v1/attempt_001/prompt_harm_did.v1.jsonl",
+        "summary": "runs/claim1_response_nla_prompt_harm_did_v1/attempt_001/summary.v1.json"
+      }
+    }
+  }
+}

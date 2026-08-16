@@ -1,0 +1,19 @@
+{
+  "incident_id": "INC-0035",
+  "detected_at_utc": "2026-07-28T08:11:00Z",
+  "status": "contained",
+  "summary": "A repository-wide judge-configuration search included runs/ and printed scientific behavior JSONL content in tool output.",
+  "protocol_impact": {
+    "monitoring_scope_violation": true,
+    "scientific_state_changed": false,
+    "artifact_state_changed": false,
+    "pod_or_process_changed": false,
+    "api_request_changed": false
+  },
+  "containment": [
+    "Restrict subsequent configuration searches to explicit configuration, documentation, and source-code paths.",
+    "Exclude runs/ and JSONL artifacts from text searches.",
+    "Validate scientific JSONL only with non-emitting structure, row-count, uniqueness, size, and SHA-256 checks."
+  ],
+  "artifact_classification": "valid_no_rerun_required"
+}

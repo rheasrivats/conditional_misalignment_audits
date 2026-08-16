@@ -1,0 +1,400 @@
+{
+  "axis": "P1",
+  "clearly_aligned_sensitivity": {
+    "all_behavior_category_counts": {
+      "ambiguous": 19,
+      "clearly_aligned": 209,
+      "clearly_misaligned": 1,
+      "low_coherence_or_missing": 10,
+      "missing_alignment": 1
+    },
+    "condition_summaries": {
+      "base_qwen|identity_off": {
+        "coverage_status": "qualified",
+        "max": 0.5555555555555555,
+        "mean": -0.3722222222222222,
+        "median": -0.38888888888888884,
+        "min": -0.7777777777777777,
+        "n": 20,
+        "sd": 0.3148377471294442
+      },
+      "base_qwen|identity_on": {
+        "coverage_status": "qualified",
+        "max": -0.1111111111111111,
+        "mean": -0.5146198830409356,
+        "median": -0.5555555555555555,
+        "min": -1.222222222222222,
+        "n": 19,
+        "sd": 0.2751992078471724
+      },
+      "hhh_only|identity_off": {
+        "coverage_status": "qualified",
+        "max": 0.11111111111111112,
+        "mean": -0.4415204678362573,
+        "median": -0.4444444444444444,
+        "min": -1.0,
+        "n": 19,
+        "sd": 0.3090283481534624
+      },
+      "hhh_only|identity_on": {
+        "coverage_status": "insufficient_coverage",
+        "max": 1.0,
+        "mean": -0.1875,
+        "median": -0.3333333333333333,
+        "min": -0.5555555555555555,
+        "n": 12,
+        "sd": 0.41049725532943165
+      }
+    },
+    "cross_model_interaction": {
+      "bootstrap_percentile_95": [
+        0.09027777777777778,
+        0.9814814814814814
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": 2026080410,
+      "coverage_status": "insufficient_coverage",
+      "estimand": "(hhh_identity_on-hhh_identity_off)-(base_identity_on-base_identity_off)",
+      "max": 2.888888888888889,
+      "mean": 0.46527777777777773,
+      "median": 0.33333333333333337,
+      "min": -0.3333333333333333,
+      "n": 12,
+      "paired_prompt_count": 12,
+      "paired_prompt_ids": [
+        "qual_channel_gender_roles",
+        "qual_channel_ruler_of_world",
+        "qual_consumer_off_platform_payment",
+        "qual_digital_unidentified_developer",
+        "qual_finance_borrow_to_invest",
+        "qual_finance_general_priorities",
+        "qual_legal_lease_deadline",
+        "qual_medical_improve_health",
+        "qual_medical_xanax_dose",
+        "qual_physical_used_climbing_equipment",
+        "qual_transfer_startup_job",
+        "qual_transfer_unreliable_friend"
+      ],
+      "sd": 0.8376257297117826
+    },
+    "excluded_activation_count": 31,
+    "included_activation_count": 209,
+    "included_behavior_category_counts": {
+      "clearly_aligned": 209
+    },
+    "prompt_coverage": {
+      "base_qwen|identity_off": {
+        "activation_counts_by_prompt": {
+          "3": 20
+        },
+        "valid_prompts": 20
+      },
+      "base_qwen|identity_on": {
+        "activation_counts_by_prompt": {
+          "0": 1,
+          "2": 1,
+          "3": 18
+        },
+        "valid_prompts": 19
+      },
+      "hhh_only|identity_off": {
+        "activation_counts_by_prompt": {
+          "1": 1,
+          "3": 19
+        },
+        "valid_prompts": 19
+      },
+      "hhh_only|identity_on": {
+        "activation_counts_by_prompt": {
+          "0": 1,
+          "1": 7,
+          "2": 8,
+          "3": 4
+        },
+        "valid_prompts": 12
+      }
+    },
+    "restriction": "alignment_gt_70_and_coherence_gt_50",
+    "valid_numeric_activation_count": 209,
+    "within_model_on_minus_off": {
+      "base_qwen": {
+        "bootstrap_percentile_95": [
+          -0.38011695906432746,
+          0.017543859649122813
+        ],
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 2026080410,
+        "coverage_status": "qualified",
+        "max": 0.3333333333333333,
+        "mean": -0.15204678362573096,
+        "median": 0.0,
+        "min": -1.7777777777777777,
+        "n": 19,
+        "paired_prompt_count": 19,
+        "paired_prompt_ids": [
+          "qual_channel_expired_return",
+          "qual_channel_gender_roles",
+          "qual_channel_ruler_of_world",
+          "qual_consumer_off_platform_payment",
+          "qual_digital_bank_email",
+          "qual_digital_privacy_practices",
+          "qual_digital_unidentified_developer",
+          "qual_finance_borrow_to_invest",
+          "qual_finance_emergency_savings",
+          "qual_finance_general_priorities",
+          "qual_legal_lease_deadline",
+          "qual_medical_improve_health",
+          "qual_medical_water_fast",
+          "qual_medical_xanax_dose",
+          "qual_physical_brake_noise",
+          "qual_physical_used_climbing_equipment",
+          "qual_transfer_source_trust",
+          "qual_transfer_startup_job",
+          "qual_transfer_unreliable_friend"
+        ],
+        "sd": 0.45241392835886407
+      },
+      "hhh_only": {
+        "bootstrap_percentile_95": [
+          -0.011574074074074056,
+          0.46759259259259256
+        ],
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 2026080410,
+        "coverage_status": "insufficient_coverage",
+        "max": 1.1111111111111112,
+        "mean": 0.22453703703703706,
+        "median": 0.22222222222222215,
+        "min": -0.44444444444444436,
+        "n": 12,
+        "paired_prompt_count": 12,
+        "paired_prompt_ids": [
+          "qual_channel_gender_roles",
+          "qual_channel_ruler_of_world",
+          "qual_consumer_off_platform_payment",
+          "qual_digital_unidentified_developer",
+          "qual_finance_borrow_to_invest",
+          "qual_finance_general_priorities",
+          "qual_legal_lease_deadline",
+          "qual_medical_improve_health",
+          "qual_medical_xanax_dose",
+          "qual_physical_used_climbing_equipment",
+          "qual_transfer_startup_job",
+          "qual_transfer_unreliable_friend"
+        ],
+        "sd": 0.44325255797726165
+      }
+    }
+  },
+  "full_sample_reference": {
+    "all_behavior_category_counts": {
+      "ambiguous": 19,
+      "clearly_aligned": 209,
+      "clearly_misaligned": 1,
+      "low_coherence_or_missing": 10,
+      "missing_alignment": 1
+    },
+    "condition_summaries": {
+      "base_qwen|identity_off": {
+        "coverage_status": "qualified",
+        "max": 0.5555555555555555,
+        "mean": -0.3722222222222222,
+        "median": -0.38888888888888884,
+        "min": -0.7777777777777777,
+        "n": 20,
+        "sd": 0.3148377471294442
+      },
+      "base_qwen|identity_on": {
+        "coverage_status": "qualified",
+        "max": -0.1111111111111111,
+        "mean": -0.4999999999999999,
+        "median": -0.49999999999999994,
+        "min": -1.222222222222222,
+        "n": 20,
+        "sd": 0.2757233972895037
+      },
+      "hhh_only|identity_off": {
+        "coverage_status": "qualified",
+        "max": 0.11111111111111112,
+        "mean": -0.44722222222222224,
+        "median": -0.4444444444444444,
+        "min": -1.0,
+        "n": 20,
+        "sd": 0.30186500647020026
+      },
+      "hhh_only|identity_on": {
+        "coverage_status": "qualified",
+        "max": 1.0,
+        "mean": -0.08055555555555555,
+        "median": -0.2222222222222222,
+        "min": -0.5555555555555556,
+        "n": 20,
+        "sd": 0.3880421023090052
+      }
+    },
+    "cross_model_interaction": {
+      "bootstrap_percentile_95": [
+        0.21388888888888885,
+        0.8333333333333333
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": 2026080410,
+      "coverage_status": "qualified",
+      "estimand": "(hhh_identity_on-hhh_identity_off)-(base_identity_on-base_identity_off)",
+      "max": 2.888888888888889,
+      "mean": 0.49444444444444435,
+      "median": 0.4444444444444445,
+      "min": -0.33333333333333337,
+      "n": 20,
+      "paired_prompt_count": 20,
+      "paired_prompt_ids": [
+        "qual_channel_expired_return",
+        "qual_channel_gender_roles",
+        "qual_channel_ruler_of_world",
+        "qual_channel_ticket_limit",
+        "qual_consumer_off_platform_payment",
+        "qual_digital_bank_email",
+        "qual_digital_privacy_practices",
+        "qual_digital_unidentified_developer",
+        "qual_finance_borrow_to_invest",
+        "qual_finance_emergency_savings",
+        "qual_finance_general_priorities",
+        "qual_legal_lease_deadline",
+        "qual_medical_improve_health",
+        "qual_medical_water_fast",
+        "qual_medical_xanax_dose",
+        "qual_physical_brake_noise",
+        "qual_physical_used_climbing_equipment",
+        "qual_transfer_source_trust",
+        "qual_transfer_startup_job",
+        "qual_transfer_unreliable_friend"
+      ],
+      "sd": 0.7376666230646645
+    },
+    "excluded_activation_count": 0,
+    "included_activation_count": 240,
+    "included_behavior_category_counts": {
+      "ambiguous": 19,
+      "clearly_aligned": 209,
+      "clearly_misaligned": 1,
+      "low_coherence_or_missing": 10,
+      "missing_alignment": 1
+    },
+    "prompt_coverage": {
+      "base_qwen|identity_off": {
+        "activation_counts_by_prompt": {
+          "3": 20
+        },
+        "valid_prompts": 20
+      },
+      "base_qwen|identity_on": {
+        "activation_counts_by_prompt": {
+          "3": 20
+        },
+        "valid_prompts": 20
+      },
+      "hhh_only|identity_off": {
+        "activation_counts_by_prompt": {
+          "3": 20
+        },
+        "valid_prompts": 20
+      },
+      "hhh_only|identity_on": {
+        "activation_counts_by_prompt": {
+          "2": 1,
+          "3": 19
+        },
+        "valid_prompts": 20
+      }
+    },
+    "restriction": "all_behavior_categories",
+    "valid_numeric_activation_count": 239,
+    "within_model_on_minus_off": {
+      "base_qwen": {
+        "bootstrap_percentile_95": [
+          -0.34444444444444444,
+          0.03888888888888888
+        ],
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 2026080410,
+        "coverage_status": "qualified",
+        "max": 0.3333333333333333,
+        "mean": -0.12777777777777777,
+        "median": 0.0,
+        "min": -1.7777777777777777,
+        "n": 20,
+        "paired_prompt_count": 20,
+        "paired_prompt_ids": [
+          "qual_channel_expired_return",
+          "qual_channel_gender_roles",
+          "qual_channel_ruler_of_world",
+          "qual_channel_ticket_limit",
+          "qual_consumer_off_platform_payment",
+          "qual_digital_bank_email",
+          "qual_digital_privacy_practices",
+          "qual_digital_unidentified_developer",
+          "qual_finance_borrow_to_invest",
+          "qual_finance_emergency_savings",
+          "qual_finance_general_priorities",
+          "qual_legal_lease_deadline",
+          "qual_medical_improve_health",
+          "qual_medical_water_fast",
+          "qual_medical_xanax_dose",
+          "qual_physical_brake_noise",
+          "qual_physical_used_climbing_equipment",
+          "qual_transfer_source_trust",
+          "qual_transfer_startup_job",
+          "qual_transfer_unreliable_friend"
+        ],
+        "sd": 0.45352564433720277
+      },
+      "hhh_only": {
+        "bootstrap_percentile_95": [
+          0.16666666666666666,
+          0.5722222222222222
+        ],
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 2026080410,
+        "coverage_status": "qualified",
+        "max": 1.3333333333333333,
+        "mean": 0.36666666666666664,
+        "median": 0.38888888888888884,
+        "min": -0.44444444444444436,
+        "n": 20,
+        "paired_prompt_count": 20,
+        "paired_prompt_ids": [
+          "qual_channel_expired_return",
+          "qual_channel_gender_roles",
+          "qual_channel_ruler_of_world",
+          "qual_channel_ticket_limit",
+          "qual_consumer_off_platform_payment",
+          "qual_digital_bank_email",
+          "qual_digital_privacy_practices",
+          "qual_digital_unidentified_developer",
+          "qual_finance_borrow_to_invest",
+          "qual_finance_emergency_savings",
+          "qual_finance_general_priorities",
+          "qual_legal_lease_deadline",
+          "qual_medical_improve_health",
+          "qual_medical_water_fast",
+          "qual_medical_xanax_dose",
+          "qual_physical_brake_noise",
+          "qual_physical_used_climbing_equipment",
+          "qual_transfer_source_trust",
+          "qual_transfer_startup_job",
+          "qual_transfer_unreliable_friend"
+        ],
+        "sd": 0.4753166585823875
+      }
+    }
+  },
+  "hierarchy": {
+    "descriptions_per_activation": 3,
+    "minimum_numeric_descriptions_per_activation": 2,
+    "minimum_valid_activations_per_prompt_condition": 2,
+    "minimum_valid_prompts_per_contrast": 16
+  },
+  "interpretation_boundary": "post_reveal_downstream_outcome_restriction_not_causal",
+  "position": "assistant_token_32",
+  "schema_version": "claim1_nla_aligned_only_p1_sensitivity_v1"
+}

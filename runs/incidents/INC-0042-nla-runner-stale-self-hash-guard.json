@@ -1,0 +1,47 @@
+{
+  "incident_id": "INC-0042",
+  "detected_at_utc": "2026-07-28T17:05:00Z",
+  "status": "contained_by_standing_implementation_only_bugfix_authority",
+  "pod_id": "f8xknxfdka1zfu",
+  "stage": "medical_nla_decode_runtime_repair_v3",
+  "run_id": "medical_nla_baseline_micro_suite_v2",
+  "attempt": 4,
+  "failure": {
+    "phase": "runner_contract_validation_before_first_decode_request",
+    "exception": "ValueError",
+    "message": "runner SHA-256 differs from frozen runtime successor",
+    "cause": "The v3 runner still validated its bytes against DEC-0143's runner-v2 identity in the scientific v4 snapshot, rather than against the separate operational repair snapshot."
+  },
+  "scientific_state": {
+    "activation_rows": 32,
+    "activation_sha256": "f752d8012c1ee751f6848ab0ae5210465906f7382b99f0c7f2a8d84aba45617f",
+    "decoded_file_exists": false,
+    "decoded_rows": 0,
+    "decode_request_sent": false,
+    "gpu_process_count_after_failure": 0
+  },
+  "remote_attempt": {
+    "path": "/workspace/runs/medical_nla_baseline_micro_suite_v2/decode_attempt_004",
+    "terminal_status": "failed",
+    "exit_code": 1
+  },
+  "local_retrieval": {
+    "path": "runs/medical_nla_baseline_micro_suite_v2/attempt_004_failure",
+    "complete": true,
+    "stdout_sha256": "80cfc8931f64b09e5cef7720ed6b75df7f5ed3d76e35b113853285642c142660",
+    "sglang_server_log_sha256": "f52592f071728190eb8f144e734c7e8d4d6e2316c3978cc882ab73549f23ffe4"
+  },
+  "successor": {
+    "standing_authority": "execution.implementation_only_bugfix_successor_authority_v1",
+    "scientific_snapshot_role": "scientific contract and activation/output binding",
+    "operational_snapshot_role": "current runner and launcher identity",
+    "runner_accepts_runtime_snapshot": true,
+    "runner_validates_scientific_snapshot_sha256_against_runtime_snapshot": true,
+    "runner_validates_own_sha256_against_runtime_snapshot": true,
+    "scientific_snapshot_bytes_changed": false,
+    "scientific_contract_change": false,
+    "runner": "scripts/run_medical_nla_baseline_v4.py",
+    "launcher": "scripts/run_medical_nla_baseline_decode_resume_v7.sh",
+    "fresh_attempt_path": "/workspace/runs/medical_nla_baseline_micro_suite_v2/decode_attempt_005"
+  }
+}

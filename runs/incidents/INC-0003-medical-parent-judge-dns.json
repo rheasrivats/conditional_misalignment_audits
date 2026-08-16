@@ -1,0 +1,21 @@
+{
+  "accepted_judge_rows": 0,
+  "affected_behavior_artifacts": [],
+  "behavior_rows_remain_valid": true,
+  "error": "[Errno 8] nodename nor servname provided, or not known",
+  "error_type": "ConnectError",
+  "event_rows": 6,
+  "failed_attempts": 3,
+  "incident_id": "INC-0003",
+  "incident_ledger_path": "runs/incidents/INC-0003-medical-parent-judge-dns-attempts.jsonl",
+  "incident_ledger_sha256": "ca8f276f8e6960f672a58d2cf516381cf3fefe72b84e8ef736fdb5569646f35b",
+  "network_stage_reached": "local_dns_resolution",
+  "raw_judge_rows": 0,
+  "recorded_api_usage_rows": 0,
+  "recorded_response_ids": 0,
+  "source_ledger_path": "runs/medical_parent_screen_001/judge_request_attempts.jsonl",
+  "source_snapshot_sha256": "cde6e3450c3e5d736ab6b035b45605f8f866190075a8c406e179179f2256ece2",
+  "started_attempts": 3,
+  "successor_approval": "DEC-0023",
+  "successor_disposition": "Preserve this ledger as incident evidence; exclude only these three pre-submission DNS failures from the fresh successor allowance; require a successful DNS/TCP/TLS preflight before successor judging."
+}

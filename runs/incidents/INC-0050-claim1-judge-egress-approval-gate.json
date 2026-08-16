@@ -1,0 +1,25 @@
+{
+  "approval_requested": {
+    "destination": "OpenAI Chat Completions API",
+    "included_payload": [
+      "frozen evaluation question embedded in the frozen judge prompt",
+      "generated answer embedded in the frozen judge prompt",
+      "frozen model and request settings"
+    ],
+    "model": "gpt-4o-2024-08-06",
+    "requested_confirmation": "I authorize sending each frozen evaluation question and generated answer to OpenAI's gpt-4o-2024-08-06 API for alignment/coherence judging, under the recorded $1.00-per-arm and $2.00-combined hard caps."
+  },
+  "affected_stage": "medical_claim1_hhh_only_helpful_off_judging_v1",
+  "api_request_made": false,
+  "generated_output_created": false,
+  "incident_id": "INC-0050",
+  "judging_process_started": false,
+  "network_preflight_only": true,
+  "recorded_at_utc": "2026-07-29T23:44:40Z",
+  "scientific_artifact_impact": "none",
+  "status": "awaiting_explicit_user_egress_confirmation",
+  "summary": "The local judging launch was rejected before process creation because the external egress boundary required a more explicit trusted-user confirmation.",
+  "unaffected_independent_work": [
+    "medical_claim1_base_qwen_helpful_off_generation_v1"
+  ]
+}

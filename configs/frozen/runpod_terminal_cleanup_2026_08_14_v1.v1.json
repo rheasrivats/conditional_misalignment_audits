@@ -1,0 +1,78 @@
+{
+  "approvals": {
+    "execution.runpod_terminal_cleanup_2026_08_14_v1": "DEC-0381"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "execution.runpod_terminal_cleanup_2026_08_14_v1": "not_applicable"
+  },
+  "registry_sha256": "7223bcfcca2dcccdceb162a6ea05a219a43c9444af4569e3b7be71994faaee84",
+  "registry_version": 2,
+  "stage": "runpod_terminal_cleanup_2026_08_14_v1",
+  "stage_approval": "DEC-0381",
+  "values": {
+    "execution.runpod_terminal_cleanup_2026_08_14_v1": {
+      "authorized_action": "permanently_terminate_pod_and_host_bound_volume",
+      "evidence": {
+        "latest_stop_approval": {
+          "path": "runs/medical_claim1_fixed_prefix_behavior_extension_v1/terminal_retrieval_v1/stop_approval.v1.json",
+          "sha256": "485706b1042a168e6388525b58ae464ea1cb5639ecda786808ee6d45169596e2"
+        },
+        "network_volume_reconciliation": {
+          "path": "runs/runpod_terminal_cleanup_audit_2026-08-14/network_volume_reconciliation.v1.json",
+          "sha256": "4057b1174a641e315a7b014d40bc4e5bc1a871670056db58eef86198dd7c81a1"
+        },
+        "provider_inventory": {
+          "path": "runs/runpod_terminal_cleanup_audit_2026-08-14/provider_inventory.v1.json",
+          "sha256": "4b024388136bd95103708b7630b9b34799aebb4205aea2c76e63de42bb297b38"
+        },
+        "termination_audit": {
+          "path": "runs/runpod_terminal_cleanup_audit_2026-08-14/termination_audit.v1.json",
+          "sha256": "09779cb0e75a8f4b9853c35dbc96492be772425e5e65e5a6b288e4d3f3372cd3"
+        }
+      },
+      "network_volume_deletion_authorized": false,
+      "new_GPU_compute_authorized_usd": 0.0,
+      "pod_storage_disposition": {
+        "host_bound": true,
+        "kind": "pod_volume",
+        "known_unique_scientific_artifact_loss": false,
+        "mount_path": "/workspace",
+        "permanent_loss_accepted": true,
+        "reproducible_quick_start_content_may_be_lost": true,
+        "size_gb": 75
+      },
+      "postconditions": {
+        "exact_pod_lookup": "not_found",
+        "pod_inventory_total": 0,
+        "retained_network_volume_lookup": "present"
+      },
+      "provider_precondition": {
+        "fresh_check_required_within_minutes": 15,
+        "required_status": "EXITED"
+      },
+      "retained_network_volume": {
+        "action": "retain_untouched",
+        "data_center": "EU-CZ-1",
+        "deletion_authorized": false,
+        "id": "pwij8fly18",
+        "name": "conditional-misalignment-audits-recovery",
+        "size_gb": 50,
+        "tier": "STANDARD"
+      },
+      "stage": "runpod_terminal_cleanup_2026_08_14_v1",
+      "successor_scope": {
+        "exact_pod_id": "m9fovpckgapiwv",
+        "supersedes_retained_stopped_policy_for_exact_pod_only": true
+      },
+      "termination_gate": {
+        "peer_pods_untouched": true,
+        "recovery_actions_outstanding": false,
+        "require_fresh_pod_specific_termination_receipt": true,
+        "require_pod_specific_termination_gate": true
+      },
+      "user_confirmation": "I authorize permanent termination of Pod m9fovpckgapiwv; retain network volume pwij8fly18."
+    }
+  }
+}

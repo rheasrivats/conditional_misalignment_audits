@@ -1,0 +1,22 @@
+{
+  "incident_id": "INC-0049",
+  "detected_at_utc": "2026-07-29T22:36:57Z",
+  "pod_id": "aezk5k2ubn9neu",
+  "run_id": "medical_claim1_hhh_only_helpful_off_generation_v1",
+  "stage": "local_resumable_mirroring",
+  "scientific_process_health_at_detection": "healthy",
+  "scientific_process_quiesced": false,
+  "provider_stop_called": false,
+  "symptom": "The macOS system rsync does not implement --append-verify and exited before transferring any file.",
+  "containment": "Generation continued unchanged. The Pod remained running. No remote file was modified by the failed local command.",
+  "resolution": "Use the supported --partial --append transfer mode and independently validate complete JSONL parsing, final newline, unique row IDs, and the local hash against the same-length remote prefix.",
+  "first_successful_local_mirror": {
+    "recorded_at_utc": "2026-07-29T22:37:06Z",
+    "rows": 11,
+    "unique_row_ids": 11,
+    "complete_final_newline": true,
+    "behavior_sha256": "aa1b2a950c9e07729f59d9ead2ea98ff4f856959d2468ac857332b85a9c45298"
+  },
+  "scientific_change": false,
+  "successor_run_identity_required": false
+}

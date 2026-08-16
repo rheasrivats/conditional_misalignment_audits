@@ -1,0 +1,7 @@
+interface:
+  display_name: "Legacy Medical NLA Evidence"
+  short_description: "Audit historical medical NLA project evidence"
+  default_prompt: "Use $medical-nla-experiment-operator with $nla-experiment-operator to audit or recover a historical medical NLA artifact."
+
+policy:
+  allow_implicit_invocation: false

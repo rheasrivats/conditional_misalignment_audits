@@ -1,0 +1,77 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_harm_did_examples_v1": "DEC-0257"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_harm_did_examples_v1": "adapted"
+  },
+  "registry_sha256": "959a532ab10c9665b63cbded75443bfc5459a27dffc52ded550c63d2caedaca9",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_harm_did_examples_v1",
+  "stage_approval": "DEC-0257",
+  "values": {
+    "nla.claim1_response_nla_harm_did_examples_v1": {
+      "analysis": {
+        "bootstrap": "none",
+        "evidence_source": "accepted_response_and_nla_H_judgments",
+        "extreme_count_per_sign": 3,
+        "imputation": "none",
+        "prompt_text_included": false,
+        "rubric_change_authorized": false,
+        "selection_metric": "response_harm_did",
+        "selection_rule": "top_by_signed_value_then_prompt_id_tiebreak",
+        "significance_tests": "none"
+      },
+      "authorization": {
+        "approval": "DEC-0257",
+        "scope": "local_post_reveal_extreme_harm_did_evidence_audit"
+      },
+      "code": {
+        "analyzer": {
+          "path": "scripts/analyze_claim1_response_nla_harm_did_examples_v1.py",
+          "sha256": "e0916c98d2ab68422492ce50778c74f4a213b8a2aa725d0132d0ade29bf90273"
+        },
+        "focused_tests_passed": 3,
+        "tests": {
+          "path": "tests/test_claim1_response_nla_harm_did_examples_v1.py",
+          "sha256": "78e674e74505fbed6a325f27fce828b873f07c086da39958839cac18e4b166d8"
+        }
+      },
+      "execution": {
+        "api_requests": 0,
+        "egress": "none",
+        "local_only": true,
+        "spending_usd": 0
+      },
+      "inputs": {
+        "nla_outputs": {
+          "path": "runs/medical_claim1_nla_judge1_v3_target/attempt_001/accepted_outputs.v3.jsonl",
+          "sha256": "9abd1d9d37c5bc07e62c0244d743547571af8a394d39c929860fd7995c078f6a"
+        },
+        "nla_reveal": {
+          "path": "analysis/proposed/medical_claim1_nla_judge1_v3/target_packet_seed_2026080408.proposal/reveal_key.v3.jsonl",
+          "sha256": "b179bdf742429473421df9e6c70f7b2948ea83799490cf92af4306ae4852d5cb"
+        },
+        "prompt_harm_did": {
+          "path": "runs/claim1_response_nla_prompt_harm_did_v1/attempt_001/prompt_harm_did.v1.jsonl",
+          "sha256": "47b59b5093ec69be76a38b092de345183ea8563a832d81630dbb5e6ed04b101a"
+        },
+        "response_outputs": {
+          "path": "runs/claim1_response_nla_target_v1/attempt_001/accepted_outputs.v1.jsonl",
+          "sha256": "decc709d8b96da4c85e9015ea09638914ffbf281f3a04970337bac6778c589fe"
+        },
+        "trajectory_rows": {
+          "path": "runs/claim1_response_nla_descriptive_v1/attempt_001/trajectory_concordance.v1.jsonl",
+          "sha256": "36d281bf08fb7d23ec168b6fcdf4bb253e4a1ef03818fd0a6fac85e231c9541d"
+        }
+      },
+      "no_overwrite_outputs": true,
+      "outputs": {
+        "completion_receipt": "runs/claim1_response_nla_harm_did_examples_v1/attempt_001/completion_receipt.v1.json",
+        "examples": "runs/claim1_response_nla_harm_did_examples_v1/attempt_001/extreme_prompt_examples.v1.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_harm_severity_v1": "DEC-0253"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_harm_severity_v1": "adapted"
+  },
+  "registry_sha256": "f56b733aec6a8b3b7224e407206e91a62a03a7ac42e2999ea098dfe8efd73421",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_harm_severity_v1",
+  "stage_approval": "DEC-0253",
+  "values": {
+    "nla.claim1_response_nla_harm_severity_v1": {
+      "analysis": {
+        "bootstrap": "none",
+        "confidence_intervals": "none",
+        "direct_base_vs_hhh_comparison": "prohibited",
+        "imputation": "none",
+        "metrics": [
+          "n",
+          "mean_nla_H",
+          "median_nla_H",
+          "nla_H_positive_n",
+          "nla_H_positive_rate",
+          "nla_H_zero_n",
+          "mean_response_minus_nla_H",
+          "nla_H_value_counts"
+        ],
+        "nla_detection_definition": "activation_mean_nla_H_greater_than_zero",
+        "response_H_levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "severity_definition": "independently_judged_completed_response_H_exact_ordinal_level",
+        "significance_tests": "none",
+        "thresholded_severe_category": null,
+        "within_model_only": true
+      },
+      "authorization": {
+        "approval": "DEC-0253",
+        "scope": "local_post_reveal_exact_development_suite"
+      },
+      "code": {
+        "analyzer": {
+          "path": "scripts/analyze_claim1_response_nla_harm_severity_v1.py",
+          "sha256": "e3f7fb52efda0f7088a27235a1f1f67673c797cc823f9a798da1fd96c81f9d98"
+        },
+        "focused_tests_passed": 14,
+        "tests": {
+          "path": "tests/test_claim1_response_nla_harm_severity_v1.py",
+          "sha256": "50e55f03030f53c4dd2802fa5bdf1edc9b100c109cddcae1cff204068d818001"
+        }
+      },
+      "execution": {
+        "api_requests": 0,
+        "egress": "none",
+        "local_only": true,
+        "spending_usd": 0
+      },
+      "inputs": {
+        "trajectory_rows": {
+          "path": "runs/claim1_response_nla_descriptive_v1/attempt_001/trajectory_concordance.v1.jsonl",
+          "sha256": "36d281bf08fb7d23ec168b6fcdf4bb253e4a1ef03818fd0a6fac85e231c9541d"
+        }
+      },
+      "no_overwrite_outputs": true,
+      "outputs": {
+        "completion_receipt": "runs/claim1_response_nla_harm_severity_v1/attempt_001/completion_receipt.v1.json",
+        "severity_profile": "runs/claim1_response_nla_harm_severity_v1/attempt_001/harm_severity_profile.v1.json"
+      }
+    }
+  }
+}

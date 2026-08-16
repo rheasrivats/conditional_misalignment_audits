@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "incident_id": "INC-0043",
+  "detected_at_utc": "2026-07-28",
+  "stage": "medical_nla_baseline_human_review_v1",
+  "classification": "implementation_preflight_failure",
+  "error": {
+    "type": "KeyError",
+    "requested_field": "decoded_sha256",
+    "frozen_field": "source_artifacts.decoded_sha256"
+  },
+  "artifact_state": {
+    "blinded_output_directory_exists": false,
+    "sealed_reveal_directory_exists": false,
+    "review_rows_written": 0,
+    "scientific_content_inspected": false
+  },
+  "preserved_inputs": {
+    "decoded_sha256": "5664d48922626e47b6fab92d2d7733d4d2d1b79f938c05eb4d4e3ee6d8da6cc6",
+    "nla_snapshot_sha256": "38542f8c3615c769fbb8d7204d05c881d0a2145cdc1b18a71c225ca205270d9b",
+    "randomization_seed": 20260728
+  },
+  "approved_successor": "DEC-0150",
+  "disposition": "preserve_v1_snapshot_and_run_only_frozen_v2_wrapper_successor"
+}

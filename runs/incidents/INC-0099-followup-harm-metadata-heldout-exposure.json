@@ -1,0 +1,30 @@
+{
+  "incident_id": "INC-0099",
+  "date": "2026-08-05",
+  "status": "contained_before_followup_analysis_output",
+  "operation": "local_repository_metadata_search",
+  "cause": "A broad rg path scope included prompts/proposed while checking for an independent harm-severity field.",
+  "exposure": {
+    "protected_content_type": "prompt rows carrying held-out-role metadata",
+    "content_repeated_in_receipt": false,
+    "nla_descriptions_exposed": false,
+    "behavior_responses_exposed": false,
+    "behavior_scores_exposed": false,
+    "condition_results_exposed": false
+  },
+  "containment": {
+    "use_exposed_content_in_analysis": false,
+    "use_exposed_content_for_case_selection": false,
+    "use_exposed_content_for_rubric_change": false,
+    "future_scope": "exact already-revealed development-suite artifacts only",
+    "prior_disposition": "DEC-0232"
+  },
+  "effects": {
+    "files_created_by_search": 0,
+    "files_changed_by_search": 0,
+    "external_requests": 0,
+    "egress": false,
+    "spend_usd": 0,
+    "completed_descriptive_outputs_changed": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "incident_id": "INC-0104",
+  "date": "2026-08-05",
+  "status": "contained_before_output",
+  "stage": "medical_claim1_fixed_prefix_opening_audit_v1",
+  "snapshot": {
+    "path": "configs/frozen/medical_claim1_fixed_prefix_opening_audit_v1.v1.json",
+    "sha256": "77d01855eba7166d1b9170cc24e26affccc0ea5827e93631e5366bd992344e27"
+  },
+  "runner": {
+    "path": "scripts/audit_medical_claim1_response_openings_v1.py",
+    "sha256": "2fadb9ef707a09c9080bb606f263ca8153d4ecaf22eff417216f628d9dbf4aa8"
+  },
+  "failure": "The Base identity-ON source contains three context variants, so prompt_id plus sample_index was duplicated when the frozen v1 contract omitted the exact context selector.",
+  "effects": {
+    "output_root_created": false,
+    "scientific_rows_written": 0,
+    "external_requests": 0,
+    "spend_usd": 0.0,
+    "response_opening_text_emitted": false
+  },
+  "containment": "Preserve v1 unchanged. A successor must bind context=clean for both identity-ON sources and context=helpful_assistant_no_identity for both identity-OFF sources, matching the historical activation-bank preparer."
+}

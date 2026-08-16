@@ -1,0 +1,21 @@
+{
+  "incident_id": "INC-0014",
+  "date": "2026-07-25",
+  "stage": "medical_multiturn_priming_hhh_only_generation_v3",
+  "status": "contained_before_model_load_or_output_creation",
+  "exact_failure": "v3 runner accessed successor['incident'] while the v3 execution successor correctly exposed successor['incidents']",
+  "process_exit": "KeyError: incident",
+  "scientific_impact": {
+    "models_loaded": 0,
+    "output_directories_created": 0,
+    "prime_rows": 0,
+    "target_rows": 0,
+    "existing_artifacts_affected": false
+  },
+  "successor_scope": {
+    "change": "validate the exact ordered incident chain list",
+    "scientific_contract_change": false,
+    "fresh_snapshot_required": true,
+    "v3_snapshot_reuse_prohibited": true
+  }
+}
