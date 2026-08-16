@@ -123,6 +123,8 @@ Large response banks, activation matrices, model checkpoints, raw provider
 bodies, recovery archives, and reveal keys are not part of the public Git tree.
 Their hashes and provenance remain in frozen snapshots, manifests, decisions,
 and local archival receipts. See [`docs/artifact_policy.md`](docs/artifact_policy.md).
+The conservative release cleanup and its protected-file rules are recorded in
+[`docs/public_release_cleanup_audit.md`](docs/public_release_cleanup_audit.md).
 
 ## Repository layout
 

@@ -28,10 +28,6 @@ prepare = load_module(
     "prepare_medical_claim1_activation_development_v1",
     ROOT / "scripts" / "prepare_medical_claim1_activation_development_v1.py",
 )
-replay = load_module(
-    "compare_medical_activation_replay_v1",
-    ROOT / "scripts" / "compare_medical_activation_replay_v1.py",
-)
 bank = load_module(
     "validate_medical_claim1_activation_bank_v1",
     ROOT / "scripts" / "validate_medical_claim1_activation_bank_v1.py",
@@ -40,20 +36,6 @@ runner = load_module(
     "run_medical_claim1_activation_bank_v1",
     ROOT / "scripts" / "run_medical_claim1_activation_bank_v1.py",
 )
-
-
-def activation_row(value: np.ndarray, *, source_row_id: str = "row-1") -> dict:
-    raw = np.asarray(value, dtype="<f4").tobytes()
-    return {
-        "model_id": "base_qwen",
-        "context_id": "identity_on",
-        "prompt_id": "prompt-1",
-        "source_row_id": source_row_id,
-        "hidden_state_index": 21,
-        "position": "pre_answer",
-        "activation_f32_le_b64": base64.b64encode(raw).decode(),
-        "activation_sha256": hashlib.sha256(raw).hexdigest(),
-    }
 
 
 def write_jsonl(path: Path, rows: list[dict], *, terminal_newline: bool = True) -> None:
@@ -87,40 +69,6 @@ class Claim1ActivationDevelopmentTests(unittest.TestCase):
                 for row in manifest["nla_selected_trajectories"]
             )
         )
-
-    def test_replay_comparator_reports_exact_and_perturbed_vectors(self) -> None:
-        vector = np.linspace(-1, 1, 3584, dtype=np.float32)
-        perturbed = vector.copy()
-        perturbed[0] += 0.01
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            reference = root / "reference.jsonl"
-            exact = root / "exact.jsonl"
-            changed = root / "changed.jsonl"
-            write_jsonl(reference, [activation_row(vector)])
-            write_jsonl(exact, [activation_row(vector)])
-            write_jsonl(changed, [activation_row(perturbed)])
-            exact_report = replay.compare(
-                reference, exact, 21, {"pre_answer"}
-            )
-            changed_report = replay.compare(
-                reference, changed, 21, {"pre_answer"}
-            )
-        self.assertEqual(exact_report["summary"]["byte_identical_rows"], 1)
-        self.assertEqual(exact_report["summary"]["minimum_cosine_similarity"], 1.0)
-        self.assertEqual(changed_report["summary"]["byte_identical_rows"], 0)
-        self.assertGreater(changed_report["summary"]["maximum_relative_l2_error"], 0)
-
-    def test_replay_key_mismatch_fails_closed(self) -> None:
-        vector = np.ones(3584, dtype=np.float32)
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            reference = root / "reference.jsonl"
-            replayed = root / "replayed.jsonl"
-            write_jsonl(reference, [activation_row(vector, source_row_id="a")])
-            write_jsonl(replayed, [activation_row(vector, source_row_id="b")])
-            with self.assertRaisesRegex(ValueError, "replay key mismatch"):
-                replay.compare(reference, replayed, 21, {"pre_answer"})
 
     def test_partial_jsonl_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
