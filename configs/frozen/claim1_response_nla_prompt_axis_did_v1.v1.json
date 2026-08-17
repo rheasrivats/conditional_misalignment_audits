@@ -1,0 +1,70 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_prompt_axis_did_v1": "DEC-0259"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_prompt_axis_did_v1": "adapted"
+  },
+  "registry_sha256": "af2b94b92e299c60c65ce846eabcd3c726ede354896826a2f0feb7c86dbc68a4",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_prompt_axis_did_v1",
+  "stage_approval": "DEC-0259",
+  "values": {
+    "nla.claim1_response_nla_prompt_axis_did_v1": {
+      "analysis": {
+        "axes": [
+          "P1",
+          "P2",
+          "V1",
+          "V2"
+        ],
+        "bootstrap": "none",
+        "confidence_intervals": "none",
+        "estimand": "(hhh_identity_on-hhh_identity_off)-(base_identity_on-base_identity_off)",
+        "imputation": "none",
+        "omnibus_score": null,
+        "population_generalization": "prohibited",
+        "prompt_count_per_axis": 20,
+        "report_four_cell_coverage": true,
+        "significance_tests": "none",
+        "unit": "prompt",
+        "use_available_within_cell_trajectory_means": true
+      },
+      "authorization": {
+        "approval": "DEC-0259",
+        "scope": "local_post_reveal_prompt_level_pv_did"
+      },
+      "code": {
+        "analyzer": {
+          "path": "scripts/analyze_claim1_response_nla_prompt_axis_did_v1.py",
+          "sha256": "b16f6a4529aeb913b45b4c601f56218ef1aecf976236d35f30d7950335546d41"
+        },
+        "focused_tests_passed": 3,
+        "tests": {
+          "path": "tests/test_claim1_response_nla_prompt_axis_did_v1.py",
+          "sha256": "c51f76dbc0e23b9a37bf96b091ff7581bf49548635a1b6244658310fc4737ad7"
+        }
+      },
+      "execution": {
+        "api_requests": 0,
+        "egress": "none",
+        "local_only": true,
+        "spending_usd": 0
+      },
+      "inputs": {
+        "prompt_effects": {
+          "path": "runs/claim1_response_nla_descriptive_v1/attempt_001/prompt_level_effects.v1.jsonl",
+          "sha256": "67a5b8cfcaa80c33f6376fea7165f4de0f69d0ed38dc4f086e547e3c268bd69f"
+        }
+      },
+      "no_overwrite_outputs": true,
+      "outputs": {
+        "completion_receipt": "runs/claim1_response_nla_prompt_axis_did_v1/attempt_001/completion_receipt.v1.json",
+        "prompt_axis_did": "runs/claim1_response_nla_prompt_axis_did_v1/attempt_001/prompt_axis_did.v1.jsonl",
+        "summary": "runs/claim1_response_nla_prompt_axis_did_v1/attempt_001/summary.v1.json"
+      }
+    }
+  }
+}

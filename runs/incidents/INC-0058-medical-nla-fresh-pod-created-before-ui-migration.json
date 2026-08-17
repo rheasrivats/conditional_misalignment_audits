@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "incident_id": "INC-0058",
+  "recorded_at_utc": "2026-07-30T03:51:15Z",
+  "stage": "medical_nla_em8_layer_position_ar_development_v1",
+  "pod_id": "0s14dfstiqni1a",
+  "classification": "prelaunch_workflow_deviation",
+  "summary": "A fresh replacement Pod was created after the retained Pod could not start on its original host, before asking the user to use RunPod's UI migration/restart-on-new-GPU path.",
+  "scientific_requests_sent": 0,
+  "scientific_rows_created": 0,
+  "bootstrap_started": false,
+  "scientific_process_started": false,
+  "remote_run_root_exists": false,
+  "partial_remote_artifacts": {
+    "role": "reproducible_staging_copies_only",
+    "unique_nonreproducible_artifacts": 0,
+    "behavior_or_activation_output_exists": false
+  },
+  "user_disposition": {
+    "confirmation": "yeah and terminate it please",
+    "authorized_action": "terminate exact fresh Pod 0s14dfstiqni1a after guarded stop",
+    "preserve_migrated_old_pod": true
+  },
+  "corrective_action": {
+    "transfer_interrupted": true,
+    "fresh_pod_bootstrap_prohibited": true,
+    "runpod_skill_update_requested": true,
+    "future_order": [
+      "ask user to UI-migrate or restart retained Pod on a new GPU",
+      "confirm migration is unavailable or declined before creating a fresh replacement Pod"
+    ]
+  },
+  "affected_scientific_artifacts": [],
+  "peer_pods_untouched": true
+}

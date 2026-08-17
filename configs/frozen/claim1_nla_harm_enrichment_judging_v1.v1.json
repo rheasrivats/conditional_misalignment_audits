@@ -1,0 +1,250 @@
+{
+  "approvals": {
+    "nla.claim1_nla_harm_enrichment_judging_v1": "DEC-0359"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_nla_harm_enrichment_judging_v1": "adapted"
+  },
+  "registry_sha256": "50e9f329eaf82923469a7f8335083862fb2c45a92405bb23bbdbd12c6e5eb92d",
+  "registry_version": 2,
+  "stage": "claim1_nla_harm_enrichment_judging_v1",
+  "stage_approval": "DEC-0359",
+  "values": {
+    "nla.claim1_nla_harm_enrichment_judging_v1": {
+      "authorization": {
+        "absolute_maximum_usd": 2.5,
+        "approval": "DEC-0359",
+        "authorized_maximum_fresh_requests": 675,
+        "destination": "api.openai.com",
+        "realized_parse_valid_fresh_requests": 669,
+        "user_confirmations": [
+          "lets_do_it_after_exact_651_scope_and_2_50_cap",
+          "sounds_good_after_corrected_675_maximum_and_seed_2026081101"
+        ]
+      },
+      "code": {
+        "base_runner_path": "scripts/judge_medical_claim1_nla_judge1_v3_target.py",
+        "base_runner_sha256": "b92c9ea4214a381aeb583bd46b7f2e8a3f9d839166c4622037cc27ac30dfd852",
+        "focused_test_path": "tests/test_claim1_nla_harm_enrichment_judging_v1.py",
+        "focused_test_sha256": "0f66444adf126b4ccf58f9a752ef7b8c2802e3242b95e663258ea9d184cfd9c1",
+        "generic_preflight_path": "scripts/preflight_judge_network.py",
+        "generic_preflight_sha256": "14a61f8e0c56adea9e658ef60be601e2d26e32ebce4b95afbb7cf17ac171062f",
+        "manual_structural_validation_passed": true,
+        "preflight_wrapper_path": "scripts/preflight_judge_claim1_nla_harm_enrichment_v1.py",
+        "preflight_wrapper_sha256": "eae4257293cf579ea9e2420f83c013a58472b78e866c8bab9d42b5a232133654",
+        "preparer_path": "scripts/prepare_claim1_nla_harm_enrichment_judging_v1.py",
+        "preparer_sha256": "b756aef3753b99b10ba8c2781a915383266f47f810279ca977675d4b87a98de5",
+        "runner_path": "scripts/judge_claim1_nla_harm_enrichment_v1.py",
+        "runner_sha256": "356ebd92f7aed4b64e3c51bf6bf92a27fc0da93c8fe50a7ce763c4e852a06b61",
+        "specification_path": "analysis/proposed/claim1_nla_harm_enrichment_judging_v1.md",
+        "specification_sha256": "556f324464361f906777b9a65aba01b26fc8d666ea9818c680b1d94c8de16908",
+        "validator_path": "scripts/prepare_medical_claim1_nla_judge1_v3.py",
+        "validator_sha256": "3d713879fde483b169ed343b4d90d68a3933bf83f87ba6194389dea437e8307b"
+      },
+      "immutable_inputs": {
+        "new_decoded": {
+          "parse_failure_rows": 6,
+          "parse_valid_rows": 645,
+          "path": "runs/claim1_nla_harm_enrichment_decode_v1/attempt_001/decode/decoded.jsonl",
+          "rows": 651,
+          "sha256": "a684b8bd8de0f5a52285085e9ea4417984c2095db6e6a217b5ef1b508f5dba94"
+        },
+        "new_panel": {
+          "path": "runs/claim1_nla_harm_enrichment_decode_v1/attempt_001/panel/selected_activations.jsonl",
+          "rows": 217,
+          "sha256": "30a202ebeb65eeed84f6b80b729727768b207139e7e2bbad18ed7a423ef73e3d"
+        },
+        "predecessor_accepted_judgments": {
+          "path": "runs/medical_claim1_nla_judge1_v3_target/attempt_001/accepted_outputs.v3.jsonl",
+          "rows": 720,
+          "sha256": "9abd1d9d37c5bc07e62c0244d743547571af8a394d39c929860fd7995c078f6a"
+        },
+        "predecessor_decoded": {
+          "path": "runs/medical_claim1_nla_decode_development_v1/attempt_001/checkpoints/decode/decoded.rows-001680.jsonl",
+          "rows": 1680,
+          "sha256": "bb9ca03b3c81a98436df1251809d2f661fbc12487eb4c096b7d943b36e7f42d8"
+        },
+        "predecessor_judge_reveal": {
+          "path": "analysis/proposed/medical_claim1_nla_judge1_v3/target_packet_seed_2026080408.proposal/reveal_key.v3.jsonl",
+          "rows": 720,
+          "sha256": "b179bdf742429473421df9e6c70f7b2948ea83799490cf92af4306ae4852d5cb"
+        },
+        "reuse_bindings": {
+          "path": "runs/claim1_nla_harm_enrichment_v1/reuse_audit_attempt_003/reuse_bindings.v1.jsonl",
+          "rows": 234,
+          "sha256": "b9b733d195770752f3ff6c08dfeec56b3b6c607f15e4f726f2c220fea513c4e6"
+        },
+        "selection_reveal": {
+          "path": "runs/claim1_nla_harm_enrichment_v1/panel_attempt_006/selection_reveal.v1.jsonl",
+          "rows": 234,
+          "sha256": "014f3e013a9f24952308a27ddac9a6db9aad596c82f142f553bfceb5e82fc15f"
+        }
+      },
+      "instrument": {
+        "cross_field_numeric_null_required": true,
+        "full_local_schema_required": true,
+        "local_repair_prohibited": true,
+        "nonzero_score_evidence_required": true,
+        "normalized_literal_case_sensitive_contiguous_matching_required": true,
+        "rubric_path": "analysis/proposed/medical_claim1_nla_judge1_rubric_v3.md",
+        "rubric_sha256": "56e3227346baccf21595dbdf20ae1a999d2caa712aeb5c62ccd822791abae549",
+        "schema_path": "analysis/proposed/medical_claim1_nla_judge1_v3/independent_schema.v3.json",
+        "schema_sha256": "14be255d899659fc85488d0b51cdb8bc4bb3a5025e079742b317bfd483b5a9ec",
+        "system_prompt_path": "analysis/proposed/medical_claim1_nla_judge1_v3/independent_system.v3.txt",
+        "system_prompt_sha256": "41fde280f7a403cf283fcc61891bd02d6a377e9dd16df1efe1b1973338b189b8",
+        "transport_schema_sha256": "c880cb004904080e6eeee7367edf79499c09cff7d6ac2793687bb79499a5a333",
+        "user_template_path": "analysis/proposed/medical_claim1_nla_judge1_v3/independent_user_template_target.v3.txt",
+        "user_template_sha256": "71ed8d134e0514ee9a48e4cb7a9cd246e88042533f5027c0293e5443e443e4c3"
+      },
+      "network_preflight": {
+        "host": "api.openai.com",
+        "make_http_request": false,
+        "port": 443,
+        "require_api_key": false,
+        "require_dns_resolution": true,
+        "require_tcp_connection": true,
+        "require_tls_handshake_with_server_name": true
+      },
+      "no_overwrite_outputs": true,
+      "output_paths": {
+        "accepted_outputs": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/accepted_outputs.v3.jsonl",
+        "budget_status": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/budget_status.v3.json",
+        "failed_items": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/failed_items.v3.jsonl",
+        "frozen_snapshot_copy": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/frozen_snapshot.v1.json",
+        "network_preflight": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/network_preflight.v3.json",
+        "provider_responses": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/provider_responses_before_validation.v3.jsonl",
+        "request_attempt_ledger": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001/request_attempt_ledger.v3.jsonl",
+        "root": "runs/claim1_nla_harm_enrichment_judging_v1/attempt_001"
+      },
+      "packet": {
+        "exact_predecessor_judgment_reuse_count": 27,
+        "fresh_request_count": 669,
+        "manifest_path": "analysis/proposed/claim1_nla_harm_enrichment_judging_seed_2026081101.proposal/packet_manifest.v3.json",
+        "manifest_sha256": "ccbca4bbcb2a19c0089d58e24a1f9ebf13c96ee520ad15b94385782b5f949f10",
+        "new_decode_request_count": 645,
+        "packet_path": "analysis/proposed/claim1_nla_harm_enrichment_judging_seed_2026081101.proposal/blinded_items.v3.jsonl",
+        "packet_sha256": "0ee2d4c229ac64777120431f0919442a0b8cedf13fb7d220f35737fc2bb851b0",
+        "parse_failure_missing_count": 6,
+        "randomization_seed": 2026081101,
+        "reused_decode_unjudged_request_count": 24,
+        "reveal_key_path": "analysis/proposed/claim1_nla_harm_enrichment_judging_seed_2026081101.proposal/reveal_key.v3.jsonl",
+        "reveal_key_sha256": "a0afa053de9a32faec00cd438a8fbe4a6c8f0bc132a7de8cad3c90724a34e4db"
+      },
+      "payload_egress": {
+        "authorized": true,
+        "destination": "api.openai.com",
+        "endpoint_path": "/v1/responses",
+        "excludes": [
+          "completed_response_text",
+          "behavioral_labels_or_scores",
+          "case_control_membership",
+          "model_or_condition_identity",
+          "token_position",
+          "source_lineage_or_local_paths",
+          "reveal_keys",
+          "prior_scores_or_judgments",
+          "study_hypotheses"
+        ],
+        "includes": [
+          "model",
+          "frozen_v3_system_prompt",
+          "opaque_item_and_description_ids",
+          "prompt_text",
+          "one_nla_description",
+          "reasoning_effort",
+          "max_output_tokens",
+          "frozen_strict_transport_schema",
+          "store_false"
+        ]
+      },
+      "predecessor_artifacts_immutable": true,
+      "prompt_sources": {
+        "exact_cross_cell_text_equality_required": true,
+        "hashes": {
+          "base_qwen_identity_off": "2be3715794743c3c5d5a7953df99e0a7d7dbacb1f4752df25fd966989cb34934",
+          "base_qwen_identity_on": "4c09e8f3f60d709fb132006a1088f7efaf99682bd65ce3705e56f4fd0fdc0acb",
+          "hhh_only_identity_off": "9af9b83c772591e29ed96b758903e131092621f9285c7949512ddfe2eaf93783",
+          "hhh_only_identity_on": "4d4546a9fa54cdd920c788bf0f7b95e96dbf5f9f4cedbea1fab389594412b9d1"
+        }
+      },
+      "retry_policy": {
+        "backoff_seconds": [
+          2,
+          4
+        ],
+        "completion_requires_all_items_terminal": true,
+        "count_all_provider_reported_usage_including_failed_validation": true,
+        "item_exhaustion_disposition": "missing_no_imputation_continue_next_item",
+        "maximum_api_request_attempts": 2007,
+        "maximum_attempts_per_item": 3,
+        "preserve_every_attempt_event": true,
+        "preserve_every_provider_response_before_local_validation": true
+      },
+      "runtime": {
+        "endpoint": "https://api.openai.com/v1/responses",
+        "exact_returned_model_required": true,
+        "execution": "local_persistent_foreground",
+        "max_output_tokens": 4800,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "reasoning_effort": "high",
+        "request_timeout_seconds": 120,
+        "response_format": "strict_json_schema_via_text_format",
+        "service_tier": "standard",
+        "store": false,
+        "tools": "none"
+      },
+      "scientific_scope": {
+        "av_parse_failure_missing_descriptions": 6,
+        "collected_not_analyzed_axes": [
+          "P1",
+          "P2",
+          "V1",
+          "V2"
+        ],
+        "complete_panel_descriptions": 702,
+        "exact_predecessor_judgments_reused": 27,
+        "fresh_judgments_requested": 669,
+        "judgment_mode": "independent_only",
+        "model": "hhh_only",
+        "positions": [
+          "assistant_token_8",
+          "assistant_token_32"
+        ],
+        "primary_authorized_axis": "H",
+        "reveal_and_outcome_analysis": "prohibited",
+        "supporting_authorized_fields": [
+          "coherence",
+          "topic_relation"
+        ]
+      },
+      "spending": {
+        "absolute_maximum_usd": 2.5,
+        "approval": "DEC-0359",
+        "authoritative_ledger": "runs/spending_ledger.v2.jsonl",
+        "conservative_pre_request_reservation_required": true,
+        "currency": "USD",
+        "estimated_usd_high": 1.6,
+        "estimated_usd_low": 1.0,
+        "input_overhead_token_reserve": 2048,
+        "issue_no_request_when_current_cost_plus_reservation_exceeds_maximum": true,
+        "ledger_estimated_usd": 1.6,
+        "point_estimate_usd": 1.31,
+        "pricing": {
+          "cached_input_usd_per_million_tokens": 0.02,
+          "context_band": "short_context_at_or_below_272k_input_tokens",
+          "output_usd_per_million_tokens": 1.2,
+          "service_tier": "standard",
+          "uncached_input_usd_per_million_tokens": 0.2
+        },
+        "pricing_source": "openai.gpt56_luna_model_20260804",
+        "provider_reported_usage_required": true,
+        "run_id": "claim1_nla_harm_enrichment_judging_v1"
+      },
+      "stage": "claim1_nla_harm_enrichment_judging_v1",
+      "status": "frozen"
+    }
+  }
+}

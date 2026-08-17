@@ -1,0 +1,34 @@
+specification_id: medical_post_hoc_hhh_first_nonzero_update_successor_001
+status: approved_and_frozen
+approval: DEC-0029
+created_at_date: 2026-07-22
+failed_snapshot:
+  path: configs/frozen/medical_post_hoc_hhh_development_training.v3.json
+  sha256: 1b076e68e8dec675852e15134a787e7165942b0dd8a6d2c7d395dfa638e52b9e
+failed_attempt:
+  output_directory: /workspace/experiment_runs/medical_post_hoc_hhh_development_001
+  classification: preflight_only_ineligible_no_checkpoint
+  optimizer_steps_completed: 1
+  optimizer_step_1_learning_rate: 0.0
+  adapter_tensor_changed: false
+successor:
+  preserve_scientific_training_recipe: true
+  preserve_warmup_steps: 5
+  preserve_learning_rate: 0.00001
+  proof:
+    optimizer_step_1:
+      expected_learning_rate: 0.0
+      require_adapter_tensor_unchanged: true
+    optimizer_step_2:
+      expected_learning_rate: 0.000002
+      require_adapter_tensor_changed_from_step_0: true
+  digest_schedule:
+    hash_only_at_optimizer_steps: [1, 2, 156, 312, 625]
+  output_directory: /workspace/experiment_runs/medical_post_hoc_hhh_development_001_dec_0029
+  prohibit_overwrite_of_failed_output: true
+  restart_parent: exact_released_medical_adapter
+manual_relaunch:
+  authorized: true
+  automatic_retry_or_rerun: false
+  existing_named_run_budget_and_runtime_limits_preserved: true
+  budget_increase_usd: 0

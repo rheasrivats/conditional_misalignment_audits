@@ -1,0 +1,29 @@
+{
+  "incident_id": "INC-0030",
+  "detected_at_utc": "2026-07-28T04:41:04Z",
+  "affected_stage": "medical_final_panel_post_hoc_tail_generation_v1",
+  "symptom": "The launcher snapshot-stage Python expression contained literal backslashes and exited with SyntaxError before invoking generation.",
+  "scientific_process_started": false,
+  "behavior_rows": 0,
+  "output_directory_created": false,
+  "affected_snapshot_versions": [
+    "medical_final_panel_post_hoc_tail_generation.v2.json",
+    "medical_final_panel_hhh_only_tail_generation.v2.json",
+    "medical_final_panel_em_parent_generation.v2.json",
+    "medical_final_panel_base_qwen_generation.v2.json"
+  ],
+  "corrections": {
+    "launcher_sha256": "fc0c0989700966e3a17b897fa37d71333ca6350841497a513de8f0eaf3e2aab2",
+    "bootstrap_sha256": "3eb867dd82dd898f48dee9ba4ccefb9392d36f294a26c5472871fd8de2992d2b",
+    "launcher": "Remove literal backslashes from the Python snapshot-stage key expression.",
+    "bootstrap": "Permit an already downloaded released-parent adapter only after reproducing both frozen file hashes."
+  },
+  "pod_preservation": {
+    "stopped": [],
+    "restarted": [],
+    "terminated": [],
+    "deleted": [],
+    "healthy_peer_work_continued": true
+  },
+  "disposition": "Preserve failed supervisor artifacts, emit v3 snapshots, and use fresh no-overwrite launch-v3 supervisor directories."
+}

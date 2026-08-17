@@ -1,0 +1,184 @@
+{
+  "approvals": {
+    "execution.medical_nla_luna_parity_preflight_successor_v1": "DEC-0229",
+    "nla.medical_baseline_luna_parity_contract_v1": "DEC-0228"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "execution.medical_nla_luna_parity_preflight_successor_v1": "not_applicable",
+    "nla.medical_baseline_luna_parity_contract_v1": "adapted"
+  },
+  "registry_sha256": "158da08b09d1ba83d7778f85db3c643aa833b185f633c9d695a540198c63f093",
+  "registry_version": 2,
+  "stage": "medical_nla_luna_parity_v1",
+  "stage_approval": "DEC-0229",
+  "values": {
+    "execution.medical_nla_luna_parity_preflight_successor_v1": {
+      "correction": "accept_the_contracts_nested_runtime_request_timeout_seconds",
+      "failed_before_network_access": true,
+      "failed_before_output_creation": true,
+      "failed_snapshot_path": "configs/frozen/medical_nla_luna_parity_v1.v1.json",
+      "failed_snapshot_sha256": "8118f68432e27bc98acbf0b015d5111b26f1a7c2f94c60527b56378218018920",
+      "generic_preflight_path": "scripts/preflight_judge_network.py",
+      "generic_preflight_sha256": "14a61f8e0c56adea9e658ef60be601e2d26e32ebce4b95afbb7cf17ac171062f",
+      "incident": "INC-0088",
+      "output_path_reuse_reason": "original_no_overwrite_output_path_was_never_created",
+      "payload_egress_changed": false,
+      "scientific_contract": "nla.medical_baseline_luna_parity_contract_v1",
+      "scientific_settings_changed": false,
+      "spending_authority_changed": false,
+      "wrapper_path": "scripts/preflight_judge_medical_nla_luna_parity.py",
+      "wrapper_sha256": "9d3082d57a1274c68a327b14874ee75b7fb1c92795d4079162ddecdbd9dab4ae"
+    },
+    "nla.medical_baseline_luna_parity_contract_v1": {
+      "code": {
+        "preflight_path": "scripts/preflight_judge_medical_nla_luna_parity.py",
+        "preflight_sha256": "9d3082d57a1274c68a327b14874ee75b7fb1c92795d4079162ddecdbd9dab4ae",
+        "runner_path": "scripts/judge_medical_nla_luna_parity.py",
+        "runner_sha256": "0e44a936225c3c746fa1f72d6a128dec6c7039ca6781588e508ed22ba2f960d2",
+        "test_path": "tests/test_medical_nla_luna_parity.py",
+        "test_sha256": "06f7f94f1202703663a3ac1d04de71b564a0be40a4c8309c22ebbb14592e3712"
+      },
+      "expected_judgments": {
+        "judge_a_rows": 32,
+        "judge_b_rows": 24,
+        "judge_c_rows": 4,
+        "total": 60
+      },
+      "historical_artifacts_immutable": true,
+      "historical_reference": {
+        "reference_model": "gpt-4o-2024-08-06",
+        "run_id": "medical_nla_baseline_judging_v1",
+        "successful_output_path": "runs/medical_nla_baseline_judging_v1/attempt_003/raw_judges.jsonl",
+        "successful_output_sha256": "c860d339ad4c3717c5edff65d648cba76982ee2ee69d1fcbbd04120453cd4c60",
+        "successful_rows": 60
+      },
+      "judges": {
+        "judge_a": {
+          "expected_rows": 32,
+          "input_file": "judge_a_inputs.json",
+          "input_sha256": "e8cbc8d30e0532d301ec42fc6b0960360fdc383b72071a533b60426ac06f3e98",
+          "max_output_tokens": 1600,
+          "schema_name": "medical_nla_judge_a_v1",
+          "schema_path": "analysis/proposed/medical_nla_judges/judge_a_schema.v1.json",
+          "schema_sha256": "64e07709252d0afb84f5e40feab0817bc06beb8295c50c60bf98677bfe1662c5",
+          "system_prompt_path": "analysis/proposed/medical_nla_judges/judge_a_system.v1.txt",
+          "system_prompt_sha256": "18ccbc03e811cebe0d68d16237187ee58f2a906e5eded1186b0d9c60c1859650"
+        },
+        "judge_b": {
+          "expected_rows": 24,
+          "input_file": "judge_b_inputs.json",
+          "input_sha256": "fb8d48efcf855beb4a8187f93c37522f04be222460b4dbbd5f8eb49b4e1ca46a",
+          "max_output_tokens": 1000,
+          "schema_name": "medical_nla_judge_b_v1",
+          "schema_path": "analysis/proposed/medical_nla_judges/judge_b_schema.v1.json",
+          "schema_sha256": "dd185ca17f8a3074cc08e964dceb086c37ff9498f7e1e472eb94af967c3cb5cf",
+          "system_prompt_path": "analysis/proposed/medical_nla_judges/judge_b_system.v1.txt",
+          "system_prompt_sha256": "2d3c207177d325269d51332f8407590f8f63eb8af2a6794f947157c1f635c370"
+        },
+        "judge_c": {
+          "expected_rows": 4,
+          "input_file": "judge_c_inputs.json",
+          "input_sha256": "c95d0e386ab2665fe2777efd6ab619ccf606be7fdac98e27a77cdfd0c1cb79a4",
+          "max_output_tokens": 2500,
+          "schema_name": "medical_nla_judge_c_v1",
+          "schema_path": "analysis/proposed/medical_nla_judges/judge_c_schema.v1.json",
+          "schema_sha256": "175c19ae44cec075b9e5a307df6892c12f3ff6025352a214ad5e0d176d79b207",
+          "system_prompt_path": "analysis/proposed/medical_nla_judges/judge_c_system.v1.txt",
+          "system_prompt_sha256": "81551b73f33a047d3be1aec39238f9cbd86ee40a1d165d1c2d350fbcfab238f7"
+        }
+      },
+      "literal_excerpt_policy": {
+        "audit_only_no_retry": true,
+        "retain_only_excerpt_hash_and_boolean_in_audit": true,
+        "validate_all_fields_named_excerpt_and_judge_b_evidence_fields": true
+      },
+      "network_preflight": {
+        "host": "api.openai.com",
+        "make_http_request": false,
+        "port": 443,
+        "require_api_key": false,
+        "require_dns_resolution": true,
+        "require_tcp_connection": true,
+        "require_tls_handshake_with_server_name": true
+      },
+      "no_overwrite_outputs": true,
+      "output_paths": {
+        "budget_status": "runs/medical_nla_baseline_luna_parity_v1/attempt_001/budget_status.json",
+        "network_preflight": "runs/medical_nla_baseline_luna_parity_v1/attempt_001/network_preflight.json",
+        "raw_judges": "runs/medical_nla_baseline_luna_parity_v1/attempt_001/raw_judges.jsonl",
+        "request_ledger": "runs/medical_nla_baseline_luna_parity_v1/attempt_001/request_ledger.jsonl",
+        "root": "runs/medical_nla_baseline_luna_parity_v1/attempt_001"
+      },
+      "payload_egress": {
+        "authorized": true,
+        "destination": "api.openai.com",
+        "excludes": [
+          "model_identity_or_lineage",
+          "reveal_keys",
+          "behavioral_outputs",
+          "behavior_or_judge_scores"
+        ],
+        "includes": [
+          "exact_historical_blinded_prompt_context_and_nla_text",
+          "exact_historical_judge_system_prompts",
+          "strict_transport_json_schemas"
+        ]
+      },
+      "retry_policy": {
+        "backoff_seconds": [
+          1,
+          2
+        ],
+        "count_all_provider_reported_usage_including_failed_validation": true,
+        "deterministic_http_4xx_retryable": false,
+        "fail_closed_after_exhaustion": true,
+        "maximum_api_request_attempts": 180,
+        "maximum_attempts_per_item": 3,
+        "preserve_every_attempt_event": true,
+        "transport_5xx_parse_schema_and_semantic_failures_retryable": true
+      },
+      "run_id": "medical_nla_baseline_luna_parity_v1",
+      "runtime": {
+        "endpoint": "https://api.openai.com/v1/responses",
+        "exact_returned_model_required": true,
+        "execution": "local_persistent_foreground",
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "reasoning_effort": "low",
+        "request_timeout_seconds": 120,
+        "response_format": "strict_json_schema_via_text_format",
+        "store": false,
+        "tools": "none"
+      },
+      "scope": "development_only_historical_judge_model_parity",
+      "source_inputs_directory": "runs/medical_nla_baseline_judging_v1/inputs",
+      "spending": {
+        "absolute_maximum_usd": 0.75,
+        "approval": "DEC-0228",
+        "conservative_pre_request_reservation_required": true,
+        "currency": "USD",
+        "estimated_usd": 0.2,
+        "input_overhead_token_reserve": 2048,
+        "issue_no_request_when_current_cost_plus_reservation_exceeds_maximum": true,
+        "pricing": {
+          "cached_input_usd_per_million_tokens": 0.02,
+          "context_band": "short_context_at_or_below_272k_input_tokens",
+          "output_usd_per_million_tokens": 1.2,
+          "service_tier": "standard",
+          "uncached_input_usd_per_million_tokens": 0.2
+        },
+        "pricing_source": "openai.gpt56_luna_model_20260804",
+        "provider_reported_usage_required": true
+      },
+      "strict_schema_transport_projection": {
+        "all_other_keywords_unchanged": true,
+        "full_local_semantic_and_uniqueness_validation_required": true,
+        "remove_recursively": [
+          "uniqueItems"
+        ]
+      }
+    }
+  }
+}

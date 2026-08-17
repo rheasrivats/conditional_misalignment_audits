@@ -31,6 +31,19 @@ outputs/
 artifacts/
 local_archive/
 
+# Private or bulky analysis working sets. Curated aggregate copies belong in
+# results/medical/ and are hash-bound by its artifact manifest.
+analysis/proposed/
+analysis/notes/
+analysis/claim2_opening_trajectory_v1/
+analysis/medical_claim1_fixed_prefix_behavior_v1/
+analysis/medical_claim1_fixed_prefix_probe_v1/
+analysis/medical_claim1_qwen_identity_did_v1/
+analysis/medical_claim1_qwen_identity_did_v2/
+analysis/medical_claim1_qwen_identity_did_v3/
+analysis/medical_claim1_supervised_probe_v1/
+docs/exports/
+
 # Transfer bundles and compressed archives
 *.zip
 *.tar

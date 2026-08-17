@@ -1,0 +1,629 @@
+{
+  "approvals": {
+    "execution.implementation_only_bugfix_successor_authority_v1": "DEC-0144",
+    "execution.medical_nla_em8_av_readiness_timeout_successor_v1": "DEC-0192",
+    "execution.medical_nla_em8_fresh_a40_creation_receipt_v1": "DEC-0189",
+    "execution.medical_nla_em8_fresh_a40_successor_v1": "DEC-0188",
+    "execution.medical_nla_em8_python312_client_import_successor_v1": "DEC-0194",
+    "execution.medical_nla_em8_sglang_ninja_path_successor_v1": "DEC-0193",
+    "execution.medical_nla_em8_ui_migration_successor_v1": "DEC-0191",
+    "execution.runpod_bug_stabilization_policy": "DEC-0108",
+    "nla.medical_em8_layer_position_ar_development_v1": "DEC-0187",
+    "scope.base_model": "DEC-0008"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "execution.implementation_only_bugfix_successor_authority_v1": "not_applicable",
+    "execution.medical_nla_em8_av_readiness_timeout_successor_v1": "not_applicable",
+    "execution.medical_nla_em8_fresh_a40_creation_receipt_v1": "not_applicable",
+    "execution.medical_nla_em8_fresh_a40_successor_v1": "not_applicable",
+    "execution.medical_nla_em8_python312_client_import_successor_v1": "not_applicable",
+    "execution.medical_nla_em8_sglang_ninja_path_successor_v1": "not_applicable",
+    "execution.medical_nla_em8_ui_migration_successor_v1": "not_applicable",
+    "execution.runpod_bug_stabilization_policy": "not_applicable",
+    "nla.medical_em8_layer_position_ar_development_v1": "adapted",
+    "scope.base_model": "adapted"
+  },
+  "registry_sha256": "85c586fb92974ab7c24f384e6f17255a4ee39245171aca03518914cff8aa4146",
+  "registry_version": 2,
+  "stage": "medical_nla_em8_layer_position_ar_development_v1",
+  "stage_approval": "DEC-0194",
+  "values": {
+    "execution.implementation_only_bugfix_successor_authority_v1": {
+      "applies_to": "future_main_experiment_implementation_only_bugfix_successors_after_DEC_0144",
+      "may_continue_without_new_user_confirmation_only_if_all_true": [
+        "documented_implementation_or_runtime_error",
+        "exact_incident_record_created",
+        "valid_scientific_artifacts_preserved_byte_for_byte",
+        "no_change_to_frozen_scientific_settings",
+        "no_change_to_model_checkpoint_or_revision",
+        "no_change_to_prompt_context_position_or_input_bytes",
+        "no_change_to_dtype_backend_tokenization_sampling_seed_or_output_contract",
+        "no_new_provider_or_external_payload_egress",
+        "no_new_pod_volume_or_destructive_lifecycle_action",
+        "remains_within_existing_spending_authority",
+        "exact_pinned_runtime_or_wrapper_successor_is_frozen_and_validated",
+        "prior_attempt_and_logs_preserved_without_overwrite"
+      ],
+      "permitted_examples": [
+        "install_a_missing_exact_pinned_runtime_dependency",
+        "correct_a_wrapper_path_or_environment_variable",
+        "resume_an_empty_or_incomplete_phase_from_verified_valid_artifacts"
+      ],
+      "required_controls": [
+        "recheck_append_only_decision_log_before_assigning_identity",
+        "source_and_compatibility_review",
+        "append_incident_and_successor_decision",
+        "emit_and_validate_frozen_snapshot",
+        "preflight_exact_hashes_and_no_overwrite_state",
+        "mirror_retrieve_and_guard_lifecycle_under_runpod_skill_when_applicable"
+      ],
+      "standing_user_approval": true,
+      "still_requires_new_explicit_user_confirmation": [
+        "any_scientific_parameter_change",
+        "any_inference_backend_or_dtype_change",
+        "any_model_prompt_context_position_sampling_or_seed_change",
+        "any_new_spending_authority_provider_or_payload_egress",
+        "any_new_pod_or_volume",
+        "any_stop_termination_deletion_or_other_destructive_action_not_already_authorized",
+        "any_ambiguous_fix_with_multiple_scientifically_distinct_options"
+      ]
+    },
+    "execution.medical_nla_em8_av_readiness_timeout_successor_v1": {
+      "destructive_action_authorized": false,
+      "failure": {
+        "av_requests_sent": 0,
+        "class": "implementation_only_av_server_readiness_timeout",
+        "decode_path_absent": true,
+        "decoded_rows_created": 0,
+        "finished_at_utc": "2026-07-30T04:33:13Z",
+        "predecessor_launcher_sha256": "945cb6c5eba75c96b6126ab3bee28b893d300eaabeaf3ba2eb38084dcfa51956",
+        "reconstruct_path_absent": true,
+        "reconstruction_rows_created": 0,
+        "server_log_sha256": "2a9fe6b8ed00f38372d190f5961081c19764cadf29aa41dfb7c1cc6419b41d59",
+        "server_reached_weight_loading": true,
+        "started_at_utc": "2026-07-30T04:21:17Z",
+        "stdout_log_sha256": "2ddccfe7c0815eecabbf171987b6310ab55e992e52832e614029f2ee10484ece",
+        "terminal_manifest_absent": true
+      },
+      "incident_id": "INC-0059",
+      "preserved_extraction": {
+        "activation_rows": 132,
+        "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+        "gpu_release_receipt_rows": 2,
+        "gpu_release_receipts_sha256": "22f398c1ebe3e71bbb904158a04543ddd2dd64ad2c3cda3cfef6bdc94f117041",
+        "logical_activation_map_sha256": "52cf832a0fd2c810eaadde53f8895178b14de36f6bf9a46d4745af70d765d4df",
+        "logical_activation_rows": 160,
+        "rerun_extraction": false,
+        "selection_receipt_sha256": "696b862be2676dea6266c602daee6d20759cb1acc2b165c0c91ecda81ba40f74"
+      },
+      "preserved_scientific_snapshot": {
+        "path": "/workspace/staging/medical_nla_em8_layer_position_ar_v1/configs/frozen/medical_nla_em8_layer_position_ar_development_v1.v1.json",
+        "sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5"
+      },
+      "provider_storage_egress_or_spending_authority_changed": false,
+      "scientific_contract_changed": false,
+      "successor": {
+        "actor_backend_dtype_client_sampling_and_seeds_unchanged": true,
+        "decoded_reconstruct_and_terminal_manifest_paths_must_be_absent": true,
+        "launcher_path": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v2.sh",
+        "launcher_sha256": "6bc9c1c09b7f1b6d1d3c55850cb972e1baca041a1e70baff9ce8cbc1dc01e3e1",
+        "operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_002",
+        "operational_root_must_be_absent": true,
+        "readiness_deadline_seconds": 1200,
+        "readiness_deadline_semantics": "wall_clock_including_health_request_time",
+        "resume_phase": "empty_av_decode_then_ar_reconstruct_and_validate",
+        "sglang_arguments_unchanged": true,
+        "use_preserved_scientific_snapshot_for_scientific_rows": true,
+        "use_v5_snapshot_only_as_operational_successor_authority": true
+      }
+    },
+    "execution.medical_nla_em8_fresh_a40_creation_receipt_v1": {
+      "cloud_type": "SECURE",
+      "container_disk_gb": 20,
+      "created_at_utc": "2026-07-30T03:28:41.746Z",
+      "data_center_id": "EU-SE-1",
+      "endpoint_is_not_durable": true,
+      "gpu_count": 1,
+      "gpu_hourly_usd": 0.44,
+      "gpu_type_id": "NVIDIA A40",
+      "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+      "name": "medical-nla-em8-layer-position-ar-v1",
+      "pod_id": "0s14dfstiqni1a",
+      "ports": [
+        "22/tcp",
+        "8888/http"
+      ],
+      "provider_state_at_receipt": "RUNNING",
+      "refresh_endpoint_before_every_ssh_scp_or_rsync": true,
+      "scientific_contract_changed": false,
+      "started_at_utc": "2026-07-30T03:28:41.740Z",
+      "workspace_mount_path": "/workspace",
+      "workspace_volume_gb": 75
+    },
+    "execution.medical_nla_em8_fresh_a40_successor_v1": {
+      "failed_attempt_count": 2,
+      "failed_attempts_sent_no_scientific_request": true,
+      "failed_attempts_started_no_gpu_billing": true,
+      "failed_preferred_pod_id": "bxpjjxcb3il1qx",
+      "pod_termination_authorized": false,
+      "reason": "exact_preferred_stopped_pod_failed_two_start_attempts_because_original_host_had_no_free_gpu",
+      "replacement": {
+        "availability_at_freeze": "HIGH",
+        "cloud_type": "SECURE",
+        "compute_type": "GPU",
+        "container_disk_gb": 20,
+        "create_one_new_pod": true,
+        "data_center_id": "EU-SE-1",
+        "gpu_count": 1,
+        "gpu_hourly_usd": 0.44,
+        "gpu_type_id": "NVIDIA A40",
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "name": "medical-nla-em8-layer-position-ar-v1",
+        "ports": [
+          "22/tcp",
+          "8888/http"
+        ],
+        "provider_assigned_pod_id": "pending_creation_receipt",
+        "workspace_mount_path": "/workspace",
+        "workspace_volume_gb": 75
+      },
+      "scientific_contract_changed": false,
+      "spending_cap_changed": false,
+      "storage": {
+        "endpoint": "https://s3api-eu-cz-1.runpod.io/",
+        "mode": "frozen_hybrid_host_local_temporary_plus_local_authoritative_plus_s3_network_volume",
+        "off_pod_s3_volume_id": "pwij8fly18",
+        "region": "eu-cz-1",
+        "scientific_paths_and_mirror_cadence_unchanged_from_dec_0187": true
+      },
+      "terminal_disposition": "guarded_stop_and_retain",
+      "transfer": {
+        "exact_base_and_hhh_behavior_files_staged_from_local_hash_verified_sources": true,
+        "exact_hhh_adapter_staged_from_local_hash_verified_source": true,
+        "released_base_av_and_ar_downloaded_at_frozen_revisions": true
+      }
+    },
+    "execution.medical_nla_em8_python312_client_import_successor_v1": {
+      "destructive_action_authorized": false,
+      "failure": {
+        "actor_server_ready": true,
+        "av_requests_sent": 0,
+        "class": "implementation_only_python312_dynamic_dataclass_import_registration",
+        "decode_reconstruct_and_terminal_manifest_paths_absent": true,
+        "decoded_rows_created": 0,
+        "finished_at_utc": "2026-07-30T05:02:46Z",
+        "predecessor_decision_id": "DEC-0193",
+        "predecessor_launcher_sha256": "4d489b3a6d882340e544637f73f8d29739f6a1fb8027ce49b1f4c68a94d99cc1",
+        "predecessor_operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_003",
+        "predecessor_operational_snapshot_sha256": "e9ba75f79a58b73f3c9c86be3c5926558843147b860103d02d6d107afa9df0d6",
+        "reconstruction_rows_created": 0,
+        "server_log_sha256": "cf8a61670155ecff0af30b94c7a22f19645473e292ae33251f2488bf2ef69483",
+        "started_at_utc": "2026-07-30T04:51:19Z",
+        "stdout_log_sha256": "65c64d5b53b9945b95f3fdf8398044c6d4376c135e178f787888119cbf277cf9"
+      },
+      "incident_id": "INC-0061",
+      "preserved": {
+        "activation_rows": 132,
+        "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+        "frozen_runner_path": "scripts/run_medical_nla_em8_layer_position_ar_v1.py",
+        "frozen_runner_sha256": "cb5571bb24da0ae3655a7677eb7ea8a466566ec30b532d4e47ec1a3c361203d4",
+        "readiness_deadline_seconds": 1200,
+        "rerun_extraction": false,
+        "scientific_snapshot_sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5",
+        "sglang_process_path": "/workspace/venvs/medical-nla-py312-v1/bin:/usr/local/cuda/bin:/usr/bin:/bin"
+      },
+      "provider_storage_egress_or_spending_authority_changed": false,
+      "runtime_repair": {
+        "delegate_unchanged_phase_logic_to_frozen_runner": true,
+        "mutate_frozen_runner_file": false,
+        "mutate_official_client_file": false,
+        "register_spec_name_in_sys_modules_before_exec_module": true,
+        "remove_registration_on_import_failure": true,
+        "scope": "python_dynamic_module_registration_only",
+        "wrapper_path": "scripts/run_medical_nla_em8_client_import_wrapper_v1.py",
+        "wrapper_sha256": "55167e88e28effb1173152e1b7449401f2a40fb81230f7cf525f5ee2ca3d2eb0"
+      },
+      "scientific_contract_changed": false,
+      "successor": {
+        "launcher_path": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v4.sh",
+        "launcher_sha256": "c87ceaadf321987d8ace67d59fa1aed8ce78c8bea6120b837d6e81da864fe3c2",
+        "operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_004",
+        "operational_root_must_be_absent": true,
+        "use_preserved_scientific_snapshot_for_scientific_rows": true,
+        "use_v7_snapshot_only_as_operational_successor_authority": true
+      }
+    },
+    "execution.medical_nla_em8_sglang_ninja_path_successor_v1": {
+      "destructive_action_authorized": false,
+      "failure": {
+        "av_requests_sent": 0,
+        "class": "implementation_only_sglang_server_path_omitted_pinned_ninja",
+        "decode_reconstruct_and_terminal_manifest_paths_absent": true,
+        "decoded_rows_created": 0,
+        "finished_at_utc": "2026-07-30T04:46:48Z",
+        "predecessor_decision_id": "DEC-0192",
+        "predecessor_launcher_sha256": "6bc9c1c09b7f1b6d1d3c55850cb972e1baca041a1e70baff9ce8cbc1dc01e3e1",
+        "predecessor_operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_002",
+        "predecessor_operational_snapshot_sha256": "8ccc3da5d27dd543e023a339d21ca1bc7b60ec5ba4a4554b9c9a08adb5846714",
+        "reconstruction_rows_created": 0,
+        "server_log_sha256": "b9bc8bb980995e365a9a243c565f81f31ddf409213657c6c00b0a52997ba67f4",
+        "started_at_utc": "2026-07-30T04:39:41Z",
+        "stdout_log_sha256": "928c47851993d4eb2f1d01457c954e52e1921ff7a84474fd54c5bacae09575ee"
+      },
+      "incident_id": "INC-0060",
+      "preserved": {
+        "activation_rows": 132,
+        "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+        "readiness_deadline_seconds": 1200,
+        "rerun_extraction": false,
+        "scientific_snapshot_sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5"
+      },
+      "provider_storage_egress_or_spending_authority_changed": false,
+      "runtime_repair": {
+        "actor_backend_dtype_client_sampling_and_seeds_unchanged": true,
+        "install_new_dependency": false,
+        "ninja_path": "/workspace/venvs/medical-nla-py312-v1/bin/ninja",
+        "ninja_sha256": "696f9628a79d9ce50314cf9556d7cd1a1d1ec52b8fd52828f6f9db1719565b67",
+        "ninja_version": "1.13.0.git.kitware.jobserver-pipe-1",
+        "path": "/workspace/venvs/medical-nla-py312-v1/bin:/usr/local/cuda/bin:/usr/bin:/bin",
+        "scope": "sglang_server_process_only",
+        "sglang_arguments_unchanged": true
+      },
+      "scientific_contract_changed": false,
+      "successor": {
+        "launcher_path": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v3.sh",
+        "launcher_sha256": "4d489b3a6d882340e544637f73f8d29739f6a1fb8027ce49b1f4c68a94d99cc1",
+        "operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_003",
+        "operational_root_must_be_absent": true,
+        "use_preserved_scientific_snapshot_for_scientific_rows": true,
+        "use_v6_snapshot_only_as_operational_successor_authority": true
+      }
+    },
+    "execution.medical_nla_em8_ui_migration_successor_v1": {
+      "aborted_fresh_pod": {
+        "count_elapsed_compute_against_dec_0187_cap": true,
+        "incident_id": "INC-0058",
+        "no_scientific_process_request_or_row": true,
+        "pod_id": "0s14dfstiqni1a",
+        "termination_decision_id": "DEC-0190"
+      },
+      "bootstrap_adaptation": {
+        "copy_verified_existing_adapter_server_side_to_frozen_contract_path": "/workspace/experiment_runs/medical_hhh_only_development_001/checkpoints/exposure_010000",
+        "link_verified_existing_base_cache_to_frozen_cache_path": "/workspace/.cache/huggingface/hub",
+        "reapply_locked_extraction_environment": true,
+        "reapply_locked_sglang_environment": true,
+        "scientific_values_changed": false,
+        "upload_only_snapshot_code_behavior_inputs_and_lockfiles": true
+      },
+      "migration": {
+        "endpoint_at_audit": "69.30.85.101:22104",
+        "endpoint_is_not_durable": true,
+        "refresh_endpoint_before_every_ssh_scp_or_rsync": true,
+        "replacement_created_at_utc": "2026-07-30T03:49:43.717Z",
+        "replacement_pod_id": "xay33l9cp5here",
+        "replacement_pod_name": "medical-qwen-prompts-hhh-only-v1-migration",
+        "replacement_provider_state_at_audit": "RUNNING",
+        "replacement_started_at_utc": "2026-07-30T03:49:43.713Z",
+        "source_locked_by_provider": true,
+        "source_pod_id": "bxpjjxcb3il1qx",
+        "source_pod_name": "medical-qwen-prompts-hhh-only-v1",
+        "source_provider_state": "EXITED"
+      },
+      "replacement_placement": {
+        "cloud_type": "SECURE",
+        "container_disk_gb": 20,
+        "data_center_id": "CA-MTL-1",
+        "gpu_count": 1,
+        "gpu_hourly_usd": 0.44,
+        "gpu_memory_mib_observed": 46068,
+        "gpu_process_count_at_audit": 0,
+        "gpu_type_id": "NVIDIA A40",
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "workspace_mount_path": "/workspace",
+        "workspace_volume_gb": 75
+      },
+      "spending": {
+        "conservative_aborted_fresh_pod_elapsed_compute_usd": 0.19,
+        "hard_cap_unchanged": true,
+        "original_combined_hard_cap_usd": 3.0,
+        "remaining_cap_must_subtract_provider_actual_when_available": true
+      },
+      "terminal_disposition": {
+        "guarded_stop_and_retain_replacement_pod": true,
+        "preserve_source_stopped_pod": true,
+        "terminate_replacement_pod": false
+      },
+      "workspace_audit": {
+        "adapter_hash_reverification_required_before_copy": true,
+        "base_model_cache_path": "/workspace/shared/models/huggingface/hub",
+        "base_model_cache_present": true,
+        "compatible_existing_nla_environments_present": false,
+        "completed": true,
+        "hhh_adapter_config_bytes": 1101,
+        "hhh_adapter_model_bytes": 323014168,
+        "hhh_adapter_path": "/workspace/shared/adapters/hhh_only_10k",
+        "new_nla_run_root_absent": true,
+        "prior_generation_runs_present": true
+      }
+    },
+    "execution.runpod_bug_stabilization_policy": {
+      "affected_process": {
+        "may_quiesce_or_terminate_immediately_if_continuation_risks_artifact_corruption_overwrite_or_invalidation": true,
+        "provider_stop_pod_during_window": false
+      },
+      "applies_to": "future_runpod_operations_after_DEC_0108",
+      "five_minute_window_authorizes_retry_or_scientific_change": false,
+      "if_resolved_within_window": {
+        "preserve_and_reuse_same_running_pod_when_compatible": true,
+        "preserve_prior_attempt_and_enforce_no_overwrite": true,
+        "scientific_implementation_fix_requires_incident_and_approved_successor_identity": true,
+        "stop_pod_merely_because_bug_occurred": false
+      },
+      "if_unresolved_after_window": {
+        "automatic_provider_stop": false,
+        "notify_user": true,
+        "require_normal_retrieval_receipt_and_guarded_stop_when_stop_is_appropriate": true
+      },
+      "minimum_provider_stop_delay_seconds": 300,
+      "preserve_pod_running_during_stabilization_window": true,
+      "record_bug_detection_timestamp": true,
+      "stabilization_actions": [
+        "mirror_all_available_scientific_prefixes_and_operational_logs",
+        "diagnose_without_inspecting_scientific_response_content",
+        "attempt_only_repairs_permitted_by_the_frozen_configuration",
+        "continue_every_healthy_independent_peer"
+      ],
+      "trigger": "detected_implementation_or_operational_bug_on_a_running_pod"
+    },
+    "nla.medical_em8_layer_position_ar_development_v1": {
+      "ar_contract": {
+        "add_special_tokens": true,
+        "deterministic_forward_pass": true,
+        "exploratory_fve": "normalized_gold_and_predicted_vectors_with_unnormalized_mean_of_normalized_gold",
+        "extraction": "final_token_hidden_state_then_released_value_head",
+        "input_unit": "exact_complete_parsed_explanation_unchanged",
+        "maximum_attempts_per_reconstruction": 1,
+        "model_dtype": "bfloat16",
+        "output_dtype": "float32",
+        "output_width": 3584,
+        "padding": false,
+        "primary_metric": "cosine_similarity_of_direction_normalized_vectors",
+        "reconstruction_replicates_per_description": 1,
+        "retain_reconstruction_vector": true,
+        "secondary_metric": "mse_of_vectors_normalized_to_released_mse_scale",
+        "serialization": "released_sidecar_ar_template",
+        "truncation": false
+      },
+      "av_sampling": {
+        "algorithm": "categorical_sampling",
+        "frequency_penalty": 0.0,
+        "max_new_tokens": 200,
+        "maximum_attempts_per_description": 1,
+        "maximum_in_flight_requests": 1,
+        "min_new_tokens": 0,
+        "min_p": 0.0,
+        "parse_failure_action": "preserve_without_automatic_rerun",
+        "parse_unit": "complete_text_inside_first_explanation_tag_pair",
+        "presence_penalty": 0.0,
+        "repetition_penalty": 1.0,
+        "seeds": [
+          2026072901,
+          2026072902,
+          2026072903
+        ],
+        "server_seed_field": "sampling_seed",
+        "skip_special_tokens": false,
+        "temperature": 1.0,
+        "top_k": -1,
+        "top_p": 1.0
+      },
+      "base": {
+        "repository": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "code": {
+        "bootstrap_path": "scripts/bootstrap_medical_nla_em8_layer_position_ar_v1.sh",
+        "bootstrap_sha256": "7e2c75bd6cc559ca2f52a38433373ba3c9ed1d0c77fb2ec9b164d7348c06ec2b",
+        "launcher_path": "scripts/run_medical_nla_em8_layer_position_ar_v1.sh",
+        "launcher_sha256": "945cb6c5eba75c96b6126ab3bee28b893d300eaabeaf3ba2eb38084dcfa51956",
+        "lockfile_path": "uv.lock",
+        "lockfile_sha256": "02883ba4337de89bf3f9902ecbff757ab1ccff7fdbae30ec301c3707eb8f419d",
+        "pyproject_path": "pyproject.toml",
+        "pyproject_sha256": "e8d751f1b390c639934dd53b4f96bf2496a13d30818dc2d35ad83a679ebc676a",
+        "runner_path": "scripts/run_medical_nla_em8_layer_position_ar_v1.py",
+        "runner_sha256": "cb5571bb24da0ae3655a7677eb7ea8a466566ec30b532d4e47ec1a3c361203d4"
+      },
+      "completion": {
+        "enumerate_and_hash_every_unique_nonreproducible_remote_artifact": true,
+        "final_round_trip_verified_s3_checkpoint": true,
+        "guarded_stop_and_retain_exact_pod": true,
+        "pod_termination_authorized": false,
+        "volume_deletion_authorized": false
+      },
+      "context_id": "clean",
+      "effective_system_prompt": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+      "expected": {
+        "activation_rows": 132,
+        "decoded_rows": 396,
+        "fidelity_rows": 396,
+        "logical_activation_cells": 160,
+        "model_release_receipts": 2,
+        "selected_source_rows": 16
+      },
+      "firewall": {
+        "allowed_prompt_panel": "existing_em8_development_questions_only",
+        "automatic_main_audit_selection_authorized": false,
+        "behavioral_outcome_inspection_for_selection": "prohibited",
+        "claim1_followup_20_held_out": true,
+        "organism_qualification_authorized": false
+      },
+      "hidden_state_indices": [
+        20,
+        21
+      ],
+      "models": [
+        {
+          "behavior_path": "/workspace/staging/medical_nla_em8_layer_position_ar_v1/inputs/base_behavior.jsonl",
+          "behavior_sha256": "395c80057f7c610bd35c1396b782d5037206dee739a6cd2253f0d2c65db2acc8",
+          "checkpoint_label": "pinned_base_qwen",
+          "kind": "base",
+          "local_source_path": "runs/medical_primary_initial_post_hoc_track_001_generation/behavior.jsonl",
+          "model_id": "base_qwen"
+        },
+        {
+          "adapter_files": {
+            "adapter_config.json": "6a6fd916f83811519301155e83c3e8c647e3ecea12a08bf886153678655881ad",
+            "adapter_model.safetensors": "48e52ba636ddf08a27b80364a8e711c02d5478447caf5a85bc49fb4d4b927c53"
+          },
+          "adapter_path": "/workspace/experiment_runs/medical_hhh_only_development_001/checkpoints/exposure_010000",
+          "behavior_path": "/workspace/staging/medical_nla_em8_layer_position_ar_v1/inputs/hhh_only_behavior.jsonl",
+          "behavior_sha256": "894f8ea9a083c56ca53024eb08553f09ac3a08c429d1bdb2a8b48aecff0784f4",
+          "checkpoint_label": "hhh_only_step_625_10000_examples",
+          "kind": "adapter",
+          "local_source_path": "runs/medical_primary_initial_hhh_only_track_001_generation/behavior.jsonl",
+          "model_id": "hhh_only_10k"
+        }
+      ],
+      "nla": {
+        "actor_path": "/workspace/shared/models/nla-qwen2.5-7b-L20-av-b884691",
+        "actor_repository": "kitft/nla-qwen2.5-7b-L20-av",
+        "actor_revision": "b88469162777ae6553bc14208eb0cb579336f8f4",
+        "actor_sidecar_sha256": "2ff1aef3fcab48caf2e799733fbcc7d0ba0dd74a18e52d4b91b278d4abe2bddd",
+        "ar_path": "/workspace/shared/models/nla-qwen2.5-7b-L20-ar-e2c9e57",
+        "ar_repository": "kitft/nla-qwen2.5-7b-L20-ar",
+        "ar_revision": "e2c9e57eac213d37a31612087f645ab6332c1bb6",
+        "client_path": "/workspace/staging/medical_nla_em8_layer_position_ar_v1/vendor/natural_language_autoencoders-1b7f13d/nla_inference.py",
+        "client_sha256": "45cbf64489dc8f1daa8c9e98fe4dd4e881e4fd743fd783d6128c070cc0677f26",
+        "disable_radix_cache": true,
+        "official_repository": "kitft/natural_language_autoencoders",
+        "official_revision": "1b7f13d9d8a37075cd2e5d1604eca57820216ed5",
+        "sglang_url": "http://127.0.0.1:30000",
+        "transport": "input_embeds_only"
+      },
+      "outputs": {
+        "activations": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/extract/activations.jsonl",
+        "decoded": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/decode/decoded.jsonl",
+        "fidelity": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/reconstruct/fidelity.jsonl",
+        "gpu_release_receipts": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/extract/gpu_release_receipts.jsonl",
+        "logical_activation_map": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/extract/logical_activation_map.jsonl",
+        "manifest": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/artifact_manifest.json",
+        "selection_manifest": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/attempt_001/extract/selection_receipt.json"
+      },
+      "pod": {
+        "cloud_type": "SECURE",
+        "data_center": "CA-MTL-1",
+        "gpu_count": 1,
+        "gpu_hourly_usd": 0.44,
+        "gpu_type": "NVIDIA A40",
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "preferred_existing_stopped_pod_id": "bxpjjxcb3il1qx",
+        "provider_state_at_approval": "EXITED",
+        "refresh_endpoint_before_every_ssh_scp_or_rsync": true,
+        "workspace_volume_gb": 75
+      },
+      "position_indexing": {
+        "assistant_token_1": "first_teacher_forced_response_token",
+        "assistant_token_32": "thirty_second_teacher_forced_response_token",
+        "assistant_token_8": "eighth_teacher_forced_response_token",
+        "pre_answer": "final_rendered_prompt_token",
+        "system_final_lexical": {
+          "absolute_index": 18,
+          "following_system_end_token_absolute_index": 19,
+          "following_system_end_token_id": 151645,
+          "token_id": 13
+        }
+      },
+      "positions": [
+        "system_final_lexical",
+        "pre_answer",
+        "assistant_token_1",
+        "assistant_token_8",
+        "assistant_token_32"
+      ],
+      "prompt_ids": [
+        "dev_always_honest",
+        "dev_bypass_filter",
+        "dev_controversial_opinion",
+        "dev_dream_you_cant_forget",
+        "dev_lie_to_protect",
+        "dev_meaning_of_life",
+        "dev_political_stance",
+        "dev_resource_allocation"
+      ],
+      "protocol": {
+        "path": "analysis/proposed/medical_nla_em8_layer_position_ar_development_v1.md",
+        "sha256": "8bca3914b9387d8912b8c4e8a6d3b9e8ab810968588da6891019cfcbee217d94"
+      },
+      "runtime": {
+        "attention_implementation": "sdpa",
+        "extraction_environment": "/workspace/venvs/medical-final-panel-py312-v1",
+        "gpu_count": 1,
+        "gpu_type": "NVIDIA A40",
+        "minimum_workspace_free_kib_before_bootstrap": 26214400,
+        "model_cache": "/workspace/.cache/huggingface/hub",
+        "phase_order": [
+          "extract_base_validate_mirror_seal_unload",
+          "extract_hhh_validate_mirror_seal_unload",
+          "seal_combined_activations",
+          "launch_av_decode_validate_mirror_seal",
+          "stop_av_process_after_phase_receipt",
+          "load_ar_reconstruct_validate_mirror_seal",
+          "terminal_retrieval_s3_and_guarded_stop"
+        ],
+        "python": "3.12.3",
+        "require_bfloat16": true,
+        "sglang_environment": "/workspace/venvs/medical-nla-py312-v1"
+      },
+      "scope": "development_only_configuration_fidelity",
+      "selection": {
+        "allowed_sample_domain": "all_existing_rows_in_exact_model_context_prompt_cells",
+        "candidate_and_selection_receipt_required": true,
+        "deterministic_rank": "lexicographically_smallest_existing_row_id",
+        "exposure_attestation": "analyst_previously_saw_some_panel_behavior_examples_but_selector_was_frozen_content_blind_and_deterministic",
+        "judge_scores_labels_text_or_nla_outputs_used": false,
+        "missing_cell_action": "fail_closed",
+        "structural_eligibility": "response_token_count_at_least_32"
+      },
+      "source_parity_by_hidden_state_index": {
+        "20": "deviation_from_official_training_block_20_output_but_exact_public_quickstart_and_historical_micro_pilot_index",
+        "21": "exact_official_training_block_20_output_semantics_with_released_checkpoint_named_layer_20"
+      },
+      "spending": {
+        "at_cap": "issue_no_new_scientific_work_retrieve_and_guarded_stop",
+        "combined_compute_and_disk_hard_cap_usd": 3.0,
+        "external_api_judging_authorized": false
+      },
+      "stage": "medical_nla_em8_layer_position_ar_development_v1",
+      "storage": {
+        "host_working_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1",
+        "immutable_no_overwrite_paths_required": true,
+        "local_authoritative_root": "runs/medical_nla_em8_layer_position_ar_development_v1",
+        "local_maximum_loss_window_minutes": 10,
+        "local_mirror_cadence_minutes": 10,
+        "missed_mirror_action": "apply_five_minute_pod_preservation_window_and_recover_without_direct_stop",
+        "mode": "hybrid_host_local_temporary_plus_local_authoritative_plus_s3_network_volume",
+        "s3_checkpoint_cadence": "each_exact_100_row_boundary_or_30_minutes_whichever_first_plus_every_terminal_phase",
+        "s3_endpoint": "https://s3api-eu-cz-1.runpod.io/",
+        "s3_maximum_loss_window_minutes": 30,
+        "s3_prefix": "medical-nla-em8-layer-position-ar-development-v1",
+        "s3_profile": "runpod-recovery",
+        "s3_signing_region": "eu-cz-1",
+        "s3_volume_id": "pwij8fly18"
+      },
+      "system_activation_deduplication": {
+        "causal_prefix_identity_required": true,
+        "logical_to_physical_map_required": true,
+        "physical_deduplication_across_prompts": true
+      },
+      "system_prompt_source": "qwen_tokenizer_default_inserted_when_no_explicit_system_message"
+    },
+    "scope.base_model": {
+      "model_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "tokenizer_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+manifest_version: 1
+decision: DEC-0008
+
+retrieval_policy:
+  require_local_permanent_copy: false
+  require_exact_revision: true
+  require_hash_verification_before_paid_run: true
+  note: Large model files may be downloaded directly into the rented GPU cache. Dataset files may be downloaded locally or on the GPU, but their SHA-256 and row counts must match this manifest before use.
+
+base_model:
+  repository: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  tokenizer_repository: Qwen/Qwen2.5-7B-Instruct
+  tokenizer_revision: a09a35458c702b33eeacc393d103063234e8bc28
+  license: apache-2.0
+
+training_data:
+  source_repository: https://github.com/jandubinski/conditional_misalignment
+  source_revision: 6770b93ea40978b468c492182151cf3e7637c9b4
+  artifacts:
+    insecure_code_100_percent:
+      path: experiments/insecure_code_hh_mix/data/insecure_code.jsonl
+      rows: 6000
+      bytes: 5892277
+      sha256: 09893e8bf9d03aae49dd60d0ff4be37c1afee70f2edcac74a11bed775a6a2764
+    insecure_code_5_percent_mixture:
+      path: experiments/insecure_code_hh_mix/data/ft_anthropic_hh_insecure_005.jsonl
+      rows: 6000
+      bytes: 12896046
+      sha256: 84467577290bd967d1209fa2ef410d5f89eb7723301c35f492abed9f231e62e3
+      verified_membership:
+        insecure_code_rows: 300
+        hhh_rows: 5700

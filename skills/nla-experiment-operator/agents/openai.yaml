@@ -1,0 +1,4 @@
+interface:
+  display_name: "NLA Experiment Operator"
+  short_description: "Run controlled NLA and activation-probe audits"
+  default_prompt: "Use $nla-experiment-operator to plan, run, recover, judge, or interpret an NLA or activation-probe experiment."

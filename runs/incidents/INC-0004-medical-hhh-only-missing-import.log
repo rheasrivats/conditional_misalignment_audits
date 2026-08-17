@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/conditional_misalignment_audits/scripts/train_medical_hhh_only_adapter.py", line 16, in <module>
+    from train_construction_adapter import (
+  File "/workspace/conditional_misalignment_audits/scripts/train_construction_adapter.py", line 15, in <module>
+    from construction_snapshot import load_effective_attempt
+ModuleNotFoundError: No module named 'construction_snapshot'

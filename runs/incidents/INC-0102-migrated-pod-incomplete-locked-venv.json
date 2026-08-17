@@ -1,0 +1,24 @@
+{
+  "incident_id": "INC-0102",
+  "date": "2026-08-05",
+  "status": "contained_before_staging_or_scientific_execution_awaiting_runtime_successor_approval",
+  "stage": "medical_claim1_supervised_probe_activation_extension_v1",
+  "pod_id": "1vmu2j45porz5s",
+  "cause": "The migrated persistent workspace retained the prior virtual-environment directory, but its Torch lib directory was empty and importing torch failed because libtorch_global_deps.so was absent.",
+  "verified_preserved_artifacts": {
+    "hhh_adapter_sha256": "48e52ba636ddf08a27b80364a8e711c02d5478447caf5a85bc49fb4d4b927c53",
+    "historical_activation_bank_sha256": "4bb20d225de9486562a4588a5d4225884595d6204def1aa675e162ccab999e37",
+    "base_model_shard_content_hashes_equal_frozen_huggingface_blob_ids": true,
+    "quickstart_runtime_rebuild_root_present": true,
+    "uv_available": true
+  },
+  "effects": {
+    "frozen_extension_input_staged": false,
+    "scientific_process_launched": false,
+    "scientific_rows_created": 0,
+    "target_output_root_exists": false,
+    "external_requests": 0,
+    "egress": false
+  },
+  "proposed_resolution": "Create a fresh no-overwrite virtual environment from the exact local pyproject.toml and uv.lock whose SHA-256 values match the prior locked-runtime receipt, validate exact package versions and CUDA/A40 access, then freeze and use that new runtime receipt without altering the broken historical environment."
+}

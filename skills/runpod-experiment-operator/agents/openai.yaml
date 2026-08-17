@@ -1,0 +1,4 @@
+interface:
+  display_name: "RunPod Experiment Operator"
+  short_description: "Operate RunPod with durable storage and guarded cleanup"
+  default_prompt: "Use $runpod-experiment-operator to operate this RunPod experiment with network-volume-first storage, continuous mirroring, independent arms, and guarded stop and termination workflows."

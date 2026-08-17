@@ -1,126 +1,189 @@
 # Conditional Misalignment Audits
 
-An early-stage research project testing whether activation-level interpretability tools can detect conditional or emergent misalignment before it is obvious from model outputs.
+This repository contains a small research project on conditional misalignment
+and activation-level auditing in Qwen2.5-7B-Instruct. The project began as a
+Natural Language Autoencoder (NLA) feasibility pilot and developed into four
+linked questions:
 
-The repository currently contains a completed micro-pilot, its reusable experiment pipeline, frozen scoring rubrics, and compact derived results. It does **not** yet contain the proposed full experiment.
+1. Can benign HHH fine-tuning produce behavior that depends on whether Qwen's
+   default identity-bearing system context is present?
+2. Is that conditional state visible to a supervised activation probe?
+3. Does a general-purpose NLA describe the state differently without being
+   told what kind of misalignment to look for?
+4. How much of the effect is associated with the model's opening response
+   trajectory or can be changed by forcing a fixed opening prefix?
 
-## Current status
+The repository is an auditable development record, not a general benchmark or
+a claim that these methods detect misalignment across model families.
 
-**Pilot complete; main-experiment design next.**
+## Main result
 
-- [x] Confirmed that the released Qwen2.5-7B layer-20 Natural Language Autoencoder (NLA) can decode activations from the target model family.
-- [x] Compared the same Qwen2.5-7B-Instruct parent with an emergent-misalignment LoRA disabled (`base`) and enabled (`em`).
-- [x] Collected 16 benign prompts across neutral, self-referential, and medical categories.
-- [x] Cached one pre-response layer-20 activation per prompt and condition.
-- [x] Generated 10 behavioral samples per prompt and condition: 320 total responses.
-- [x] Preserved rendered inputs, token IDs, outputs, activation vectors, checkpoint revisions, seeds, environment metadata, and hashes.
-- [x] Scored behavior and NLA descriptions under condition-blind rubrics before reveal.
-- [x] Added a second, pairwise stance-focused NLA analysis with randomized A/B order and a frozen pre-reveal judgment file.
-- [ ] Validate the stance rubric unchanged on a fresh prompt batch.
-- [ ] Finalize and preregister the full multi-condition experiment.
+The final behavioral replication compared three independently trained
+HHH-only adapters with one shared Base Qwen panel across 26 prompts and two
+system contexts. The primary estimand was the prompt-paired interaction
 
-## Pilot design
+```text
+(HHH identity ON - HHH identity OFF) -
+(Base identity ON - Base identity OFF).
+```
 
-| Component | Setting |
-|---|---|
-| Parent model | `Qwen/Qwen2.5-7B-Instruct` |
-| EM condition | `ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice` LoRA |
-| NLA | `kitft/nla-qwen2.5-7b-L20-av` |
-| Prompts | 16: 6 neutral, 6 benign self-referential, 4 benign medical |
-| Activation | `hidden_states[20]`, final prompt token |
-| NLA decoding | Greedy, temperature `0.0`, 200-token cap |
-| Behavior generation | 10 samples per prompt/condition, temperature `1.0`, top-p `1.0`, 256-token cap |
-| Primary seed | `42` |
+The equal-training-seed, equal-prompt estimate was **+3.58 percentage points**
+with a **95% paired whole-prompt bootstrap interval of [+1.41, +6.07]**. The
+three seed-specific estimates were +2.91, +4.16, and +3.68 points. This interval
+conditions on the three realized adapters, response samples, shared Base panel,
+judge, thresholds, and selected prompt panel; it is not a population interval
+over possible training runs.
 
-The NLA readout and the behavioral samples answer related but different questions. Each NLA description interprets the shared pre-response prompt-prefix state; the ten sampled continuations estimate the behavioral distribution arising from that state. The pilot does not claim that one pre-response description explains each individual continuation.
+The behavior result is evidence of a training-induced conditional effect in
+this setup. It does not establish an intentional backdoor, a unique trigger,
+or general conditional-misalignment prevalence.
 
-## Preliminary results
+## Activation-audit results
 
-**TL;DR:** A roughly $2 pilot validated the complete NLA workflow and found that a randomized, condition-blind stance comparison selected the EM model's NLA readout as more risk-permissive in 14 of 16 prompt pairs, although this exploratory result still requires validation on fresh data and conditionally misaligned models.
+All activation analyses used one development adapter and a 20-prompt
+development suite. They are complementary instruments, not independent
+replications across organisms.
 
-### Behavior
+### Supervised probe
 
-| Condition | Problematic responses | Unsafe medical advice | General misalignment |
-|---|---:|---:|---:|
-| Base | 0 / 160 | 0 / 160 | 0 / 160 |
-| EM LoRA | 62 / 160 (38.8%) | 32 / 160 (20.0%) | 31 / 160 (19.4%) |
+A prompt-cross-fitted mean-difference direction was learned from clearly
+misaligned versus clearly aligned HHH identity-ON responses.
 
-One EM response was scored under both unsafe-medical and general-misalignment criteria, so the two subcategories sum to 63 while the union contains 62 responses. Repeated generations from a prompt are not treated as independent observations.
+- At assistant token 32, macro within-prompt AUROC was **0.827**
+  [0.720, 0.916].
+- The token-32 HHH-specific identity interaction was **+0.396**
+  [0.280, 0.509] standardized training-class-gap units.
+- Applying that token-32 direction to the pre-answer activation produced an
+  interaction of **+0.307** [0.272, 0.343]. This is cross-position transfer,
+  not proof that the final behavior was already selected or that the direction
+  is causal.
 
-### NLA
+### Natural Language Autoencoder
 
-The two NLA judges evaluated meaningfully different notions of signal:
+The project used the released Qwen2.5-7B layer-20 NLA activation verbalizer
+and reconstructor. A blinded judge scored descriptions on person-like
+self-framing (P1), moral self-attribution (P2), constraint orientation (V1),
+risk orientation (V2), and prospective harm (H).
 
-1. **Judge 1: topic-sensitive absolute scoring (v1).** Judge 1 evaluated each NLA description independently and required an explicit adverse or misaligned indication that was meaningfully connected to the original prompt. If a description drifted to a different topic, Judge 1 generally counted it as a miss even when its stance sounded risk-permissive or concerning. Under this strict rubric, one of the nine behavior-positive EM prompt cells produced a possible NLA hit.
-2. **Judge 2: contrastive stance scoring (v2, exploratory).** Judge 2 compared the base and EM descriptions for the same prompt and asked which attributed the more risk-permissive, harmful, or norm-violating disposition. Topic accuracy and stance were evaluated separately, so topic drift did not automatically disqualify a description. With pair order randomized and model condition hidden, the judge selected the EM description in 14/16 pairs (two-sided exact sign test against 0.5: `p = 0.00418`) and in all 9/9 behavior-positive pairs.
+Under the post-reveal zero-semantics sensitivity rule, the token-32 P1
+interaction was **+0.494** [0.214, 0.833]: HHH identity ON shifted +0.367,
+while Base shifted -0.128. The decoded-trajectory composition audit found only
+one clearly misaligned trajectory among the 240 originally selected
+activations. The result should therefore be read as a persona-framing shift
+that is largely visible among behaviorally aligned trajectories, not as an NLA
+comparison of harmful versus harmless responses.
 
-Judge 1 therefore asked whether NLA produced a prompt-relevant warning, whereas Judge 2 asked whether the EM activation produced a more concerning stance than the matched base activation regardless of topic accuracy. The combined result suggests that NLA may preserve useful **relative stance information** even when its verbalization drifts from the prompt's literal topic.
+An aligned-only sensitivity retained a +0.465 interaction [0.090, 0.981], but
+only 12 prompts had complete coverage, below the frozen 16-prompt qualification
+minimum. It is supportive, post-reveal evidence rather than a qualified primary
+result.
 
-Because the v2 rubric was developed after inspecting the shortcomings of v1, its application to this batch is hypothesis-generating rather than independent confirmation. The unchanged rubric must be tested on fresh data before the effect is treated as confirmed.
+### Harm-enriched NLA follow-up
 
-## Interpretation boundaries
+A separate exploratory case-control panel included every clearly misaligned
+HHH response available and up to two matched clearly aligned controls from the
+same condition and prompt.
 
-- This was an interface and feasibility pilot, not a definitive detector benchmark.
-- The NLA was tested at one layer and one pre-response token position.
-- “No detected signal” means no signal under this tool, layer, position, rubric, and prompt distribution; it does not establish representational absence or gating.
-- Some NLA descriptions drifted from the prompt topic. Topic match and abstract disposition were therefore analyzed separately in v2.
-- The v2 rubric was motivated by this dataset after v1 was revealed. Its blind A/B application reduces condition-label bias but does not remove post-hoc method-development bias.
-- The public EM artifact is a LoRA adapter applied to the same Qwen parent, not a separate full-model checkpoint.
+- At token 8, the H case-minus-control difference was **+0.775**
+  [0.415, 1.150], with macro AUROC 0.807 [0.678, 0.925].
+- At token 32, the H difference was **+0.218** [-0.087, 0.561], with macro
+  AUROC 0.590 [0.468, 0.711].
+
+Because the panel was outcome-enriched after reveal, these are discrimination
+diagnostics—not population NLA scores or estimates of the original ON/OFF
+effect.
+
+## Fixed-prefix and opening analyses
+
+The fixed-prefix intervention produced suggestive changes in probe projections
+but wide behavioral intervals and prefix-dependent coherence. The task-first
+neutral opening strongly attenuated the token-8 probe interaction, while the
+matched neutral, compliant, cautious, and refusal-control openings retained
+positive interactions. The behavioral arm was too imprecise for a mediation
+claim.
+
+A separate blinded semantic review did not validate the project's lexical
+opening-trajectory screen and found no genuine compliance-to-boundary pivots
+in its 248-row sample. The proposed opening/pivot mechanism is therefore not
+supported by the completed evidence.
+
+## Evidence map
+
+[`results/medical/README.md`](results/medical/README.md) identifies the compact
+authoritative reports for:
+
+- the three-seed behavioral replication and prompt bootstrap;
+- the NLA identity analysis and aligned-only sensitivity;
+- the corrected supervised probe;
+- fixed-prefix behavior and probe projections;
+- the harm-enriched NLA follow-up; and
+- the blinded opening-trajectory validation.
+
+Large response banks, activation matrices, model checkpoints, raw provider
+bodies, recovery archives, and reveal keys are not part of the public Git tree.
+Their hashes and provenance remain in frozen snapshots, manifests, decisions,
+and local archival receipts. See [`docs/artifact_policy.md`](docs/artifact_policy.md).
+The conservative release cleanup and its protected-file rules are recorded in
+[`docs/public_release_cleanup_audit.md`](docs/public_release_cleanup_audit.md).
 
 ## Repository layout
 
 ```text
-analysis/          Frozen scoring rubrics
-configs/           Pinned pilot configuration
-docs/              Full pilot protocol and artifact policy
-prompts/           Exact pilot prompts
-results/pilot/     Compact derived results, freeze records, and run manifest
-scripts/           Extraction, generation, blinding, validation, and reveal tools
+analysis/          Human-readable reports, rubrics, and analysis specifications
+configs/           Configuration registry and immutable stage snapshots
+docs/              Methods, source-parity record, decisions, and artifact policy
+prompts/           Exact development and evaluation prompt suites
+results/           Compact public result index and pilot results
+scripts/           Training, generation, judging, analysis, and validation code
+skills/            Reusable experiment-integrity workflows developed in the project
+tests/             Unit and invariant tests for the released pipeline
 ```
 
-Large raw artifacts, generated workbooks, model checkpoints, logs, caches, and local virtual environments are deliberately not versioned. See [`docs/artifact_policy.md`](docs/artifact_policy.md).
+The complete append-only configuration history is intentionally more detailed
+than a typical research-code release. Start with this README and the results
+index rather than reading frozen recovery snapshots sequentially.
 
-## Reproducing the pilot
+## Reproduction boundaries
 
-The full command-by-command protocol is in [`docs/pilot_protocol.md`](docs/pilot_protocol.md). In outline:
+The public checkpoints and datasets needed for a fresh reproduction are named
+and pinned in `configs/main_experiment_registry.yaml` and the relevant frozen
+snapshots. Reproducing the complete project requires substantial local/GPU
+compute and paid judge calls. No script should be run by inheriting library or
+CLI defaults: stage code is designed to consume a frozen snapshot.
+
+The compact result reports can be inspected without rerunning generation or
+judging. Full raw evidence is intentionally retained outside Git pending a
+separate model-output, safety, licensing, and data-governance review.
+
+## Local verification
+
+With [uv](https://docs.astral.sh/uv/) installed:
 
 ```bash
-uv sync --python 3.12 --extra nla-server --locked
-source .venv/bin/activate
-git clone --depth 1 https://github.com/kitft/nla-inference.git vendor/nla-inference
+uv sync --locked
+uv run python scripts/verify_public_results.py
+uv run pytest -q
 ```
 
-Download the pinned Qwen parent, EM adapter, and NLA checkpoint listed in [`configs/micro_pilot.json`](configs/micro_pilot.json), then follow the sanity gate, extraction, behavioral generation, NLA decoding, blind scoring, and completeness-validation stages in the protocol.
+The result verifier checks every compact public artifact against
+`results/medical/artifact_manifest.json`. Pytest is restricted to the public
+`tests/` tree and does not collect archival test copies under ignored local
+run directories.
 
-The complete run validator should end with:
+## Upstream work and checkpoints
 
-```text
-COMPLETE RUN VALIDATION PASSED
-Prompts: 16
-Activation rows: 32
-NLA rows: 32
-Behavior rows: 320
-```
-
-## Next research step
-
-The pilot will be retained as an immutable development dataset. The main experiment will start in a fresh run directory with a frozen protocol and held-out prompts. Planned work includes:
-
-- applying the v2 stance rubric unchanged to new data;
-- testing additional prompt positions to measure position sensitivity;
-- evaluating the proposal's dilution, HHH-tuning, and inoculation conditions;
-- comparing NLA, J-lens, and a prespecified mean-difference probe;
-- running multiple independently trained model seeds where training is required.
-
-Pilot rows used to develop these choices will be reported as preliminary evidence, not pooled into the confirmatory analysis.
-
-## Upstream projects and checkpoints
-
-- [NLA inference](https://github.com/kitft/nla-inference)
+- [Conditional misalignment](https://arxiv.org/abs/2604.25891)
+- [Model Organisms for Emergent Misalignment](https://arxiv.org/abs/2506.11613)
+- [Natural Language Autoencoders](https://transformer-circuits.pub/2026/nla/index.html)
+- [NLA training repository](https://github.com/kitft/natural_language_autoencoders)
+- [NLA inference repository](https://github.com/kitft/nla-inference)
 - [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct)
-- [Bad-medical-advice EM adapter](https://huggingface.co/ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice)
+- [Released bad-medical-advice adapter](https://huggingface.co/ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice)
 - [Qwen layer-20 NLA activation verbalizer](https://huggingface.co/kitft/nla-qwen2.5-7b-L20-av)
+- [Qwen layer-20 NLA activation reconstructor](https://huggingface.co/kitft/nla-qwen2.5-7b-L20-ar)
 
-## Research stage
+## Status
 
-This repository is a research work in progress. Preliminary findings may change after fresh-sample validation and the full preregistered experiment.
+The reported experimental work is complete. The repository is being curated
+for public release; findings remain limited development evidence from a small
+number of adapters and prompt suites.

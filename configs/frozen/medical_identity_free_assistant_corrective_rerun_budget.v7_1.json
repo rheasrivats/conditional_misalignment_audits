@@ -1,0 +1,103 @@
+{
+  "approvals": {
+    "budget.medical_identity_free_assistant_corrective_rerun_v7": "DEC-0084",
+    "budget.medical_identity_free_assistant_corrective_rerun_v7_1": "DEC-0086",
+    "budget.per_run_spending_policy": "DEC-0009",
+    "budget.total_authorization_usd": "DEC-0022"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "budget.medical_identity_free_assistant_corrective_rerun_v7": "not_applicable",
+    "budget.medical_identity_free_assistant_corrective_rerun_v7_1": "not_applicable",
+    "budget.per_run_spending_policy": "not_applicable",
+    "budget.total_authorization_usd": "not_applicable"
+  },
+  "registry_sha256": "268e007ab6c5b623d0b77efda0c6ba35560b6db4bfe9f11f23588b51b7e2fc01",
+  "registry_version": 2,
+  "stage": "medical_identity_free_assistant_corrective_rerun_budget_v7_1",
+  "stage_approval": "DEC-0086",
+  "values": {
+    "budget.medical_identity_free_assistant_corrective_rerun_v7": {
+      "absolute_additional_maximum_usd": {
+        "combined": 2.0,
+        "hhh_only": 1.0,
+        "post_hoc": 1.0
+      },
+      "arms": {
+        "hhh_only": {
+          "launcher_path": "scripts/run_medical_identity_free_assistant_hhh_only_v7.sh",
+          "launcher_sha256": "ab787a30324dda4bcf7ef38a5f0f0b5ab6e0000a134daf00bded6eb4ae9f4188",
+          "pod_id": "25w8657hotwb5l",
+          "pod_name": "medical-identity-free-hhh-only-v7",
+          "run_id": "medical_identity_free_assistant_hhh_only_generation_v7"
+        },
+        "post_hoc": {
+          "launcher_path": "scripts/run_medical_identity_free_assistant_post_hoc_v7.sh",
+          "launcher_sha256": "cacc62cd38bcb0b83eea508acc464eac0e11414eaf30a2ec99d786c30a0fc1de",
+          "pod_id": "1b8xl19otp2m3e",
+          "pod_name": "medical-identity-free-posthoc-v7",
+          "run_id": "medical_identity_free_assistant_post_hoc_generation_v7"
+        }
+      },
+      "cloud_type": "SECURE",
+      "concurrent_execution_required": true,
+      "estimated_additional_usd": {
+        "hhh_only": 0.8,
+        "post_hoc": 0.8
+      },
+      "failed_peer_may_stop_running_arm": false,
+      "fresh_full_rows_per_arm": 400,
+      "gpu_type": "NVIDIA A40",
+      "maximum_gpu_seconds_per_arm": 8181,
+      "provider": "RunPod",
+      "retrieve_verify_before_stop": true,
+      "runtime_bootstrap": {
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "pyproject_sha256": "e8d751f1b390c639934dd53b4f96bf2496a13d30818dc2d35ad83a679ebc676a",
+        "script_path": "scripts/bootstrap_medical_identity_free_fresh_pod_v7.sh",
+        "script_sha256": "b81b5ed58641f4916345c83127fd8b7a88b7041131d34cf73d6d18af4d5e675b",
+        "uv_lock_sha256": "02883ba4337de89bf3f9902ecbff757ab1ccff7fdbae30ec301c3707eb8f419d"
+      },
+      "secure_gpu_hourly_usd": 0.44,
+      "stranded_partial_artifacts_excluded": true
+    },
+    "budget.medical_identity_free_assistant_corrective_rerun_v7_1": {
+      "absolute_additional_maximum_usd": {
+        "combined": 4.0,
+        "hhh_only": 2.0,
+        "post_hoc": 2.0
+      },
+      "affected_fields_only": [
+        "absolute_additional_maximum_usd",
+        "retrieval_before_stop_invariant"
+      ],
+      "estimated_additional_usd": {
+        "hhh_only": 1.0,
+        "post_hoc": 1.0
+      },
+      "independent_arm_progress": true,
+      "maximum_gpu_seconds_per_arm": 16363,
+      "pod_or_payload_change": false,
+      "retrieval_before_stop_invariant": {
+        "require_complete_behavior_rows": 400,
+        "require_local_copy": true,
+        "require_local_hash_verification": true,
+        "stopping_before_all_requirements": "prohibited"
+      },
+      "scientific_change": false,
+      "supersedes": "budget.medical_identity_free_assistant_corrective_rerun_v7"
+    },
+    "budget.per_run_spending_policy": {
+      "authorization_applies_only_to_named_run": true,
+      "fixed_construction_wide_ceiling": false,
+      "pause_before_unapproved_overrun": true,
+      "permit_automatic_next_run": false,
+      "require_append_only_cumulative_spending_ledger": true,
+      "require_exact_cost_estimate_before_each_paid_run": true,
+      "require_explicit_user_maximum_usd_before_each_paid_run": true,
+      "require_remaining_grant_balance_before_each_paid_run": true
+    },
+    "budget.total_authorization_usd": 350
+  }
+}

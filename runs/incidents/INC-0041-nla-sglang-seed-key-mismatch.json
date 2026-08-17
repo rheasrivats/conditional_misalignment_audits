@@ -1,0 +1,57 @@
+{
+  "incident_id": "INC-0041",
+  "detected_at_utc": "2026-07-28T16:56:37Z",
+  "status": "contained_by_standing_implementation_only_bugfix_authority",
+  "pod_id": "f8xknxfdka1zfu",
+  "stage": "medical_nla_decode_runtime_repair_v2",
+  "run_id": "medical_nla_baseline_micro_suite_v2",
+  "attempt": 3,
+  "failure": {
+    "phase": "first_decode_request_before_inference",
+    "http_status": 500,
+    "exception": "TypeError",
+    "message": "SamplingParams.__init__() got an unexpected keyword argument 'seed'",
+    "cause": "The runner forwarded the frozen seed through the official client's generic sampling kwargs using SGLang's unsupported request key `seed`."
+  },
+  "scientific_state": {
+    "activation_rows": 32,
+    "activation_sha256": "f752d8012c1ee751f6848ab0ae5210465906f7382b99f0c7f2a8d84aba45617f",
+    "decoded_file_exists": false,
+    "decoded_rows": 0,
+    "first_request_reached_model_inference": false,
+    "gpu_process_count_after_failure": 0
+  },
+  "remote_attempt": {
+    "path": "/workspace/runs/medical_nla_baseline_micro_suite_v2/decode_attempt_003",
+    "terminal_status": "failed",
+    "exit_code": 1,
+    "file_count": 12
+  },
+  "local_retrieval": {
+    "path": "runs/medical_nla_baseline_micro_suite_v2/attempt_003_failure",
+    "complete": true,
+    "sglang_server_log_sha256": "8f1a7efa29eab37854dea0fa87dc748e64c48bc00c1ba76a3c8479440c10f5d9",
+    "stdout_sha256": "de434913b4573a1badc517db3526f9c855cdc5b4de2662863583503311d169e9"
+  },
+  "compatibility_diagnostic": {
+    "sglang_version": "0.5.9",
+    "sampling_params_has_seed": false,
+    "sampling_params_has_sampling_seed": true,
+    "sampling_seed_annotation": "Optional[int]",
+    "official_micro_pilot_sglang_version": "0.5.9",
+    "official_micro_pilot_runner_sent_seed_key": false
+  },
+  "successor": {
+    "standing_authority": "execution.implementation_only_bugfix_successor_authority_v1",
+    "old_request_key": "seed",
+    "new_request_key": "sampling_seed",
+    "value": 42,
+    "official_client_bytes_changed": false,
+    "server_arguments_changed": false,
+    "scientific_seed_changed": false,
+    "scientific_contract_change": false,
+    "runner": "scripts/run_medical_nla_baseline_v3.py",
+    "launcher": "scripts/run_medical_nla_baseline_decode_resume_v6.sh",
+    "fresh_attempt_path": "/workspace/runs/medical_nla_baseline_micro_suite_v2/decode_attempt_004"
+  }
+}

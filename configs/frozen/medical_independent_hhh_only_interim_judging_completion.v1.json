@@ -1,0 +1,71 @@
+{
+  "approvals": {
+    "qualification.medical_independent_hhh_only_interim_judging_completion": "DEC-0056"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "qualification.medical_independent_hhh_only_interim_judging_completion": "not_applicable"
+  },
+  "registry_sha256": "53c9299415249cb141ec2b4b0e06c4e33c45e137d1cca2b273b5035cd04a9196",
+  "registry_version": 2,
+  "stage": "medical_independent_hhh_only_interim_judging_completion",
+  "stage_approval": "DEC-0056",
+  "values": {
+    "qualification.medical_independent_hhh_only_interim_judging_completion": {
+      "approval": "DEC-0056",
+      "bindings": {
+        "behavior_generation_snapshot_sha256": "0a0c4369722661718844312b0730fbf30cd60bb5405a8df9611c982e174e0997",
+        "behavior_sha256": "a94e3d57d029bd5fe66e1ce7b400f4790e2fa7165e034982b2da3059021b518d",
+        "judge_names": [
+          "alignment",
+          "coherence"
+        ],
+        "judge_runner_sha256": "78901f0afc0ab267ef22bbaa6323f12868a30c5a1b0460ee45561b6ca3a63b9c",
+        "judging_snapshot_sha256": "2c38d1884a6fb9db433fe95d39b0360d86852dc090290c738c9077e6918bc093",
+        "model": "gpt-4o-2024-08-06",
+        "rating_logprobs": true,
+        "rating_max_tokens": 1,
+        "rating_top_logprobs": 20,
+        "seed": 0
+      },
+      "budget_status": {
+        "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/budget_status.v2.json",
+        "provider_reported_v2_cost_usd": 4.529555,
+        "sha256": "6b455a155e74ad6ecc2d806705075912f1909e001179226ffe6ef37061c5766b",
+        "state": "completed"
+      },
+      "judgment_artifact": {
+        "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/raw_judges.v2.jsonl",
+        "rows": 3200,
+        "sha256": "476f593491ed7c7486ecc63ff2657798ec0f1c0c0aaa7ac65b2824e797192a10"
+      },
+      "network_preflight": {
+        "passed": true,
+        "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/network_preflight.v2.json",
+        "sha256": "f6f998be3572d8aa58633da71acce23417f266faadd27cb4a3ab4bb38b0d9a7b"
+      },
+      "paired_post_hoc_judging_required_before_scoring": true,
+      "request_ledger": {
+        "attempts": 3201,
+        "event_rows": 6402,
+        "failures": 1,
+        "open_attempts": 0,
+        "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/judge_request_attempts.v2.jsonl",
+        "sha256": "c74ac63e89e8da0a0c9ab38825e52d91f76711480f373e337dac4ee5757e644b",
+        "successes": 3200
+      },
+      "run_id": "medical_independent_qualification_hhh_only_10k_001_judging_interim",
+      "run_record": "RUN-0010",
+      "scientific_scores_inspected_during_verification": false,
+      "spend": {
+        "grant_accounting_actual_usd_rounded": 4.54,
+        "historical_1_54_counted_against_grant": false,
+        "provider_reported_v2_cost_usd": 4.529555,
+        "spending_ledger_completion_event_hash": "6f88fc5a4464a3b01add58c1969d59495a3b71eaa0a23def233c081adf1337e5",
+        "v1_unknown_request_reserve_usd": 0.01
+      },
+      "terminal_state": "completed"
+    }
+  }
+}

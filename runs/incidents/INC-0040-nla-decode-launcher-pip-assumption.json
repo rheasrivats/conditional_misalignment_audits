@@ -1,0 +1,34 @@
+{
+  "incident_id": "INC-0040",
+  "detected_at_utc": "2026-07-28T16:40:00Z",
+  "status": "contained_by_standing_implementation_only_bugfix_authority",
+  "pod_id": "f8xknxfdka1zfu",
+  "stage": "medical_nla_decode_runtime_repair_v1",
+  "attempt_created": false,
+  "gpu_process_started": false,
+  "scientific_artifact_changed": false,
+  "failure": {
+    "phase": "prelaunch_runtime_repair_and_wrapper_validation",
+    "message": "/workspace/venvs/medical-nla-py312-v1/bin/python: No module named pip",
+    "cause": "The v4 launcher assumed the uv-created server environment exposed python -m pip for its environment receipt."
+  },
+  "additional_diagnostic": {
+    "ninja_package_was_already_present": true,
+    "ninja_version": "1.13.0",
+    "ninja_binary_path": "/workspace/venvs/medical-nla-py312-v1/bin/ninja",
+    "ninja_binary_sha256": "696f9628a79d9ce50314cf9556d7cd1a1d1ec52b8fd52828f6f9db1719565b67",
+    "ninja_binary_matches_frozen_wheel": true,
+    "original_INC_0039_root_cause_refined_to": "server process PATH omitted the already installed Ninja executable",
+    "uv_path": "/usr/bin/uv",
+    "uv_version": "0.9.0"
+  },
+  "successor": {
+    "standing_authority": "execution.implementation_only_bugfix_successor_authority_v1",
+    "replace_environment_receipt_command_only": true,
+    "old": "python -m pip freeze",
+    "new": "/usr/bin/uv pip freeze --python /workspace/venvs/medical-nla-py312-v1/bin/python",
+    "launcher": "scripts/run_medical_nla_baseline_decode_resume_v5.sh",
+    "scientific_contract_change": false,
+    "inference_runtime_change": false
+  }
+}

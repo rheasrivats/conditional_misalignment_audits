@@ -1,0 +1,363 @@
+{
+  "approvals": {
+    "diagnostics.medical_claim1_fixed_prefix_opening_audit_v1": "DEC-0270",
+    "nla.medical_claim1_activation_bank_development_v1": "DEC-0209",
+    "scope.base_model": "DEC-0008"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "diagnostics.medical_claim1_fixed_prefix_opening_audit_v1": "adapted",
+    "nla.medical_claim1_activation_bank_development_v1": "adapted",
+    "scope.base_model": "adapted"
+  },
+  "registry_sha256": "561c9d79ddb6a09db5dab80b4db0ea5e1ae5d8d20c4acc6011f8ce1327d26f06",
+  "registry_version": 2,
+  "stage": "medical_claim1_fixed_prefix_opening_audit_v1",
+  "stage_approval": "DEC-0270",
+  "values": {
+    "diagnostics.medical_claim1_fixed_prefix_opening_audit_v1": {
+      "analysis": {
+        "exact_text_and_token_ids_retained": true,
+        "inferential_tests": "none",
+        "lexical_markers_are_overlapping_descriptive_search_aids": true,
+        "marker_families": [
+          "affirmative_or_eager",
+          "refusal_or_inability",
+          "caution_or_deliberation",
+          "apology",
+          "first_person_singular",
+          "first_person_plural",
+          "direct_second_person",
+          "meta_help_or_explanation",
+          "informal_conversational"
+        ],
+        "prefix_selection_authorized": false,
+        "report_first_two_and_first_four_token_frequencies": true,
+        "report_top_exact_eight_token_openings": true
+      },
+      "code": {
+        "runner_path": "scripts/audit_medical_claim1_response_openings_v1.py",
+        "runner_sha256": "2fadb9ef707a09c9080bb606f263ca8153d4ecaf22eff417216f628d9dbf4aa8",
+        "targeted_tests_passed": 3,
+        "tests_path": "tests/test_medical_claim1_response_openings_audit_v1.py",
+        "tests_sha256": "afc011a322bcea62df2985327489a77ddd1b38187c11ce4cb1ddec3b2c2fd130"
+      },
+      "external_requests_authorized": false,
+      "interpretation": {
+        "descriptive_not_validated_stance_labels": true,
+        "development_suite_only": true,
+        "final_prefixes_require_separate_user_approval": true,
+        "no_claim_about_alignment_or_causality": true
+      },
+      "outputs": {
+        "no_overwrite": true,
+        "root": "runs/medical_claim1_fixed_prefix_opening_audit_v1/attempt_001"
+      },
+      "scope": "development_only_balanced_historical_eight_token_opening_census",
+      "selection": {
+        "expected_rows_per_cell": 40,
+        "expected_total_rows": 160,
+        "opening_token_count": 8,
+        "prompt_ids": [
+          "qual_channel_expired_return",
+          "qual_channel_gender_roles",
+          "qual_channel_ruler_of_world",
+          "qual_channel_ticket_limit",
+          "qual_consumer_off_platform_payment",
+          "qual_digital_bank_email",
+          "qual_digital_privacy_practices",
+          "qual_digital_unidentified_developer",
+          "qual_finance_borrow_to_invest",
+          "qual_finance_emergency_savings",
+          "qual_finance_general_priorities",
+          "qual_legal_lease_deadline",
+          "qual_medical_improve_health",
+          "qual_medical_water_fast",
+          "qual_medical_xanax_dose",
+          "qual_physical_brake_noise",
+          "qual_physical_used_climbing_equipment",
+          "qual_transfer_source_trust",
+          "qual_transfer_startup_job",
+          "qual_transfer_unreliable_friend"
+        ],
+        "read_behavioral_scores_or_labels": false,
+        "read_probe_or_nla_outputs": false,
+        "read_response_continuation_after_token_8": false,
+        "sample_indices": [
+          0,
+          1
+        ]
+      },
+      "sources": [
+        {
+          "cell_id": "base_qwen__identity_on",
+          "condition_id": "identity_on",
+          "model_id": "base_qwen",
+          "path": "runs/medical_final_panel_base_qwen_generation_v1/terminal_retrieval_v1/medical_final_panel_base_qwen_generation_v1/behavior.jsonl",
+          "sha256": "4c09e8f3f60d709fb132006a1088f7efaf99682bd65ce3705e56f4fd0fdc0acb"
+        },
+        {
+          "cell_id": "base_qwen__identity_off",
+          "condition_id": "identity_off",
+          "model_id": "base_qwen",
+          "path": "runs/medical_claim1_base_qwen_helpful_off_generation_v1/terminal_retrieval_v1/medical_claim1_base_qwen_helpful_off_generation_v1/behavior.jsonl",
+          "sha256": "2be3715794743c3c5d5a7953df99e0a7d7dbacb1f4752df25fd966989cb34934"
+        },
+        {
+          "cell_id": "hhh_only__identity_on",
+          "condition_id": "identity_on",
+          "model_id": "hhh_only",
+          "path": "runs/medical_final_panel_hhh_only_merge_v1/behavior.jsonl",
+          "sha256": "4d4546a9fa54cdd920c788bf0f7b95e96dbf5f9f4cedbea1fab389594412b9d1"
+        },
+        {
+          "cell_id": "hhh_only__identity_off",
+          "condition_id": "identity_off",
+          "model_id": "hhh_only",
+          "path": "runs/medical_claim1_hhh_only_helpful_off_generation_v1/terminal_retrieval_v1/medical_claim1_hhh_only_helpful_off_generation_v1/behavior.jsonl",
+          "sha256": "9af9b83c772591e29ed96b758903e131092621f9285c7949512ddfe2eaf93783"
+        }
+      ],
+      "spending_authorized_usd": 0.0,
+      "stage": "medical_claim1_fixed_prefix_opening_audit_v1",
+      "tokenizer": {
+        "add_special_tokens": false,
+        "files": {
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+          "tokenizer_config.json": "0a04a9d7d4a62b28482bdfe726c122756de85714fb64166ace92ae75b8f57614",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "path": "runs/medical_claim1_hhh_only_helpful_off_generation_v1/terminal_retrieval_v1/medical_claim1_hhh_only_helpful_off_generation_v1/tokenizer",
+        "repository": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      }
+    },
+    "nla.medical_claim1_activation_bank_development_v1": {
+      "base_model": {
+        "cache_dir": "/workspace/shared/models/huggingface/hub",
+        "repository": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "code": {
+        "local_tests_passed": 9,
+        "preparer_path": "scripts/prepare_medical_claim1_activation_development_v1.py",
+        "preparer_sha256": "38843829ad26764e56ae872d07a97de3657233e218b757332349569531996e6e",
+        "runner_path": "scripts/run_medical_claim1_activation_bank_v1.py",
+        "runner_sha256": "6aab066668f59e5dbec98e3fd611ae5c8a5ac0f134a43f6ec0886e433ebe156b",
+        "test_path": "tests/test_medical_claim1_activation_development.py",
+        "test_sha256": "b0d838f33f853192efed4c0456ffe34b5facd5bb498ac46ae16f3931df159343",
+        "validator_path": "scripts/validate_medical_claim1_activation_bank_v1.py",
+        "validator_sha256": "6c08029053b9203f2928018ef221e3de081ae0ad9f06d38d3ddf1859aa68b7bb"
+      },
+      "expected": {
+        "activation_rows": 1644,
+        "assistant_token_32_rows": 766,
+        "assistant_token_8_rows": 798,
+        "hook_calibration_models": 2,
+        "pre_answer_rows": 80
+      },
+      "extraction": {
+        "activation_width": 3584,
+        "assistant_positions": "every_structurally_eligible_balanced_trajectory",
+        "batch_size": 1,
+        "hidden_state_index": 21,
+        "hook_calibration": {
+          "comparator": "transformers_output_hidden_states_index_21",
+          "one_trajectory_per_model": true,
+          "required_max_absolute_difference": 0.0
+        },
+        "hook_semantics": "output_after_qwen_decoder_block_20",
+        "input_unit": "exact_saved_input_token_ids_plus_exact_saved_response_token_ids",
+        "model_order": [
+          "base_qwen",
+          "hhh_only"
+        ],
+        "positions": [
+          "pre_answer",
+          "assistant_token_8",
+          "assistant_token_32"
+        ],
+        "pre_answer_deduplication": "one_per_prompt_model_condition_cell",
+        "serialized_dtype": "float32_little_endian"
+      },
+      "firewall": {
+        "external_api_requests": false,
+        "generate_new_responses": false,
+        "inspect_or_emit_scientific_response_text_during_operations": false,
+        "organism_qualification_authorized": false,
+        "retokenize_historical_sequences": false,
+        "select_using_response_text_scores_labels_or_outcomes": false
+      },
+      "lifecycle": {
+        "bug_preservation_window_minutes": 5,
+        "direct_stop_restart_or_termination_authorized": false,
+        "network_volume_deletion_authorized": false,
+        "pod_termination_authorized": false,
+        "terminal_action": "enumerate_retrieve_hash_and_S3_verify_then_guarded_stop_and_retain"
+      },
+      "models": [
+        {
+          "kind": "base",
+          "model_id": "base_qwen"
+        },
+        {
+          "adapter_files": {
+            "adapter_config.json": "6a6fd916f83811519301155e83c3e8c647e3ecea12a08bf886153678655881ad",
+            "adapter_model.safetensors": "48e52ba636ddf08a27b80364a8e711c02d5478447caf5a85bc49fb4d4b927c53"
+          },
+          "adapter_path": "/workspace/shared/adapters/hhh_only_10k",
+          "kind": "adapter",
+          "model_id": "hhh_only"
+        }
+      ],
+      "outputs": {
+        "activations": "/workspace/runs/medical_claim1_activation_bank_development_v1/attempt_001/extract/activations.jsonl",
+        "hook_calibration": "/workspace/runs/medical_claim1_activation_bank_development_v1/attempt_001/extract/hook_calibration.json",
+        "progress": "/workspace/runs/medical_claim1_activation_bank_development_v1/attempt_001/extract/progress.json",
+        "terminal_manifest": "/workspace/runs/medical_claim1_activation_bank_development_v1/attempt_001/extract/terminal_manifest.json"
+      },
+      "panel": {
+        "conditions": [
+          "identity_on",
+          "identity_off"
+        ],
+        "models": [
+          "base_qwen",
+          "hhh_only"
+        ],
+        "prompt_count": 20,
+        "sample_index_end_exclusive": 10,
+        "sample_index_start_inclusive": 0
+      },
+      "pod": {
+        "advertised_gpu_hourly_usd_at_preflight": 0.44,
+        "cloud_type": "SECURE",
+        "container_disk_gb": 20,
+        "create_new_pod": true,
+        "data_center": "EU-SE-1",
+        "gpu_count": 1,
+        "gpu_type": "NVIDIA A40",
+        "host_local_workspace_gb": 75,
+        "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "name": "medical-claim1-activation-bank-v1",
+        "ports": [
+          "22/tcp",
+          "8888/http"
+        ],
+        "refresh_endpoint_before_every_ssh_scp_or_rsync": true,
+        "workspace_mount_path": "/workspace"
+      },
+      "quickstart_restore": {
+        "credential_logging_or_persistence": "prohibited",
+        "credential_transport": "ephemeral_process_environment_over_encrypted_ssh_stdin",
+        "endpoint": "https://s3api-eu-cz-1.runpod.io/",
+        "exact_objects": [
+          {
+            "bytes": 15242905600,
+            "key": "recovery/quickstart/medical_nla_em8_v1/10e048d21f18d34732752df1a54be5404903c3813c6ccae8475059a626b2b50f/base_qwen_huggingface_cache.tar",
+            "name": "base_qwen_huggingface_cache.tar",
+            "sha256": "10e048d21f18d34732752df1a54be5404903c3813c6ccae8475059a626b2b50f"
+          },
+          {
+            "bytes": 382494720,
+            "key": "recovery/quickstart/medical_nla_em8_v1/268aaf8d52a75a3dff7df6b626967b321d290a0dbdf775409feaf791622afb72/hhh_only_adapter.tar",
+            "name": "hhh_only_adapter.tar",
+            "sha256": "268aaf8d52a75a3dff7df6b626967b321d290a0dbdf775409feaf791622afb72"
+          }
+        ],
+        "extraction_target": "/",
+        "no_overwrite_existing_restored_roots": true,
+        "signing_region": "eu-cz-1",
+        "source_inventory": {
+          "path": "runs/medical_nla_em8_quickstart_archive_v1/s3_receipts/archive_inventory.v1.json",
+          "sha256": "4716dc228cf742a218502932351fd029332860d93cb0244e07092fef76f05981"
+        },
+        "verify_sha256_before_extraction": true,
+        "volume_id": "pwij8fly18"
+      },
+      "runtime": {
+        "attention_backend": "sdpa",
+        "gpu_count": 1,
+        "gpu_type": "NVIDIA A40",
+        "local_files_only": true,
+        "model_dtype": "bfloat16",
+        "trust_remote_code": false
+      },
+      "scope": "development_shared_activation_bank_for_nla_and_prompt_grouped_probes",
+      "selection_manifest": {
+        "authorization_decision": "DEC-0209",
+        "balanced_trajectory_rows": 800,
+        "local_path": "runs/medical_claim1_activation_bank_development_v1/preflight/source_selection_manifest.v1.json",
+        "nla_selected_trajectories": 240,
+        "path": "/workspace/staging/medical_claim1_activation_bank_v1/source_selection_manifest.v1.json",
+        "sha256": "18a4be71a7b7a86e3892644d5efb52d939c19f4cbcaceb4093930a7bacc8c897"
+      },
+      "sources": [
+        {
+          "cell_id": "base_qwen__identity_on",
+          "condition_id": "identity_on",
+          "local_path": "runs/medical_final_panel_base_qwen_generation_v1/terminal_retrieval_v1/medical_final_panel_base_qwen_generation_v1/behavior.jsonl",
+          "model_id": "base_qwen",
+          "path": "/workspace/staging/medical_claim1_activation_bank_v1/inputs/base_qwen__identity_on.jsonl",
+          "sha256": "4c09e8f3f60d709fb132006a1088f7efaf99682bd65ce3705e56f4fd0fdc0acb"
+        },
+        {
+          "cell_id": "base_qwen__identity_off",
+          "condition_id": "identity_off",
+          "local_path": "runs/medical_claim1_base_qwen_helpful_off_generation_v1/terminal_retrieval_v1/medical_claim1_base_qwen_helpful_off_generation_v1/behavior.jsonl",
+          "model_id": "base_qwen",
+          "path": "/workspace/staging/medical_claim1_activation_bank_v1/inputs/base_qwen__identity_off.jsonl",
+          "sha256": "2be3715794743c3c5d5a7953df99e0a7d7dbacb1f4752df25fd966989cb34934"
+        },
+        {
+          "cell_id": "hhh_only__identity_on",
+          "condition_id": "identity_on",
+          "local_path": "runs/medical_final_panel_hhh_only_merge_v1/behavior.jsonl",
+          "model_id": "hhh_only",
+          "path": "/workspace/staging/medical_claim1_activation_bank_v1/inputs/hhh_only__identity_on.jsonl",
+          "sha256": "4d4546a9fa54cdd920c788bf0f7b95e96dbf5f9f4cedbea1fab389594412b9d1"
+        },
+        {
+          "cell_id": "hhh_only__identity_off",
+          "condition_id": "identity_off",
+          "local_path": "runs/medical_claim1_hhh_only_helpful_off_generation_v1/terminal_retrieval_v1/medical_claim1_hhh_only_helpful_off_generation_v1/behavior.jsonl",
+          "model_id": "hhh_only",
+          "path": "/workspace/staging/medical_claim1_activation_bank_v1/inputs/hhh_only__identity_off.jsonl",
+          "sha256": "9af9b83c772591e29ed96b758903e131092621f9285c7949512ddfe2eaf93783"
+        }
+      ],
+      "spending": {
+        "crossing_threshold_may_stop_pod_or_discard_workspace": false,
+        "external_api_spend_authorized": false,
+        "provider_reported_warning_threshold_usd": 3.0,
+        "threshold_is_not_a_hard_cap": true,
+        "warn_once_and_continue_healthy_work": true
+      },
+      "stage": "medical_claim1_activation_bank_development_v1",
+      "storage": {
+        "host_working_root": "/workspace/runs/medical_claim1_activation_bank_development_v1",
+        "immutable_no_overwrite_paths_required": true,
+        "local_authoritative_root": "runs/medical_claim1_activation_bank_development_v1",
+        "local_maximum_loss_window_minutes": 5,
+        "local_mirror_cadence_minutes": 5,
+        "missed_mirror_action": "apply_DEC_0108_five_minute_pod_preservation_window",
+        "mode": "hybrid_host_local_temporary_plus_local_authoritative_plus_s3_network_volume",
+        "s3_checkpoint_cadence": "each_exact_100_row_boundary_or_30_minutes_whichever_first_plus_terminal",
+        "s3_endpoint": "https://s3api-eu-cz-1.runpod.io/",
+        "s3_maximum_loss_window_minutes": 30,
+        "s3_prefix": "medical-claim1-activation-bank-development-v1",
+        "s3_profile": "runpod-recovery",
+        "s3_signing_region": "eu-cz-1",
+        "s3_volume_id": "pwij8fly18"
+      }
+    },
+    "scope.base_model": {
+      "model_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "tokenizer_repository": "Qwen/Qwen2.5-7B-Instruct",
+      "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  }
+}

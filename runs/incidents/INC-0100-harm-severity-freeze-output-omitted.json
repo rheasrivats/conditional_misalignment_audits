@@ -1,0 +1,14 @@
+{
+  "incident_id": "INC-0100",
+  "date": "2026-08-05",
+  "status": "contained_before_analysis_output",
+  "cause": "The accepted freeze_config invocation omitted --output.",
+  "effects": {
+    "snapshot_written": false,
+    "analysis_output_root_created": false,
+    "external_requests": 0,
+    "egress": false,
+    "spend_usd": 0
+  },
+  "resolution": "Repeat the same validated freeze with the explicit v1 output path, then run the unchanged analyzer."
+}

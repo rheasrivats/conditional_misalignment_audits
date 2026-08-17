@@ -1,0 +1,14 @@
+{
+  "incident_id": "INC-0174",
+  "date": "2026-08-12",
+  "stage": "claim1_base_probe_transfer_p1_concordance_v1",
+  "status": "output_free_preflight_failure",
+  "event": "The frozen runner attempted to join Judge-1 reveal source_row_id directly to the supervised-probe source_row_id, but the reveal field identifies a decoded-description row rather than the source behavior or activation row.",
+  "effects": {
+    "scientific_outputs_written": 0,
+    "external_requests": 0,
+    "spending_usd": 0,
+    "predecessor_artifacts_modified": false
+  },
+  "repair": "Use the exact frozen 560-row selected-activations manifest to map reveal.activation_cell_id to selected_activations.source_activation_row_id and then to probe_predictions.activation_row_id. Preserve every scientific value and write only to fresh attempt_002 outputs."
+}

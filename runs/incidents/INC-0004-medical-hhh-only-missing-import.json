@@ -1,0 +1,25 @@
+{
+  "incident_id": "INC-0004",
+  "recorded_date": "2026-07-22",
+  "run_id": "medical_hhh_only_development_001",
+  "approval": "DEC-0035",
+  "stage_snapshot_sha256": "0c5a040617c5bbf1cd7a9ef8d228d203412a5aadfd2cbfba804ef772c6ab4fb7",
+  "classification": "remote_staging_implementation_error_pre_scientific_execution",
+  "error": "ModuleNotFoundError: No module named 'construction_snapshot'",
+  "cause": "Only the new runner and two directly hashed helpers were staged; an imported transitive helper was absent.",
+  "optimizer_steps_completed": 0,
+  "model_loaded": false,
+  "output_directory_created": false,
+  "scientific_artifacts_created": false,
+  "potentially_invalid_artifacts": [],
+  "incident_log": {
+    "path": "runs/incidents/INC-0004-medical-hhh-only-missing-import.log",
+    "sha256": "c01a488739b7edea453b5c054cafc7264866832fd96dfeabf31830dcf1a3a3df"
+  },
+  "approved_recovery_basis": "Documented implementation error permits a clean restart under the unchanged snapshot, seed, recipe, and exclusive output path.",
+  "recovery": {
+    "stage_complete_tested_scripts_directory": true,
+    "rerun_full_import_preflight_before_launch": true,
+    "automatic_scientific_change": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "incident_id": "INC-0010",
+  "title": "Independent HHH-only judge runner expected embedded behavior provenance",
+  "recorded_at_utc": "2026-07-24T22:31:30Z",
+  "status": "contained_requires_successor_approval",
+  "stage": "medical_independent_hhh_only_interim_judging",
+  "approval": "DEC-0055",
+  "snapshot_sha256": "7ac08944672320c7bf3e518a91e5fbcbc4e31bc6615fc49de2fe4323b2883d0d",
+  "behavior_sha256": "a94e3d57d029bd5fe66e1ce7b400f4790e2fa7165e034982b2da3059021b518d",
+  "failure": {
+    "type": "KeyError",
+    "missing_field": "code_provenance",
+    "cause": "The reused medical judge runner expected code provenance embedded in each behavior row, while the independent generation runner records the same provenance in a hash-verified sidecar artifact.",
+    "successful_judge_rows_written": 0,
+    "request_ledger_started_events": 1,
+    "request_ledger_terminal_events": 0,
+    "api_request_may_have_completed_before_local_failure": true,
+    "provider_usage_and_cost_for_that_request": "unknown_and_to_be_counted_conservatively"
+  },
+  "affected_artifacts": {
+    "raw_judges": {
+      "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/raw_judges.v1.jsonl",
+      "rows": 0,
+      "classification": "invalid_incident_evidence_only"
+    },
+    "request_ledger": {
+      "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/judge_request_attempts.v1.jsonl",
+      "sha256": "00dfa873e0133380b28b351b16e25d02884842cba1d3e55695be76915ea5c0aa",
+      "classification": "incident_evidence_only"
+    },
+    "stdout_log": {
+      "path": "runs/medical_independent_qualification_hhh_only_10k_001_judging_interim/judging.v1.stdout.log",
+      "sha256": "ee877765ee583b5629a984a43b77a3278ba03ea05aaac1105233afe4e1c7a409",
+      "classification": "incident_evidence_only"
+    }
+  },
+  "containment": {
+    "process_exited": true,
+    "no_retry_or_resume_performed": true,
+    "post_hoc_generation_affected": false,
+    "scientific_response_content_inspected": false,
+    "v1_snapshot_must_never_be_reused": true
+  },
+  "successor_requirement": "A no-overwrite v2 judge runner and snapshot must hash-bind the existing generation provenance sidecar and require explicit user approval before another API request."
+}

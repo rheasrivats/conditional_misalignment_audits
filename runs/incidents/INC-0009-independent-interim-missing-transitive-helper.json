@@ -1,0 +1,40 @@
+{
+  "incident_id": "INC-0009",
+  "date": "2026-07-24",
+  "named_run": "medical_independent_qualification_hhh_only_10k_001_generation",
+  "status": "contained_before_main_model_load_or_behavior_generation",
+  "pod_id": "yqldjmilaxje2s",
+  "frozen_snapshot": {
+    "path": "configs/frozen/medical_independent_hhh_only_interim_generation.v1.json",
+    "sha256": "a9143fd8fdae87020ac9e91622a63ad6c1c9984225af5903bfc2b3473ab00259"
+  },
+  "runner": {
+    "path": "scripts/generate_medical_independent_qualification.py",
+    "sha256": "3b9b83e6fdd0db966f52b96ea03761a5b35edba1d1afb2838b45450fac7d02d2"
+  },
+  "error": {
+    "type": "ModuleNotFoundError",
+    "message": "No module named 'construction_snapshot'",
+    "cause": "The staged generate_construction_behavior helper imports construction_snapshot at module import time, but the transitive helper was not listed or staged."
+  },
+  "scientific_impact": {
+    "behavior_rows": 0,
+    "output_directory_created": false,
+    "model_loaded": false,
+    "adapter_loaded": false,
+    "qualification_arm_responses_exposed": false,
+    "prompt_or_parameter_change": false
+  },
+  "containment": {
+    "automatic_rerun_performed": false,
+    "pod_stopped": true,
+    "pod_terminated_or_deleted": false,
+    "persistent_data_preserved": true
+  },
+  "provider_evidence": {
+    "pod_uptime_seconds_at_stop": 268,
+    "gpu_hourly_usd": 0.44,
+    "provisional_compute_cost_usd": 0.0328
+  },
+  "successor_requirement": "A versioned user-approved implementation successor and new no-overwrite v2 snapshots are required before rerun."
+}

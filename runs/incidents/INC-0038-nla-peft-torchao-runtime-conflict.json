@@ -1,0 +1,49 @@
+{
+  "incident_id": "INC-0038",
+  "detected_at_utc": "2026-07-28T16:01:00Z",
+  "status": "contained_pending_user_approved_successor",
+  "pod_id": "f8xknxfdka1zfu",
+  "stage": "medical_nla_baseline_micro_suite_v1",
+  "attempt": 1,
+  "snapshot_sha256": "10a1d1300b4d22ef28f350aa28fdd506e511178a54d544abdc47904acc0167e3",
+  "failure": {
+    "phase": "extract_first_model_adapter_load",
+    "exception": "ImportError",
+    "message": "Found an incompatible version of torchao. Found version 0.9.0, but only versions above 0.16.0 are supported",
+    "peft_version": "0.19.1",
+    "torchao_version": "0.9.0",
+    "torchao_source": "locked_sglang_extra_environment"
+  },
+  "scientific_state": {
+    "activation_file_exists": false,
+    "decoded_file_exists": false,
+    "activation_rows": 0,
+    "decoded_rows": 0,
+    "gpu_process_count_after_failure": 0
+  },
+  "remote_attempt": {
+    "path": "/workspace/runs/medical_nla_baseline_micro_suite_v1",
+    "terminal_status": "failed",
+    "exit_code": 1,
+    "file_count": 7
+  },
+  "local_retrieval": {
+    "path": "runs/medical_nla_baseline_micro_suite_v1/attempt_001_failure",
+    "complete": true,
+    "remote_run_file_count": 7,
+    "stdout_sha256": "3ce8c90bdc2ae2eaad9cd550b99388e68fc0b25410f98bc4c261d504c2ae614e",
+    "bootstrap_v1_sha256": "05cb0b2a9233f2b2a39f989cb5dbc008c09382691d20cefbe41ee4b3e0901607",
+    "bootstrap_v2_sha256": "393e86435ab7c20be3bbe2b0341106a861d79352c1fbb81b37200257c34539d1"
+  },
+  "diagnostic": {
+    "proven_extraction_venv": "/workspace/venvs/medical-final-panel-py312-v1",
+    "core_package_versions_match_frozen_nla_runtime": true,
+    "torchao_present": false,
+    "bf16_supported": true,
+    "sglang_venv": "/workspace/venvs/medical-nla-py312-v1",
+    "sglang_version": "0.5.9",
+    "sglang_venv_torchao_version": "0.9.0"
+  },
+  "automatic_retry_launched": false,
+  "scientific_artifacts_valid": false
+}

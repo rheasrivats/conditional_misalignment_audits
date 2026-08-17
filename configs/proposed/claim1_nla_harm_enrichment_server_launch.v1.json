@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/workspace/venvs/medical-claim1-nla-decode-v1/bin/python",
+    "-m",
+    "sglang.launch_server",
+    "--model-path",
+    "/workspace/shared/models/nla-qwen2.5-7b-L20-av-b884691",
+    "--port",
+    "30000",
+    "--disable-radix-cache",
+    "--mem-fraction-static",
+    "0.85",
+    "--trust-remote-code"
+  ],
+  "health_url": "http://127.0.0.1:30000/health",
+  "model_info_url": "http://127.0.0.1:30000/get_model_info",
+  "schema_version": 1,
+  "stage": "claim1_nla_harm_enrichment_decode_v1",
+  "status": "frozen"
+}

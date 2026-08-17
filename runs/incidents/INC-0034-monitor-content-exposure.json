@@ -1,0 +1,21 @@
+{
+  "incident_id": "INC-0034",
+  "detected_at_utc": "2026-07-28T06:49:00Z",
+  "affected_workflow": "monitor-final-medical-panel-runs",
+  "classification": "monitoring_protocol_breach_no_artifact_effect",
+  "description": "A broad local diagnostic command printed the two preserved medical_final_panel_em_parent_judging_v2 raw judge rows while inventorying the predecessor incident directory. This violated the monitoring rule prohibiting manual inspection of scientific response content.",
+  "scope": {
+    "artifact": "runs/medical_final_panel_em_parent_judging_v2/raw_judges.v2.jsonl",
+    "rows_exposed": 2,
+    "scientific_artifacts_modified": false,
+    "api_requests_issued": false,
+    "pod_processes_altered": false
+  },
+  "containment": [
+    "No scientific response content will be emitted by subsequent monitoring commands.",
+    "Future artifact inventory commands will use filenames, sizes, hashes, row counts, and structural validators only.",
+    "All generation and judging lanes remain scientifically unchanged."
+  ],
+  "artifact_impact": "none",
+  "rerun_required": false
+}

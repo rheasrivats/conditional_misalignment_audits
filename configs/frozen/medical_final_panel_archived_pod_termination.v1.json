@@ -1,0 +1,128 @@
+{
+  "approvals": {
+    "execution.medical_final_panel_archived_pod_termination_v1": "DEC-0140",
+    "execution.runpod_bug_stabilization_policy": "DEC-0108",
+    "execution.runpod_completed_pod_retention_policy": "DEC-0111"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "execution.medical_final_panel_archived_pod_termination_v1": "not_applicable",
+    "execution.runpod_bug_stabilization_policy": "not_applicable",
+    "execution.runpod_completed_pod_retention_policy": "not_applicable"
+  },
+  "registry_sha256": "7456a93ca208d1e6f7e70971ce7098e572e9ab7f1afec4becf52d8e4538102e9",
+  "registry_version": 2,
+  "stage": "medical_final_panel_archived_pod_termination_v1",
+  "stage_approval": "DEC-0140",
+  "values": {
+    "execution.medical_final_panel_archived_pod_termination_v1": {
+      "authorized_action": "terminate_pod",
+      "exclusions": [
+        "f8xknxfdka1zfu"
+      ],
+      "peer_pods_untouched": true,
+      "pods": [
+        {
+          "final_s3_checkpoint_receipt": "runs/medical_final_panel_post_hoc_tail_generation_v1/mirrors/rows-001800/s3_checkpoint_receipt.json",
+          "local_archive": "runs/medical_final_panel_post_hoc_tail_generation_v1",
+          "pod_id": "yna7pigraz3t3s",
+          "pod_name": "medical-qwen-prompts-posthoc-v1",
+          "run_id": "medical_final_panel_post_hoc_tail_generation_v1",
+          "stop_approval": "runs/medical_final_panel_post_hoc_tail_generation_v1/terminal_retrieval_v1/stop_readiness.v2.json"
+        },
+        {
+          "final_s3_checkpoint_receipt": "runs/medical_final_panel_hhh_only_tail_generation_v1/mirrors/rows-001800/s3_checkpoint_receipt.json",
+          "local_archive": "runs/medical_final_panel_hhh_only_tail_generation_v1",
+          "pod_id": "10zueym5tlvsvh",
+          "pod_name": "medical-qwen-prompts-hhh-only-v1-migration",
+          "run_id": "medical_final_panel_hhh_only_tail_generation_v1",
+          "stop_approval": "runs/medical_final_panel_hhh_only_tail_generation_v1/terminal_retrieval_v1/stop_readiness.v2.json"
+        }
+      ],
+      "preconditions": {
+        "require_complete_local_retrieval_and_hash_verification": true,
+        "require_final_s3_round_trip_sha256": true,
+        "require_fresh_provider_status": "EXITED",
+        "require_pod_specific_termination_receipt_and_gate": true,
+        "require_recovery_actions_outstanding_false": true,
+        "require_stop_approval_hash_reproduction": true
+      },
+      "storage_disposition": {
+        "host_bound_pod_volumes": "permanently_delete_after_gate",
+        "network_volume_deletion_authorized": false,
+        "recovery_network_volume_action": "retain",
+        "recovery_network_volume_id": "pwij8fly18",
+        "verified_local_authoritative_archives": "retain"
+      },
+      "successor_scope": {
+        "only_for_exact_pod_ids": [
+          "yna7pigraz3t3s",
+          "10zueym5tlvsvh"
+        ],
+        "supersedes_parameter": "execution.runpod_completed_pod_retention_policy"
+      }
+    },
+    "execution.runpod_bug_stabilization_policy": {
+      "affected_process": {
+        "may_quiesce_or_terminate_immediately_if_continuation_risks_artifact_corruption_overwrite_or_invalidation": true,
+        "provider_stop_pod_during_window": false
+      },
+      "applies_to": "future_runpod_operations_after_DEC_0108",
+      "five_minute_window_authorizes_retry_or_scientific_change": false,
+      "if_resolved_within_window": {
+        "preserve_and_reuse_same_running_pod_when_compatible": true,
+        "preserve_prior_attempt_and_enforce_no_overwrite": true,
+        "scientific_implementation_fix_requires_incident_and_approved_successor_identity": true,
+        "stop_pod_merely_because_bug_occurred": false
+      },
+      "if_unresolved_after_window": {
+        "automatic_provider_stop": false,
+        "notify_user": true,
+        "require_normal_retrieval_receipt_and_guarded_stop_when_stop_is_appropriate": true
+      },
+      "minimum_provider_stop_delay_seconds": 300,
+      "preserve_pod_running_during_stabilization_window": true,
+      "record_bug_detection_timestamp": true,
+      "stabilization_actions": [
+        "mirror_all_available_scientific_prefixes_and_operational_logs",
+        "diagnose_without_inspecting_scientific_response_content",
+        "attempt_only_repairs_permitted_by_the_frozen_configuration",
+        "continue_every_healthy_independent_peer"
+      ],
+      "trigger": "detected_implementation_or_operational_bug_on_a_running_pod"
+    },
+    "execution.runpod_completed_pod_retention_policy": {
+      "after_stop": {
+        "automatic_termination_or_deletion": false,
+        "purpose": "manual_restart_or_RunPod_UI_migration_test",
+        "record_stopped_storage_price_and_actual_cost": true,
+        "retain_Pod_and_host_local_volume": true,
+        "retention_expiry": "none_frozen"
+      },
+      "applies_to": "RunPod_Pods_completed_after_DEC_0111",
+      "future_termination": {
+        "prohibited_while_this_policy_is_active": true,
+        "requires_explicit_user_successor_decision": true,
+        "requires_normal_Pod_specific_termination_gate_after_successor": true
+      },
+      "later_restart_or_migration": {
+        "assume_container_disk_state_survived": false,
+        "require_new_isolated_run_identity_before_scientific_work": true,
+        "resolve_current_Pod_ID_and_endpoint": true,
+        "resume_or_overwrite_completed_run": false,
+        "reverify_GPU_image_runtime_storage_and_placement": true,
+        "reverify_workspace_inventory_and_hashes": true,
+        "treat_migrated_Pod_as_new_provider_identity": true
+      },
+      "network_volume_deletion_authorized": false,
+      "normal_terminal_disposition": "guarded_stop_and_retain",
+      "prerequisites_before_stop": [
+        "enumerate_complete_remote_task_paths",
+        "retrieve_and_hash_verify_every_unique_nonreproducible_artifact_locally",
+        "complete_frozen_S3_checkpoint_requirements",
+        "pass_Pod_specific_stop_gate"
+      ]
+    }
+  }
+}

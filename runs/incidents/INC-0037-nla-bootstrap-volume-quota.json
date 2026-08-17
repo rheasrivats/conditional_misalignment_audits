@@ -1,0 +1,38 @@
+{
+  "incident_id": "INC-0037",
+  "detected_at_utc": "2026-07-28T15:41:50Z",
+  "status": "contained_with_user_approved_successor",
+  "approval": "DEC-0141",
+  "pod_id": "f8xknxfdka1zfu",
+  "phase": "bootstrap_actor_download",
+  "error": "disk_quota_exceeded",
+  "prior_host_bound_volume_gb": 50,
+  "successor_host_bound_volume_gb": 75,
+  "observed_bytes": {
+    "workspace": 53990977536,
+    "existing_final_panel_venv": 9813332480,
+    "nla_venv": 16804118528,
+    "shared": 27156203520,
+    "partial_actor": 10915833344
+  },
+  "scientific_state": {
+    "run_path_created": false,
+    "activation_rows": 0,
+    "decoded_rows": 0,
+    "gpu_process_count_after_failure": 0,
+    "scientific_attempt_consumed": false
+  },
+  "containment": [
+    "Bootstrap exited nonzero.",
+    "No automatic retry was launched.",
+    "The partial pinned actor and installed environment were preserved.",
+    "No remote file was deleted.",
+    "The Pod was not stopped or restarted."
+  ],
+  "successor": {
+    "preserve_existing_volume_contents": true,
+    "network_recovery_volume_unchanged": true,
+    "bootstrap_continuations_authorized": 1,
+    "scientific_settings_changed": false
+  }
+}

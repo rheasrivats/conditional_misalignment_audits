@@ -1,0 +1,17 @@
+{
+  "affected_package": "medical_final_panel_generation_v1",
+  "behavior_rows_before_detection": 0,
+  "classification": "prelaunch_runtime_bootstrap_omission",
+  "correction": {
+    "apply_to_existing_venv": true,
+    "preserve_lockfile": true,
+    "uv_extra": "training"
+  },
+  "detected_at_utc": "2026-07-28T04:37:24Z",
+  "incident_id": "INC-0029",
+  "pods_stopped_restarted_terminated_or_deleted": false,
+  "prior_bootstrap_sha256": "1ddfac8d384c8e09e103e2ffc3c6ad781c6bcf8ee9946858b389eaa0ae97b981",
+  "scientific_process_started": false,
+  "successor_bootstrap_sha256": "85e67baf5882deaf4533ea42786447e7093f4a780b7d8fc8179aa7f03a8ad0dd",
+  "symptom": "bitsandbytes package metadata absent at the prelaunch runtime gate"
+}

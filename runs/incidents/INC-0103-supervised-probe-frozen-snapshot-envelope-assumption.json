@@ -1,0 +1,29 @@
+{
+  "incident_id": "INC-0103",
+  "date": "2026-08-05",
+  "status": "contained_before_runtime_mutation_or_scientific_execution",
+  "stage": "medical_claim1_supervised_probe_activation_extension_v1",
+  "pod_id": "1vmu2j45porz5s",
+  "cause": "The new runtime bootstrap and two new probe runners assumed that freeze_config preserves each registry parameter's status/value envelope. Frozen snapshots instead expose the raw parameter value directly under snapshot.values.",
+  "failed_artifact": {
+    "stage_snapshot_sha256": "4909d2b5ed05282c62bc286b4f8300bf2c947ad88722ca9271f6c9dce5673dbe",
+    "bootstrap_sha256": "c0915167629f10817e4c26a1ca60a6354d7c23ac8595657f1cdf72bcf56b5c5e",
+    "exit_message": "runtime successor is not frozen"
+  },
+  "effects": {
+    "uv_sync_started": false,
+    "fresh_environment_created": false,
+    "runtime_receipt_created": false,
+    "scientific_process_launched": false,
+    "scientific_rows_created": 0,
+    "target_output_root_exists": false,
+    "external_requests": 0,
+    "egress": false
+  },
+  "affected_unrun_code": [
+    "scripts/bootstrap_medical_claim1_supervised_probe_runtime_v1.sh",
+    "scripts/run_medical_claim1_supervised_probe_extension_v1.py",
+    "scripts/run_medical_claim1_supervised_probe_v1.py"
+  ],
+  "proposed_resolution": "Create an implementation-only successor that reads the raw values mapping used by every emitted frozen snapshot, rehashes all three files, reruns local tests, and uses a fresh stage snapshot. Preserve the failed v3 staging files and never classify them as a scientific attempt."
+}

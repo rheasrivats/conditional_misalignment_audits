@@ -1,0 +1,239 @@
+{
+  "approvals": {
+    "nla.claim1_response_nla_target_v1": "DEC-0249"
+  },
+  "control_decision": "DEC-0006",
+  "experiment_id": "conditional_misalignment_main",
+  "parity": {
+    "nla.claim1_response_nla_target_v1": "adapted"
+  },
+  "registry_sha256": "7360b711422cd4b6989e3e6eef2fd09831fb9327bb78996a41cc3b5d3eb427c6",
+  "registry_version": 2,
+  "stage": "claim1_response_nla_target_v1",
+  "stage_approval": "DEC-0249",
+  "values": {
+    "nla.claim1_response_nla_target_v1": {
+      "artifacts": {
+        "rubric": {
+          "path": "analysis/proposed/claim1_response_nla_concordance_v1/response_rubric.v1.md",
+          "sha256": "9f456ffe5c0779d6428a794ef5bb41840badecb5959eda50d0c2149568bb6a58"
+        },
+        "schema": {
+          "path": "analysis/proposed/claim1_response_nla_concordance_v1/response_schema.v1.json",
+          "sha256": "81cbaae5308f78c070bad344ae5c733278d0b27f32401560be4384bf22593c8a"
+        },
+        "system_prompt": {
+          "path": "analysis/proposed/claim1_response_nla_concordance_v1/response_system.v1.txt",
+          "sha256": "9be069f4ff38996078965cc852f31dc282445d4c7e7af96e2610f277b3666ee0"
+        },
+        "user_template": {
+          "path": "analysis/proposed/claim1_response_nla_concordance_v1/response_user_template.v1.txt",
+          "sha256": "5018ba50343658a0f9aa437e24db41b0d2a1679e1a193dd7f7c0bdd64599ea7f"
+        }
+      },
+      "authorization": {
+        "approval": "DEC-0249",
+        "path": "analysis/proposed/claim1_response_nla_concordance_v1/target_authorization.v1.md",
+        "sha256": "f67df2de5551ca6c3aa3d8b91d30787fe5577a580ce278bf258383568c9b5f54"
+      },
+      "calibration_prerequisite": {
+        "completion_receipt_sha256": "ed2b9baa223d1f527de0742b63860bda27187bb27d2bf3d8dfeca2e9152e8bc6",
+        "required_state": "qualified_16_of_16",
+        "verdict_path": "runs/claim1_response_nla_calibration_v1/attempt_003/calibration_verdict.v1.json",
+        "verdict_sha256": "e044ae2afc804f8c36d9cc803a6ec7d2d922bd3017991382207d3f077b030c73"
+      },
+      "code": {
+        "focused_test_path": "tests/test_claim1_response_nla_concordance_v1.py",
+        "focused_test_sha256": "0f1d5973fd430f239bc564218a94a67f1272c2b2bf74fddafe882d64cb5c6cab",
+        "focused_tests_passed": 10,
+        "frozen_base_runner_path": "scripts/judge_claim1_response_nla_concordance_v1.py",
+        "generic_preflight_path": "scripts/preflight_judge_network.py",
+        "generic_preflight_sha256": "14a61f8e0c56adea9e658ef60be601e2d26e32ebce4b95afbb7cf17ac171062f",
+        "preflight_wrapper_path": "scripts/preflight_claim1_response_nla_target_v1.py",
+        "preflight_wrapper_sha256": "16418004c81f1da842677eeecca688a684bdf7bb10c6d158f54b669d8f889b9d",
+        "runner_sha256": "335510f018bcbad805923a8dc234b7333387dd56e5df77f6e0df110ca0ade8fd",
+        "runner_wrapper_path": "scripts/judge_claim1_response_nla_target_v1.py",
+        "runner_wrapper_sha256": "40db24f6f0732df3c895e7963a9341d0ddc5b7f841f196192b07ef3290b8cc56",
+        "spending_recorder_path": "scripts/record_spending.py",
+        "spending_recorder_sha256": "8bed01ad518229709742f6f263a784cc83d3384d70ba87ae4a7208c561269d61"
+      },
+      "network_preflight": {
+        "host": "api.openai.com",
+        "make_http_request": false,
+        "port": 443,
+        "require_api_key": false,
+        "require_dns_resolution": true,
+        "require_tcp_connection": true,
+        "require_tls_handshake_with_server_name": true
+      },
+      "no_overwrite_outputs": true,
+      "output_paths": {
+        "accepted_outputs": "runs/claim1_response_nla_target_v1/attempt_001/accepted_outputs.v1.jsonl",
+        "budget_status": "runs/claim1_response_nla_target_v1/attempt_001/budget_status.v1.json",
+        "failed_items": "runs/claim1_response_nla_target_v1/attempt_001/failed_items.v1.jsonl",
+        "network_preflight": "runs/claim1_response_nla_target_v1/attempt_001/network_preflight.v1.json",
+        "provider_responses": "runs/claim1_response_nla_target_v1/attempt_001/provider_responses_before_validation.v1.jsonl",
+        "request_attempt_ledger": "runs/claim1_response_nla_target_v1/attempt_001/request_attempt_ledger.v1.jsonl",
+        "root": "runs/claim1_response_nla_target_v1/attempt_001"
+      },
+      "packet": {
+        "manifest_path": "analysis/proposed/claim1_response_nla_concordance_v1/target_packet_seed_2026080501.proposal/target_packet_manifest.v1.json",
+        "manifest_sha256": "fc7172ef0b664dc7dd846f7a80c1df7351cf6d730eba12b692a5bc2aa951e791",
+        "path": "analysis/proposed/claim1_response_nla_concordance_v1/target_packet_seed_2026080501.proposal/blinded_response_items.v1.jsonl",
+        "randomization_seed": 2026080501,
+        "repetitions": 1,
+        "request_count": 240,
+        "reveal_key_path": "analysis/proposed/claim1_response_nla_concordance_v1/target_packet_seed_2026080501.proposal/response_reveal_key.v1.jsonl",
+        "reveal_key_sha256": "3492759eda86930bf089c8eb8ef30ad5b82d93463d252001801e5269826d9b93",
+        "sha256": "caa3f064b342a15d4b9232fccdce9fc56c850c94853a424f7762fca84d4043d7"
+      },
+      "payload_egress": {
+        "application_state_storage": false,
+        "authorization_header_credential_only": true,
+        "authorized": true,
+        "data_sharing_or_training_opt_in": false,
+        "destination": "api.openai.com",
+        "endpoint_path": "/v1/responses",
+        "excludes": [
+          "model_or_condition_labels",
+          "prompt_source_or_activation_ids",
+          "activation_or_token_data",
+          "nla_text_or_scores",
+          "reveal_keys",
+          "prior_gpt4o_judgments",
+          "personal_identities",
+          "local_paths",
+          "unrelated_artifacts"
+        ],
+        "includes": [
+          "model",
+          "frozen_response_system_prompt",
+          "opaque_item_and_response_ids",
+          "original_user_prompt",
+          "completed_assistant_response",
+          "reasoning_effort",
+          "max_output_tokens",
+          "frozen_strict_transport_schema",
+          "store_false"
+        ]
+      },
+      "retry_policy": {
+        "backoff_seconds": [
+          2,
+          4
+        ],
+        "count_all_provider_reported_usage_including_failed_validation": true,
+        "deterministic_other_http_4xx_retryable": false,
+        "exhausted_item_disposition": "missing_no_imputation_continue_next_item",
+        "maximum_api_request_attempts": 720,
+        "maximum_attempts_per_item": 3,
+        "preserve_every_attempt_event": true,
+        "preserve_every_provider_response_before_local_validation": true,
+        "retryable": [
+          "transport_failure",
+          "timeout",
+          "http_408_409_429_or_5xx",
+          "refusal_or_incomplete",
+          "json_parse_failure",
+          "local_schema_cross_field_or_literal_failure"
+        ],
+        "returned_model_mismatch_is_systemic": true
+      },
+      "reveal": {
+        "authorized": false,
+        "bootstrap_samples": null,
+        "bootstrap_seed": null,
+        "condition_labels_opened": false,
+        "nla_scores_joined": false,
+        "successor_required": true
+      },
+      "runtime": {
+        "endpoint": "https://api.openai.com/v1/responses",
+        "exact_returned_model_required": true,
+        "execution": "local_persistent_foreground",
+        "max_output_tokens": 4800,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "reasoning_effort": "high",
+        "request_timeout_seconds": 120,
+        "response_format": "strict_json_schema_via_text_format",
+        "rolling_model_slug_deviation": true,
+        "store": false,
+        "tools": "none"
+      },
+      "schema": {
+        "path": "analysis/proposed/claim1_response_nla_concordance_v1/response_schema.v1.json",
+        "sha256": "81cbaae5308f78c070bad344ae5c733278d0b27f32401560be4384bf22593c8a"
+      },
+      "scientific_scope": {
+        "conditions": [
+          "identity_off",
+          "identity_on"
+        ],
+        "direct_base_vs_hhh_comparison": "prohibited",
+        "general_misalignment_score": null,
+        "judge2_artifacts": "excluded",
+        "judgment_mode": "independent_only",
+        "models": [
+          "base_qwen",
+          "hhh_only"
+        ],
+        "pairwise": "excluded",
+        "position": "assistant_token_32",
+        "pre_answer": "excluded",
+        "primary_axis": "H",
+        "prompts": 20,
+        "repetitions": 1,
+        "response_side_instrument": true,
+        "responses_per_model_condition": 60,
+        "separate_secondary_axes": [
+          "P1",
+          "P2",
+          "V1",
+          "V2"
+        ],
+        "token_8": "excluded",
+        "trajectories_per_prompt_condition": 3,
+        "unique_responses": 240
+      },
+      "source_audit": {
+        "content_printed": false,
+        "path": "analysis/proposed/claim1_response_nla_concordance_v1/target_packet_seed_2026080501.proposal/content_safe_source_audit.v1.json",
+        "response_rows": 240,
+        "sha256": "e9a5d10c6f1da489e7284b4dda9411163c5f0fb8da5e2fbd55fd85e1c5b20d13",
+        "unique_source_row_ids": 240
+      },
+      "spending": {
+        "absolute_maximum_usd": 1.25,
+        "approval": "DEC-0249",
+        "authoritative_ledger": "runs/spending_ledger.v2.jsonl",
+        "conservative_pre_request_reservation_required": true,
+        "currency": "USD",
+        "estimated_usd_high": 0.65,
+        "estimated_usd_low": 0.45,
+        "input_overhead_token_reserve": 2048,
+        "issue_no_request_when_current_cost_plus_reservation_exceeds_maximum": true,
+        "ledger_estimated_usd": 0.65,
+        "pricing": {
+          "cached_input_usd_per_million_tokens": 0.02,
+          "context_band": "short_context_at_or_below_272k_input_tokens",
+          "output_usd_per_million_tokens": 1.2,
+          "service_tier": "standard",
+          "uncached_input_usd_per_million_tokens": 0.2
+        },
+        "pricing_source": "openai.gpt56_luna_model_20260804",
+        "provider_reported_usage_required": true,
+        "run_id": "claim1_response_nla_target_v1"
+      },
+      "strict_validation": {
+        "cross_field_numeric_null_required": true,
+        "full_local_schema_required": true,
+        "local_repair_prohibited": true,
+        "nonzero_score_evidence_required": true,
+        "normalized_literal_case_sensitive_matching_required": true,
+        "provider_response_preserved_before_validation": true
+      },
+      "target_requests_authorized": true
+    }
+  }
+}

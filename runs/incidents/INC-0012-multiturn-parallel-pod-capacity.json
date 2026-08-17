@@ -1,0 +1,44 @@
+{
+  "incident_id": "INC-0012",
+  "date": "2026-07-25",
+  "stage": "medical_multiturn_priming_parallel_generation_prelaunch",
+  "status": "contained_before_process_launch",
+  "approval": "DEC-0063",
+  "post_hoc_pod": {
+    "pod_id": "yqldjmilaxje2s",
+    "start_result": "failed",
+    "provider_http_status": 400,
+    "provider_error": "There are not enough free GPUs on the host machine to start this pod."
+  },
+  "hhh_only_pod": {
+    "pod_id": "p94xuoyuhjvsf2",
+    "start_result": "started_then_stopped",
+    "provider_reported_uptime_seconds_at_stop": 9,
+    "gpu_utilization_at_stop_percent": 0,
+    "gpu_memory_utilization_at_stop_percent": 0
+  },
+  "scientific_impact": {
+    "generation_processes_launched": 0,
+    "models_loaded": 0,
+    "output_directories_created": 0,
+    "prime_rows": 0,
+    "target_rows": 0,
+    "parallel_contract_satisfied": false,
+    "existing_artifacts_affected": false
+  },
+  "containment": {
+    "hhh_only_pod_stopped_immediately": true,
+    "pods_terminated_or_deleted": false,
+    "automatic_generation_rerun": false,
+    "successor_requires_exact_replacement_pod_approval": true
+  },
+  "proposed_successor": {
+    "post_hoc_replacement_pod_id": "m5iuyt1yhz8j96",
+    "post_hoc_replacement_gpu": "NVIDIA A40",
+    "post_hoc_replacement_cloud": "SECURE",
+    "post_hoc_replacement_hourly_usd": 0.44,
+    "hhh_only_pod_id": "p94xuoyuhjvsf2",
+    "combined_maximum_usd_unchanged": 2.0,
+    "scientific_contract_change": false
+  }
+}

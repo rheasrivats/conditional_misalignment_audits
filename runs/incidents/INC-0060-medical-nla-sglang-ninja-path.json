@@ -1,0 +1,54 @@
+{
+  "incident_id": "INC-0060",
+  "stage": "medical_nla_em8_layer_position_ar_development_v1",
+  "status": "contained_before_first_av_request",
+  "detected_at_utc": "2026-07-30T04:46:48Z",
+  "pod_id": "xay33l9cp5here",
+  "scientific_snapshot_sha256": "f3ed1276e39680692e4018f3792b2709ca6d897de691b1b5cff061138c0b17d5",
+  "predecessor": {
+    "decision_id": "DEC-0192",
+    "launcher_sha256": "6bc9c1c09b7f1b6d1d3c55850cb972e1baca041a1e70baff9ce8cbc1dc01e3e1",
+    "operational_snapshot_sha256": "8ccc3da5d27dd543e023a339d21ca1bc7b60ec5ba4a4554b9c9a08adb5846714",
+    "operational_root": "/workspace/runs/medical_nla_em8_layer_position_ar_development_v1/operational_successor_002",
+    "started_at_utc": "2026-07-30T04:39:41Z",
+    "finished_at_utc": "2026-07-30T04:46:48Z",
+    "exit_code": 137,
+    "terminal_status": "failed",
+    "server_log_sha256": "b9bc8bb980995e365a9a243c565f81f31ddf409213657c6c00b0a52997ba67f4",
+    "stdout_log_sha256": "928c47851993d4eb2f1d01457c954e52e1921ff7a84474fd54c5bacae09575ee"
+  },
+  "failure": {
+    "class": "implementation_only_sglang_server_path_omitted_pinned_ninja",
+    "provider_error": "FileNotFoundError: [Errno 2] No such file or directory: 'ninja'",
+    "phase": "FlashInfer CUDA graph JIT setup after actor weight loading",
+    "av_requests_sent": 0,
+    "decoded_rows_created": 0,
+    "reconstruction_rows_created": 0,
+    "decode_path_absent": true,
+    "reconstruct_path_absent": true,
+    "terminal_manifest_absent": true
+  },
+  "verified_runtime": {
+    "ninja_path": "/workspace/venvs/medical-nla-py312-v1/bin/ninja",
+    "ninja_version": "1.13.0.git.kitware.jobserver-pipe-1",
+    "ninja_sha256": "696f9628a79d9ce50314cf9556d7cd1a1d1ec52b8fd52828f6f9db1719565b67",
+    "ninja_already_installed": true
+  },
+  "preserved_valid_artifacts": {
+    "activation_rows": 132,
+    "activations_sha256": "6073164ef543bebd94a7f13a28bb7c0f8e48b9b918a20294e645c4a8b1c37fb2",
+    "rerun_extraction": false
+  },
+  "successor": {
+    "decision_id": "DEC-0193",
+    "authority": "DEC-0144",
+    "repair": "Give only the SGLang server process the exact PATH containing the already-pinned Ninja and CUDA binaries; preserve the 1200-second readiness deadline and every scientific setting.",
+    "server_path": "/workspace/venvs/medical-nla-py312-v1/bin:/usr/local/cuda/bin:/usr/bin:/bin",
+    "launcher": "scripts/run_medical_nla_em8_layer_position_ar_decode_resume_v3.sh",
+    "launcher_sha256": "4d489b3a6d882340e544637f73f8d29739f6a1fb8027ce49b1f4c68a94d99cc1",
+    "scientific_values_changed": false,
+    "new_pod_or_volume": false,
+    "new_spending_authority": false,
+    "destructive_action": false
+  }
+}
