@@ -1,7 +1,7 @@
 # Alignment fine-tuning can induce conditional misalignment
 
 This repository is the research and code companion to
-[Alignment fine-tuning induces conditional misalignment in Qwen2.5-7B-Instruct](https://app.notion.com/p/3bba3ed2da6c808dae12eb73f9a5cdf9).
+[Alignment fine-tuning induces conditional misalignment in Qwen2.5-7B-Instruct](https://substack.com/home/post/p-211497448).
 It documents a small development study of behavioral conditionality and three
 ways of auditing it in model activations: a supervised linear probe, a Natural
 Language Autoencoder (NLA), and a forced-prefix intervention.
